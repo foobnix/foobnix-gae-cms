@@ -56,7 +56,7 @@ def get_active_page(*params):
             result = result + "/" + param
     return result
 
-def add_edit_update(handler, param1, param2, tpl, model, name, dict):
+def add_edit_update(handler, param1, param2, model, name, dict):
         if handler.request.get('action') == "edit":
             key_id = handler.request.get('key_id')
             menu = model.get_by_id(int(key_id))
@@ -80,12 +80,35 @@ def add_edit_update(handler, param1, param2, tpl, model, name, dict):
                 model.delete()
             handler.redirect(get_active_page(param1, param2))
         
-        path = os.path.join(os.path.dirname(__file__), tpl + '.html')
-        return template.render(path, dict)
+
+class BaseAddEditAction():
+    def __init__(self):
+        pass
+    
+    def on_edit(self):
+        pass
+    
+    def on_addupdate(self):
+        pass
+    
+    def on_delete(self):
+        pass
+
 
 class AdminMenuAction():
     def __init__(self, handler, dict, param1, param2):
-        self.content = add_edit_update(handler, param1, param2, "admin-emenu", MenuModel(), "menu", dict)
+        add_edit_update(handler, param1, param2, MenuModel(), "menu", dict)
+        
+        path = os.path.join(os.path.dirname(__file__), 'admin-emenu.html')
+        self.content = template.render(path, dict)
+
+class AdminPageAction():
+    def __init__(self, handler, dict, param1, param2):
+        self.content = add_edit_update(handler, param1, param2, PageModel(), "page", dict)
+        
+        path = os.path.join(os.path.dirname(__file__), 'admin-epages.html')
+        self.content = template.render(path, dict)
+
        
 class PageAction():
     def __init__(self, dict, param1):                
@@ -98,11 +121,6 @@ class PageAction():
                 self.content = template.render(path, {"page":page[0], "param1":param1})
             else:
                 self.content = template.render(path, {"page":None, "param1":param1})
-
-class AdminPageAction():
-    def __init__(self, handler, dict, param1, param2):
-        self.content = add_edit_update(handler, param1, param2, "admin-epages", PageModel(), "page", dict)
-
 
 class AdminAction():
     def __init__(self, handler, dict, param1, param2):
