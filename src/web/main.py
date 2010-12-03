@@ -118,11 +118,12 @@ class EditUpateRequestHandler(webapp.RequestHandler):
         webapp.RequestHandler.__init__(self)
     
     def get(self, param1=None, param2=None):
-        dict = {
+        self.dict = {
          'param1':param1,
          'param2':param2,
          'layouts':layouts,
          'positions':positions,
+         'admin_menu':admin_menu,
          'active':get_active_page(param1, param2)
          }
         
@@ -132,7 +133,7 @@ class EditUpateRequestHandler(webapp.RequestHandler):
         menu_list.order("index")
         menu_list.fetch(50)
 
-        dict["menu_list"] = menu_list
+        self.dict["menu_list"] = menu_list
         
         
         page_list = PageModel().all()
@@ -140,13 +141,13 @@ class EditUpateRequestHandler(webapp.RequestHandler):
         page_list.order("-date")
         page_list.fetch(50)
         
-        dict["page_list"] = page_list
+        self.dict["page_list"] = page_list
         
         content = None
         if param1 == "admin":
-            content = AdminAction(self, dict, param1, param2)
+            content = AdminAction(self, self.dict, param1, param2)
         else:
-            content = PageAction(dict, param1)
+            content = PageAction(self.dict, param1)
         
         if content:
             self.on_get(content.content, param1, param2)
@@ -158,22 +159,11 @@ class EditUpateRequestHandler(webapp.RequestHandler):
 
 class IndexPage(EditUpateRequestHandler):
     def on_get(self, content, param1, param2):
-        
-        menu_list = MenuModel().all()
-        menu_list.order("index")
-        menu_list.fetch(50)
-       
-        values = {
-                 'menu':menu_list,
-                 'admin_menu':admin_menu,
-                 'param1':param1,
-                 'param2':param2,
-                 'active':get_active_page(param1, param2),
-                 'container':content
-                 }
+              
+        self.dict['container'] = content                 
         
         path = os.path.join(os.path.dirname(__file__), 'template.html')
-        self.response.out.write(template.render(path, values))
+        self.response.out.write(template.render(path, self.dict))
 
 application = webapp.WSGIApplication([
                                       (r'/(.*)/(.*)/', IndexPage),

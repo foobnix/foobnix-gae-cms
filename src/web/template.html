@@ -8,7 +8,7 @@
 	<div id="sidebar">
 	<ul id="lnav">
 
-	{% for item in menu %}
+	{% for item in menu_list %}
  	{% ifequal item.position "LEFT" %}
  		{% ifequal item.id active %}
  			<li class="tabs-selected"><a href="{{item.link_id }}">{{ item.name }}</a></li>
