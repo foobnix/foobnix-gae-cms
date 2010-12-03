@@ -1,0 +1,19 @@
+<div id="header">
+   <h1><a href="/">Foobnix Simple and Powerful music player for Linux</a></h1>
+
+<div id="tagline">
+	<a href="http:/">Foobnix Simple and Powerful music player for Linux</a>
+</div>
+
+  <ul id="nav">
+ 	{% for item in menu %}
+ 	{% ifequal item.position "TOP" %}
+ 		{% ifequal item.id active %}
+ 			<li class="tabs-selected"><a href="{{item.link_id }}">{{ item.name }}</a></li>
+ 		{% else %}
+ 			<li class="tabs-container"><a href="{{item.link_id }}">{{ item.name }}</a></li>
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+  </ul>
+</div>

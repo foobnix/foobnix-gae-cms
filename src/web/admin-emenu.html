@@ -1,0 +1,110 @@
+<h2>Add Update Delete Menus</h2>
+ <div class="span-12 left">  
+        <form action="/admin/emenu" method="get">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Add Menu</legend> 
+            <p> 
+              <label>ID: {{menu.key.id}}</label>
+              <input type="hidden" name="key_id" value="{{menu.key.id}}" />
+            </p>
+            <p> 
+              <label>Menu Link</label><br> 
+              <input type="text" class="text" name="menu.link_id" value="{{menu.link_id}}">
+              <span class="notice">/welcome</span> 
+            </p>
+            `
+            <p> 
+              <label>Name</label><br> 
+              <input type="text" class="text" name="menu.name" value="{{menu.name}}">
+              <span class="notice">Welcome</span> 
+            </p>
+            
+            
+            <p> 
+              <label for="dummy3">Layout</label><br> 
+				{% for item in layouts %}
+						 <input type="radio" name="menu.layout" value="{{ item }}" {% ifequal item menu.layout %}CHECKED{% endifequal %} >{{ item }}
+				{% endfor %}
+            </p>
+            
+            <p><label>Position</label><br> 
+            	{% for item in positions %}
+						 <input type="radio" name="menu.position" value="{{ item }}" {% ifequal item menu.position %}CHECKED{% endifequal %}>{{ item }}
+				{% endfor %} 
+          	</p> 
+            
+            <p> 
+              <label>Index</label><br> 
+              <input type="text" class="text" name="menu.index" value="{{menu.index}}">
+              <span class="notice">1..n</span> 
+            </p>
+            
+            <p> 
+              <label>Visible</label><br> 
+              <input type="checkbox" class="text" name="menu.is_visible" value="False" {%if menu.is_visible %} checked="checked"{% endif %}">
+            </p>
+            
+ 
+            <p> 
+              <input type="submit" value="Submit"> 
+              <input type="reset" value="Reset"> 
+            </p> 
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div> 
+      <div class="span-12 push-0">
+	
+	<fieldset> 
+            <legend>Menu List</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Index</th>
+          <th>Link</th>
+          <th>Name</th>
+          <th>Layout</th>
+          <th>Position</th>
+          <th>id</th>
+          <th>Visible</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		
+		{% for item in menu_list %}
+		  <tr>
+	          <td>
+	          	<a href="/admin/emenu?action=delete&key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.index}}</td>
+	          <td>{{item.link_id}}</td>
+	          <td>{{item.name}}</td>
+	          <td>{{item.layout}}</td>
+	          <td>{{item.position}}</td>
+		  	  <td>{{item.key.id}}</td>
+	          <td>{{item.is_visible}}</td>
+	          <td>
+	          	<a href="/admin/emenu?action=edit&key_id={{item.key.id}}" >edit</a>
+	          </td>
+	          
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+
+<br style="clear:both" />
+
+    
+
+
+
+ 
+     

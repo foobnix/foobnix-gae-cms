@@ -1,0 +1,90 @@
+/* -------------------------------------------------------------- 
+   
+   typography.css
+   * Sets up some sensible default typography.
+  
+   Based on work by:
+   * Nathan Borror     [playgroundblues.com]
+   * Jeff Croft        [jeffcroft.com]
+   * Christian Metts   [mintchaos.com]
+   * Wilson Miner      [wilsonminer.com]
+   
+   Read more about using a baseline here:
+   * alistapart.com/articles/settingtypeontheweb
+  
+-------------------------------------------------------------- */
+
+
+/* This is where you set your desired font size. The line-height 
+   and vertical margins are automatically calculated from this. 
+   The percentage is of 16px (0.75 * 16px = 12px). */
+   
+body { font-size: 75%; }
+
+
+/* Default fonts and colors. */
+body { 
+  color: #222; 
+  font-family: Arial, Verdana, sans-serif; 
+  line-height: 1.5;
+}
+h1,h2,h3,h4,h5,h6 { 
+  color: #111; 
+  font-family: Arial, Verdana, sans-serif; 
+}
+
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { clear:both; font-weight:400; }
+h1 { font-size: 3em; line-height:2; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; line-height:2; }
+h4 { font-size: 1.2em; line-height:1.25; font-weight:700; }
+h5 { font-size: 1em; font-weight:700; }
+h6 { font-size: 1em; }
+
+
+/* Text elements
+-------------------------------------------------------------- */
+
+p           { margin: 0 0 1.5em; text-align:justify; }
+p.last      { margin-bottom:0; }
+p img       { float: left; margin: 1.5em 1.5em 1.5em 0; padding:0; }
+p img.top   { margin-top:0; } /* Use this if the image is at the top of the <p>. */
+img         { margin: 0 0 1.5em; }
+
+ul, ol      { margin: 0 0 1.5em 1.5em; }
+ul          { list-style-type: circle; }
+ol          { list-style-type: decimal; }
+dl          { margin: 1.5em 0; }
+dl dt       { font-weight:700; }
+
+a:focus, 
+a:hover     { color: #053552; text-decoration: underline;}
+a           { color: #0E9CEE; text-decoration: none; }
+a:visited   { color: #0369A3; }
+
+blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+strong      { font-weight:700; }
+em          { font-style: italic; }
+pre         { margin-bottom: 1.3em; background: #eee; border:.1em solid #ddd; padding:1.5em; }
+code        { font:1em Monaco, Courier, monospace; } 
+
+
+/* Tables (needs improvement)
+-------------------------------------------------------------- */
+
+table   { margin-bottom: 1.4em; border-top:.1em solid #ddd; border-left:.1em solid #ddd; }
+th,td   { height: 1em; padding:.2em .4em; border-bottom:.1em solid #ddd; border-right:.1em solid #ddd; }
+th      { font-weight:700; background:#eee; }
+
+
+/* Some default classes
+-------------------------------------------------------------- */
+
+.small  { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
+.large  { font-size: 1.2em; line-height: 2.5em; }
+.quiet  { color: #666; }
+.hide   { display: none; }

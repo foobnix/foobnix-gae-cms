@@ -1,0 +1,96 @@
+<h2>Add Update Delete Pages</h2>
+ <div class="span-12 left">  
+        <form action="/admin/epages" method="get">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Add Page</legend> 
+            <p> 
+              <label>ID: {{menu.key.id}}</label>
+              <input type="hidden" name="key_id" value="{{page.key.id}}" />
+            </p>
+            <p> 
+              <label>Title</label><br> 
+              <input type="text" class="text" name="page.title" value="{{page.title}}">
+            </p>
+            
+            <p> 
+              <label>Content</label><br> 
+              <textarea name="page.content">{{page.content}}</textarea>
+            </p>
+            
+            <p><label>Section Menu</label><br>
+            <select name="page.fk_menu"> 
+            	{% for key in menu_list %}
+				 <option value="{{ key.link_id }}" {% ifequal key.link_id page.fk_menu %}selected="selected"{% endifequal %}>{{ key.name }}</option>
+				{% endfor %} 
+			</select>
+          	</p> 
+            
+            <p> 
+              <label>Allow Comments</label><br> 
+              <input type="checkbox" class="text" name="page.is_comment" value="False" {%if page.is_comment %} checked="checked"{% endif %}">
+            </p>
+            <p> 
+              <label>Page Visible</label><br> 
+              <input type="checkbox" class="text" name="page.is_visible" value="False" {%if page.is_visible %} checked="checked"{% endif %}">
+            </p>
+            <p> 
+              <input type="submit" value="Submit"> 
+              <input type="reset" value="Reset"> 
+            </p> 
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div> 
+      <div class="span-12 push-0">
+	
+	<fieldset> 
+            <legend>Page List</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>          
+          <th>Title</th>
+          <th>Menu</th>
+          <th>Date</th>
+          <th>Comments</th>
+          <th>Visible</th>
+          <th>id</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		
+		{% for item in page_list %}
+		  <tr>
+	          <td>
+	          	<a href="/admin/epages?action=delete&key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.title}}</td>
+	          <td>{{item.fk_menu}}</td>
+	          <td>{{item.date|date:"d/m/y H:m"}}</td>
+	          <td>{{item.is_comment}}</td>
+	          <td>{{item.is_visible}}</td>
+		  	  <td>{{item.key.id}}</td>
+	          <td>
+	          	<a href="/admin/epages?action=edit&key_id={{item.key.id}}" >edit</a>
+	          </td>
+	          
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+
+<br style="clear:both" />
+
+    
+
+
+
+ 
+     
