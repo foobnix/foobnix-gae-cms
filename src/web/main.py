@@ -25,8 +25,8 @@ class PageModel(db.Model):
 
 admin_menu = [
         {"id":"/admin/emenu", "text":"eMenus", "template":"admin-emenu.html"},
-        {"id":"/admin/epages", "text":"ePages", "template":"admin-epage.html"},
-        {"id":"/admin/esettings", "text":"eSettins", "template":"admin-settings.html"}
+        {"id":"/admin/epages", "text":"ePages", "template":"admin-epage.html"}
+        #{"id":"/admin/esettings", "text":"eSettins", "template":"admin-settings.html"}
         ]
 
 def request_to_model(model, request, prefix="menu"):
@@ -56,44 +56,37 @@ def get_active_page(*params):
             result = result + "/" + param
     return result
 
-class AdminMenuAction():
-    def __init__(self, handler, dict, param1, param2):
-        
-        menu_list = MenuModel().all()
-        menu_list.order("-is_visible")
-        menu_list.order("-position")
-        menu_list.order("index")
-        menu_list.fetch(50)
-
-        dict["menu_list"] = menu_list
-        
-        tpl = "admin-emenu"
-        
+def add_edit_update(handler, param1, param2, tpl, model, name, dict):
         if handler.request.get('action') == "edit":
             key_id = handler.request.get('key_id')
-            menu = MenuModel.get_by_id(int(key_id))
-            dict["menu"] = menu
+            menu = model.get_by_id(int(key_id))
+            dict[name] = menu
                         
         if handler.request.get('action') == "addupdate":
             key_id = handler.request.get('key_id')
             if key_id:
-                menu = MenuModel.get_by_id(int(key_id))
+                menu = model.get_by_id(int(key_id))
             else:
-                menu = MenuModel()
-            add = request_to_model(menu, handler.request, "menu")
+                menu = model
+            add = request_to_model(menu, handler.request, name)
             add.put()
             
             handler.redirect(get_active_page(param1, param2))
+            
         if handler.request.get('action') == "delete":
             key_id = handler.request.get('key_id')
-            model = MenuModel.get_by_id(int(key_id))
+            model = model.get_by_id(int(key_id))
             if model:
                 model.delete()
             handler.redirect(get_active_page(param1, param2))
         
         path = os.path.join(os.path.dirname(__file__), tpl + '.html')
-        self.content = template.render(path, dict)
+        return template.render(path, dict)
 
+class AdminMenuAction():
+    def __init__(self, handler, dict, param1, param2):
+        self.content = add_edit_update(handler, param1, param2, "admin-emenu", MenuModel(), "menu", dict)
+       
 class PageAction():
     def __init__(self, dict, param1):                
             page = PageModel().all()
@@ -101,48 +94,15 @@ class PageAction():
             page.fetch(1)
             
             path = os.path.join(os.path.dirname(__file__), 'page.html')
-            self.content = template.render(path, {"page":page[0], "param1":param1})
+            if page.count() >= 1:
+                self.content = template.render(path, {"page":page[0], "param1":param1})
+            else:
+                self.content = template.render(path, {"page":None, "param1":param1})
 
 class AdminPageAction():
     def __init__(self, handler, dict, param1, param2):
-        tpl = "admin-epages"
-        
-        page_list = PageModel().all()
-        page_list.order("-is_visible")
-        page_list.order("-date")
-        page_list.fetch(50)
-        
-        menu_list = MenuModel().all()
-        menu_list.order("index")
-        menu_list.filter("is_visible", True)
-        
-        dict["page_list"] = page_list
-        dict["menu_list"] = menu_list
-        
-        if handler.request.get('action') == "edit":
-            key_id = handler.request.get('key_id')
-            model = PageModel.get_by_id(int(key_id))
-            dict["page"] = model
-                        
-        if handler.request.get('action') == "addupdate":
-            key_id = handler.request.get('key_id')
-            if key_id:
-                model = PageModel.get_by_id(int(key_id))
-            else:
-                model = PageModel()
-            add = request_to_model(model, handler.request, "page")
-            add.put()
-            
-            handler.redirect(get_active_page(param1, param2))
-        if handler.request.get('action') == "delete":
-            key_id = handler.request.get('key_id')
-            model = PageModel.get_by_id(int(key_id))
-            if model:
-                model.delete()
-            handler.redirect(get_active_page(param1, param2))
-        
-        path = os.path.join(os.path.dirname(__file__), tpl + '.html')
-        self.content = template.render(path, dict)
+        self.content = add_edit_update(handler, param1, param2, "admin-epages", PageModel(), "page", dict)
+
 
 class AdminAction():
     def __init__(self, handler, dict, param1, param2):
@@ -173,6 +133,15 @@ class EditUpateRequestHandler(webapp.RequestHandler):
         menu_list.fetch(50)
 
         dict["menu_list"] = menu_list
+        
+        
+        page_list = PageModel().all()
+        page_list.order("-is_visible")
+        page_list.order("-date")
+        page_list.fetch(50)
+        
+        dict["page_list"] = page_list
+        
         content = None
         if param1 == "admin":
             content = AdminAction(self, dict, param1, param2)
