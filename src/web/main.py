@@ -72,13 +72,18 @@ def get_menu_layout(menu_name):
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
-    def get(self, menu_name):
+    def get(self, menu_name, page_key_id=None):
         glob_dict = prepare_glob_dict()        
+
+        if page_key_id:
+            page = PageModel.get_by_id(int(page_key_id))
+            layout = "view_page"
+            glob_dict["page"] = page
+        else:        
+            pages = get_pages(menu_name)
+            layout = get_menu_layout(menu_name)
+            glob_dict["pages"] = pages
         
-        pages = get_pages(menu_name)
-        layout = get_menu_layout(menu_name)
-        
-        glob_dict["pages"] = pages
         glob_dict["admin_menu"] = admin_menu              
         glob_dict["active"] = menu_name
         

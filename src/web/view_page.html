@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+===============================
+<h2>{{page.title}}</h2>
+{% include "helper_page.html" %}
+<pre>
+{{page.content}}
+</pre>
+================================
+
+{% endblock %}
