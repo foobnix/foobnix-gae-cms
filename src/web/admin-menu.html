@@ -1,6 +1,10 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
 <h2>Add Update Delete Menus</h2>
  <div class="span-12 left">  
-        <form action="/admin/emenu" method="get">
+        <form action="/{{parent}}/{{name}}" method="get">
 		<input type="hidden" name="action" value="addupdate" />
  
           <fieldset> 
@@ -12,7 +16,7 @@
             <p> 
               <label>Menu Link</label><br> 
               <input type="text" class="text" name="menu.link_id" value="{{menu.link_id}}">
-              <span class="notice">/welcome</span> 
+              <span class="notice">welcome</span> 
             </p>
             `
             <p> 
@@ -45,7 +49,6 @@
               <label>Visible</label><br> 
               <input type="checkbox" class="text" name="menu.is_visible" value="False" {%if menu.is_visible %} checked="checked"{% endif %}">
             </p>
-            
  
             <p> 
               <input type="submit" value="Submit"> 
@@ -79,7 +82,7 @@
 		{% for item in menu_list %}
 		  <tr>
 	          <td>
-	          	<a href="/admin/emenu?action=delete&key_id={{item.key.id}}" >delete</a>
+	          	<a href="/{{parent}}/{{name}}?action=delete&key_id={{item.key.id}}" >delete</a>
 	          </td>
 	          <td>{{item.index}}</td>
 	          <td>{{item.link_id}}</td>
@@ -89,7 +92,7 @@
 		  	  <td>{{item.key.id}}</td>
 	          <td>{{item.is_visible}}</td>
 	          <td>
-	          	<a href="/admin/emenu?action=edit&key_id={{item.key.id}}" >edit</a>
+	          	<a href="/{{parent}}/{{name}}?action=edit&key_id={{item.key.id}}" >edit</a>
 	          </td>
 	          
          </tr>
@@ -101,6 +104,8 @@
       </div> 
 
 <br style="clear:both" />
+
+{% endblock %}
 
     
 

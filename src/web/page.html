@@ -1,5 +1,10 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
 <h2>{{page.title}}</h2>
 
 <pre>
 {{page.content}}
 </pre>
+
+{% endblock %}

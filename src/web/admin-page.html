@@ -1,13 +1,17 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
 <h2>Add Update Delete Pages</h2>
  <div class="span-12 left">  
-        <form action="/admin/epages" method="get">
+        <form action="/{{parent}}/{{name}}" method="get">
 		<input type="hidden" name="action" value="addupdate" />
  
           <fieldset> 
             <legend>Add Page</legend> 
             <p> 
-              <label>ID: {{menu.key.id}}</label>
-              <input type="hidden" name="key_id" value="{{page.key.id}}" />
+              <label>ID: {{page.key.id}}</label>
+              <input type="hidden" name="page.key_id" value="{{page.key.id}}" />
             </p>
             <p> 
               <label>Title</label><br> 
@@ -66,7 +70,7 @@
 		{% for item in page_list %}
 		  <tr>
 	          <td>
-	          	<a href="/admin/epages?action=delete&key_id={{item.key.id}}" >delete</a>
+	          	<a href="/{{parent}}/{{name}}?action=delete&{{name}}.key_id={{item.key.id}}" >delete</a>
 	          </td>
 	          <td>{{item.title}}</td>
 	          <td>{{item.fk_menu}}</td>
@@ -75,7 +79,7 @@
 	          <td>{{item.is_visible}}</td>
 		  	  <td>{{item.key.id}}</td>
 	          <td>
-	          	<a href="/admin/epages?action=edit&key_id={{item.key.id}}" >edit</a>
+	          	<a href="/{{parent}}/{{name}}?action=edit&{{name}}.key_id={{item.key.id}}" >edit</a>
 	          </td>
 	          
          </tr>
@@ -88,9 +92,7 @@
 
 <br style="clear:both" />
 
-    
-
-
+{% endblock%}
 
  
      

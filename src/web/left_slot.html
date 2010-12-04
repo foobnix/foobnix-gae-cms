@@ -1,0 +1,23 @@
+<ul id="lnav">
+
+	{% for item in menu_list %}
+ 	{% ifequal item.position "LEFT" %}
+ 		{% ifequal item.link_id active %}
+ 			<li class="tabs-selected"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
+ 		{% else %}
+ 			<li class="tabs-container"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+	
+	<h2>cms:</h2>
+ 	{% for item in admin_menu %}
+ 	
+ 	{% ifequal item.link_id active %}
+ 		<li class="tabs-selected"><a href="/{{ item.id }}">{{ item.text }}</a></li>
+ 		{% else %}
+ 		<li class="tabs-container"><a href="/{{ item.link_id }}">{{ item.text }}</a></li>
+ 		{% endifequal %}  
+	{% endfor %}
+	
+  </ul>
