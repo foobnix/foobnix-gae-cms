@@ -1,11 +1,11 @@
 from google.appengine.ext import webapp
-import os, logging
+import os
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import db
 
-positions = ["TOP", "LEFT"]
-layouts = ["page", "download", "welcome"]
+positions = ["TOP", "LEFT", "No"]
+layouts = ["one_page", "list_page"]
 
 class MenuModel(db.Model):
     link_id = db.StringProperty(multiline=False)
@@ -53,33 +53,36 @@ def prepare_glob_dict():
      }
     return glob_dict
 
-def get_active_page(*params):
-    result = ""
-    for param in params:
-        if param:
-            result = result + "/" + param
-    return result
-
-def get_page_dict_by_name(name):
+def get_pages(menu_name):
     page = PageModel().all()
-    page.filter("fk_menu", name)
-    page.fetch(1)
+    page.filter("fk_menu", menu_name)
+    return page
+
+def get_menu_layout(menu_name):
+    page = MenuModel().all()
+    page.filter("link_id", menu_name)
     
-    logging.debug("Get page my name", name)
+    layout = layouts[0]
     
     if page.count() >= 1:
-        return page[0]
-    else:
-        return None
+        layout = page[0].layout
+        
+    return layout
+    
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
-    def get(self, page_name):
+    def get(self, menu_name):
         glob_dict = prepare_glob_dict()        
-        glob_dict["page"] = get_page_dict_by_name(page_name)
+        
+        pages = get_pages(menu_name)
+        layout = get_menu_layout(menu_name)
+        
+        glob_dict["pages"] = pages
         glob_dict["admin_menu"] = admin_menu              
-        glob_dict["active"] = page_name
-        path = os.path.join(os.path.dirname(__file__), 'page.html')
+        glob_dict["active"] = menu_name
+        
+        path = os.path.join(os.path.dirname(__file__), layout + '.html')
         self.response.out.write(template.render(path, glob_dict))
 
 class ViewEditAdminPage():

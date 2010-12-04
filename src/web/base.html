@@ -10,13 +10,6 @@
 	</div>
 	
     <div id="container">
-    	{% if page %}
-    	<a href="admin/page?action=edit&page.key_id={{page.key.id}}"">edit page</a>
-    	{% else%}
-    	<a href="admin/page?action=edit&page.fk_menu={{active}}&page.title={{active}}"">add_page</a>
-    	{% endif%}
-    	
-    
   		{% block content_slot %}
   		{% endblock%}
 	</div>
