@@ -2,8 +2,14 @@
 
 
 {% block content_slot %}
-One page layout {% include "helper_page.html" %}
-{% for page in pages %}
+One page layout
+
+{% ifequal pages.count 0%}
+ {% include "helper_page.html" %}
+{% endifequal %}
+
+
+{% for page in pages|slice:":1" %}
 
 <h2>{{page.title}}</h2>
 {% include "helper_page.html" %}

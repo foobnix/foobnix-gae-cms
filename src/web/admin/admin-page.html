@@ -3,7 +3,7 @@
 {% block content_slot %}
 
 <h2>Add Update Delete Pages</h2>
- <div class="span-12 left">  
+ <div class="span-20">  
         <form action="/{{parent}}/{{name}}" method="get">
 		<input type="hidden" name="action" value="addupdate" />
  
@@ -19,7 +19,7 @@
             </p>
             
              <p>
-		      <textarea name="page.content" id="wysiwyg" rows="5" cols="103">{{page.content}}</textarea>
+		      <textarea name="page.content" id="wysiwyg" class="wysiwyg_textarea" >{{page.content}}</textarea>
 		    </p>
 		    <script type="text/javascript" src="/jwysiwyg/lib/jquery-1.4.2.js"></script>
 		    <script type="text/javascript" src="/jwysiwyg/jquery.wysiwyg.js"></script>
@@ -51,50 +51,6 @@
         </form> 
  
       </div> 
-      <div class="span-12 push-0">
-	
-	<fieldset> 
-            <legend>Page List</legend>  
-      <table>
-	  <thead>
-        <tr>
-          <th>&nbsp;</th>          
-          <th>Title</th>
-          <th>Menu</th>
-          <th>Date</th>
-          <th>Comments</th>
-          <th>Visible</th>
-          <th>id</th>
-          <th>&nbsp;</th>
-        </tr>
-		</thead>			
-		<tbody>
-		
-		{% for item in page_list %}
-		  <tr>
-	          <td>
-	          	<a href="/{{parent}}/{{name}}?action=delete&{{name}}.key_id={{item.key.id}}" >delete</a>
-	          </td>
-	          <td>{{item.title}}</td>
-	          <td>{{item.fk_menu}}</td>
-	          <td>{{item.date|date:"d/m/y H:m"}}</td>
-	          <td>{{item.is_comment}}</td>
-	          <td>{{item.is_visible}}</td>
-		  	  <td>{{item.key.id}}</td>
-	          <td>
-	          	<a href="/{{parent}}/{{name}}?action=edit&{{name}}.key_id={{item.key.id}}" >edit</a>
-	          </td>
-	          
-         </tr>
-		 {% endfor %} 
-        </tbody>
-      </table>
-      
- </fieldset>
-      </div> 
-
-<br style="clear:both" />
-
 {% endblock%}
 
  

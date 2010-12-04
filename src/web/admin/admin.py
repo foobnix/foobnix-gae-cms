@@ -7,17 +7,17 @@ from web.util import prepare_glob_dict
 from web.model import MenuModel, PageModel
 
 class ViewEditAdminPage():
-    def __init__(self, handler, model, glob_dict):
+    def __init__(self, handler, model, glob_dict, name=None):
         self.parent_page = "admin"
         self.request = handler.request
         self.redirect = handler.redirect
         self.response = handler.response
         self.glob_dict = glob_dict
         self.model = model
-        self.name = model.get_name()
-        
-        self.glob_dict["parent"] = self.parent_page
-        self.glob_dict["name"] = self.name
+        if name:
+            self.name = name
+        else:
+            self.name = model.get_name()
         
     def proccess(self):
         if self.request.get('action') == "edit":
@@ -86,15 +86,27 @@ class AdminPage(webapp.RequestHandler):
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         
+        glob_dict["parent"] = "admin"
+        
+        
         if admin_page == "menu": 
+            glob_dict["name"] = "menu"
             page = ViewEditAdminPage(self, MenuModel(), glob_dict)
             page.proccess()
+            
         elif admin_page == "page":       
+            glob_dict["name"] = "page"
             view_menu = ViewEditAdminPage(self, PageModel(), glob_dict)
             view_menu.proccess()
-        elif admin_page == "editor":       
-            path = os.path.join(os.path.dirname(__file__), 'admin-editor.html')
-            self.response.out.write(template.render(path, glob_dict))
+            
+        elif admin_page == "pageslist":       
+            glob_dict["name"] = "pageslist"
+            #path = os.path.join(os.path.dirname(__file__), 'admin-pageslist.html')
+            #self.response.out.write(template.render(path, glob_dict))
+            view_menu = ViewEditAdminPage(self, PageModel(), glob_dict, "pageslist")
+            view_menu.proccess()
+            
+            
         else:
             path = os.path.join(os.path.dirname(__file__), 'admin.html')
             self.response.out.write(template.render(path, glob_dict))
