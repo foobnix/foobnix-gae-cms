@@ -82,7 +82,7 @@
 		{% for item in menu_list %}
 		  <tr>
 	          <td>
-	          	<a href="/{{parent}}/{{name}}?action=delete&key_id={{item.key.id}}" >delete</a>
+	          	<a href="/{{parent}}/{{name}}?action=delete&menu.key_id={{item.key.id}}" >delete</a>
 	          </td>
 	          <td>{{item.index}}</td>
 	          <td>{{item.link_id}}</td>
@@ -92,7 +92,7 @@
 		  	  <td>{{item.key.id}}</td>
 	          <td>{{item.is_visible}}</td>
 	          <td>
-	          	<a href="/{{parent}}/{{name}}?action=edit&key_id={{item.key.id}}" >edit</a>
+	          	<a href="/{{parent}}/{{name}}?action=edit&menu.key_id={{item.key.id}}" >edit</a>
 	          </td>
 	          
          </tr>
