@@ -5,6 +5,9 @@ api_version: 1
 
 handlers:
 
+- url: /jwysiwyg
+  static_dir: resources/jwysiwyg
+
 - url: /css
   static_dir: resources/css
  

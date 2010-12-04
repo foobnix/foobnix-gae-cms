@@ -92,6 +92,9 @@ class AdminPage(webapp.RequestHandler):
         elif admin_page == "page":       
             view_menu = ViewEditAdminPage(self, PageModel(), glob_dict)
             view_menu.proccess()
+        elif admin_page == "editor":       
+            path = os.path.join(os.path.dirname(__file__), 'admin-editor.html')
+            self.response.out.write(template.render(path, glob_dict))
         else:
             path = os.path.join(os.path.dirname(__file__), 'admin.html')
             self.response.out.write(template.render(path, glob_dict))

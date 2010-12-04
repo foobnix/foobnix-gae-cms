@@ -18,10 +18,13 @@
               <input type="text" class="text" name="page.title" value="{{page.title}}">
             </p>
             
-            <p> 
-              <label>Content</label><br> 
-              <textarea name="page.content">{{page.content}}</textarea>
-            </p>
+             <p>
+		      <textarea name="page.content" id="wysiwyg" rows="5" cols="103">{{page.content}}</textarea>
+		    </p>
+		    <script type="text/javascript" src="/jwysiwyg/lib/jquery-1.4.2.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/jquery.wysiwyg.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/lib/jquery.simplemodal.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/base.js"></script>
             
             <p><label>Section Menu</label><br>
             <select name="page.fk_menu"> 
