@@ -27,4 +27,15 @@ class PageModel(db.Model):
     is_visible = db.BooleanProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     fk_menu = db.StringProperty(multiline=False)
+    
+class ProductModel(db.Model):
+    title = db.StringProperty(multiline=False)
+    description = db.StringProperty(multiline=True)
+    new_price = db.StringProperty(multiline=False)
+    old_price = db.StringProperty(multiline=False)
+    date = db.DateTimeProperty(auto_now_add=True)
+
+class ImageModel(db.Model):
+    title = db.StringProperty(multiline=False)
+    content = db.BlobProperty() 
 

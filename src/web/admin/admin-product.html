@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+<h2>Products</h2>
+ <div class="span-12">  
+        <form action="{{admin_model.link_id}}" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Product</legend>
+            
+            <p> 
+              <label>ID: {{product.key.id}}</label>
+              <input type="hidden" name="product.key_id" value="{{product.key.id}}" />
+            </p>
+            
+           <p>
+             <label>Title:</label><br>
+		         <input type="text" class="text" name="product.title" value="{{product.title}}">
+		    </p>
+            
+             <p>
+             <label>Description:</label><br>
+		      <textarea name="product.description" >{{product.description}}</textarea>
+		    </p>
+		    
+		     <p>
+             <label>New Price:</label><br>
+		         <input type="text" class="text" name="product.new_price" value="{{product.new_price}}">
+		    </p>
+		    
+		     <p>
+             <label>Old Price:</label><br>
+		         <input type="text" class="text" name="product.old_price" value="{{product.old_price}}">
+		    </p>
+		    
+		    <p>
+             <label>Image:</label><br>
+		         <input type="file" class="text" name="product.image" value="Add Image">
+		    </p>
+            
+            <p> 
+              <input type="submit" value="Save">
+            </p> 
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div>
+      
+      
+       <div class="span-12">
+	
+	<fieldset> 
+            <legend>product lists</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		{% for item in product_list %}
+		  <tr>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=delete&product.key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.title}}</td>
+	          <td>{{item.date|date:"d/m/y H:m"}}</td>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=edit&product.key_id={{item.key.id}}" >edit</a>
+	          </td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+       
+{% endblock%}

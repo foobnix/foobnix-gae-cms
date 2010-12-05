@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+<h2>Image System </h2>
+ <div class="span-12 left">  
+        <form action="{{admin_model.link_id}}" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Add Image</legend>
+            <p> 
+              <label>ID: {{image.key.id}}</label>
+              <input type="hidden" name="image.key_id" value="{{image.key.id}}" />
+            </p>
+            
+           <p>
+             <label>Title:</label><br>
+		         <input type="text" class="text" name="image.title" value="{{image.title}}">
+		    </p>
+		    
+		    <p>
+             <label>Image:</label><br>
+		         <input type="file" class="text" name="image.content">
+		    </p>
+		                
+            <p> 
+              <input type="submit" value="Save">
+            </p> 
+ 
+          </fieldset> 
+        </form>
+        <fieldset>
+        <a href="{{admin_model.link_id}}">Add new Image</a>
+        </fieldset>
+      </div>
+       <div class="span-12 push-0">
+        <fieldset> 
+        <legend>Image Preview</legend>
+         <p>           
+		       <label>{{image.title}}</label>
+		 </p>
+		 <p>        
+       <img src="/img/{{image.key.id}}" alt="{{image.title}}">
+       </p>
+       </fieldset>
+       </div> 
+       
+      <br style="clear:both" />
+      
+            
+       <div>
+       <fieldset> 
+       {% for item in image_list %}
+       
+       		<div class="span-4 left image_border">
+       			<p>
+       			<b>id:</b><input type="text" class="span-2" value="{{item.key.id}}" /><br/>
+      		  	<b>{{item.title}}</b>
+      		  </p>
+	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}"><br/>
+              <a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a>&nbsp;&nbsp;&nbsp;
+              <a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a><br/>
+       
+       		</div>
+       	 
+       	{% endfor %}
+       	</fieldset> 
+       
+       </div>  
+       
+        <br style="clear:both" />
+       
+{% endblock%}

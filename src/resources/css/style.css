@@ -37,6 +37,16 @@ div.pre {
     width: 38em;
 }
 
+div.image_border {
+    background:#eee;
+    border:1px solid #ddd;
+    padding:10px;
+    margin:10px;
+    height:200px;
+    
+    
+}
+
 #download {
     font-size: 300%;
     float: right;

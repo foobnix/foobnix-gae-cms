@@ -4,7 +4,7 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from web.model import MenuModel, PageModel, EmailModel
+from web.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 
 positions = ["TOP", "LEFT", "No"]
 layouts = ["one_page", "list_page"]
@@ -45,5 +45,21 @@ admin_menu = [
          "template":"admin-email.html",
          "model":EmailModel(),
          "type":CMS_EDIT
-         }        
+         },
+          {
+         "template_dict":"product",
+         "link_id":CMS_URL + "/product",
+         "text":"Add Product",
+         "template":"admin-product.html",
+         "model":ProductModel(),
+         "type":CMS_EDIT
+         },
+         {
+         "template_dict":"image",
+         "link_id":CMS_URL + "/image",
+         "text":"Add Image",
+         "template":"admin-image.html",
+         "model":ImageModel(),
+         "type":CMS_EDIT
+         }                     
         ]
