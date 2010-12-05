@@ -51,17 +51,17 @@
             
        <div>
        <fieldset> 
+       <legend>All Images list</legend>
        {% for item in image_list %}
        
        		<div class="span-4 left image_border">
-       			<p>
-       			<b>id:</b><input type="text" class="span-2" value="{{item.key.id}}" /><br/>
-      		  	<b>{{item.title}}</b>
-      		  </p>
-	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}"><br/>
-              <a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a>&nbsp;&nbsp;&nbsp;
-              <a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a><br/>
-       
+       			<b>id:</b><input type="text" class="span-3" value="{{item.key.id}}" /><br/>
+      		  	<b>{{item.title}}</b><br/>
+      		  	<a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
+      		  	<a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a><br/>
+              	
+      		  
+	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}">
        		</div>
        	 
        	{% endfor %}

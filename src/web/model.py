@@ -33,6 +33,7 @@ class ProductModel(db.Model):
     description = db.StringProperty(multiline=True)
     new_price = db.StringProperty(multiline=False)
     old_price = db.StringProperty(multiline=False)
+    images = db.StringProperty(multiline=False)
     date = db.DateTimeProperty(auto_now_add=True)
 
 class ImageModel(db.Model):

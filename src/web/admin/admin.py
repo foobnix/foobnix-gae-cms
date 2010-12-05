@@ -7,7 +7,7 @@ from web.config import admin_menu, layouts, positions, CMS_URL, CMS_EDIT, \
 from web.glob_dict import prepare_glob_dict
 from web.model import ImageModel
 from google.appengine.api import images
-
+import copy
 
 class ViewImage (webapp.RequestHandler):
     def get(self, image_key_id):
@@ -28,7 +28,7 @@ class ViewEditAdminPage():
         
     def proccess(self):
         template_dict = self.admin_model["template_dict"]
-        clean_model = self.admin_model["model"]
+        clean_model = copy.copy(self.admin_model["model"])
         
         if self.request.get('action') == "edit":
             key_id = self.request.get(template_dict + '.key_id')
