@@ -31,7 +31,10 @@
           </fieldset> 
         </form>
         <fieldset>
-        <a href="{{admin_model.link_id}}">Add new Image</a>
+        <a href="{{admin_model.link_id}}" >Add new Image</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% if image %}
+        <a href="/admin/product?action=edit&product.images={{image.key.id}}" >Create product with image</a>
+        {% endif %}
         </fieldset>
       </div>
        <div class="span-12 push-0">
@@ -40,9 +43,11 @@
          <p>           
 		       <label>{{image.title}}</label>
 		 </p>
-		 <p>        
-       <img src="/img/{{image.key.id}}" alt="{{image.title}}">
-       </p>
+		 <p>
+		 	<b>id:</b><input type="text" class="span-3" value="{{image.key.id}}" />
+		 </p>
+       <img src="/img/{{image.key.id}}" alt="{{image.title}}"><br/>
+       <small>{{image.date|date:"d/m/y H:m:s"}}</small>
        </fieldset>
        </div> 
        
@@ -51,7 +56,7 @@
             
        <div>
        <fieldset> 
-       <legend>All Images list</legend>
+       <legend>Add Images List</legend>
        {% for item in image_list %}
        
        		<div class="span-4 left image_border">
@@ -59,9 +64,10 @@
       		  	<b>{{item.title}}</b><br/>
       		  	<a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
       		  	<a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a><br/>
+      		  	<small>{{item.date|date:"d/m/y H:m:s"}}</small>
               	
       		  
-	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}">
+	          <a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" ><img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}"></a>
        		</div>
        	 
        	{% endfor %}

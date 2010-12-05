@@ -12,4 +12,11 @@ register = webapp.template.create_template_register()
 def split(value, prefix):
     if not value:
         return []
-    return value.split(prefix)
+    list = value.split(prefix)
+    filtered = []
+    for line in list:
+        line = line.strip() 
+        if line:
+            filtered.append(line)
+        
+    return filtered

@@ -8,6 +8,8 @@ from web.glob_dict import prepare_glob_dict
 from web.model import ImageModel
 from google.appengine.api import images
 import copy
+import datetime
+import time
 
 class ViewImage (webapp.RequestHandler):
     def get(self, image_key_id):
@@ -83,7 +85,7 @@ class ViewEditAdminPage():
                     request_value = False;
                 setattr(model, properie, bool(request_value))
             elif type(db_type) == db.DateTimeProperty:
-                pass
+                setattr(model, properie, datetime.datetime.utcnow())
             elif type(db_type) == db.BlobProperty:
                 if request_value:
                     resized = images.resize(request_value, 350)

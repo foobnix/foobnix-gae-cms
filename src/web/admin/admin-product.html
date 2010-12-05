@@ -3,7 +3,7 @@
 {% block content_slot %}
 
 <h2>Products</h2>
- <div class="span-12">  
+ <div class="span-12 left">  
         <form action="{{admin_model.link_id}}" method="get">
 		<input type="hidden" name="action" value="addupdate" />
  
@@ -47,23 +47,62 @@
  
           </fieldset> 
         </form> 
+        
+        <fieldset>
+        	<a href="{{admin_model.link_id}}">Add new Product</a>
+        </fieldset>
  
       </div>
       
-      
-      
-       <div class="span-12">
-		
- 		{% for image_id in product.images|split:"," %}
-       
+      <div class="span-12 push-0">
+        <fieldset> 
+        <legend>Product Images</legend>
+        <div>
+        {% for image_id in product.images|split:"," %}
+       		
        		<div class="span-4 left image_border">
        			<b>id:</b><input type="text" class="span-3" value="{{image_id}}" /><br/>
       		  	<b>{{item.title}}</b><br/>      		  	
+      		  	<a href="/admin/image?action=edit&image.key_id={{image_id}}" >edit</a><br/>
+	            <img src="/img/{{image_id}}" width="150" />
+       		</div>
+       	{% endfor %}
+        
+        </div>
+        
+       </fieldset>
+       
+        <fieldset> 
+        <legend>Last Added images</legend>
+        <div>
+        {% for item in image_list|slice:":4" %}
+       
+       		<div class="span-4 left image_border">
+       			<b>id:</b><input type="text" class="span-3" value="{{item.key.id}}" /><br/>
+      		  	<b>{{item.title}}</b><br/>
+      		  	<a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
       		  	<a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a><br/>
+              	
+      		  
 	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}">
        		</div>
        	 
        	{% endfor %}
+        
+        </div>
+        
+       </fieldset>
+       
+       <fieldset>
+        		<a href="/admin/image">Add new Image</a>
+        	</fieldset>
+       
+       </div> 
+       
+      <br style="clear:both" />
+      
+		
+ 		
 
 	
 	<fieldset> 
@@ -73,6 +112,7 @@
         <tr>
           <th>&nbsp;</th>
           <th>Title</th>
+          <th>Images</th>
           <th>Date</th>
           <th>&nbsp;</th>
         </tr>
@@ -84,6 +124,7 @@
 	          	<a href="{{admin_model.link_id}}?action=delete&product.key_id={{item.key.id}}" >delete</a>
 	          </td>
 	          <td>{{item.title}}</td>
+	          <td>{{item.images}}</td>
 	          <td>{{item.date|date:"d/m/y H:m"}}</td>
 	          <td>
 	          	<a href="{{admin_model.link_id}}?action=edit&product.key_id={{item.key.id}}" >edit</a>

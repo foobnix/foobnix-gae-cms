@@ -9,7 +9,7 @@ from google.appengine.ext import webapp
 import os
 from web.model import PageModel
 from web.config import admin_menu
-from web.glob_dict import prepare_glob_dict
+from web.glob_dict import prepare_glob_dict, get_pages, get_menu_layout
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""

@@ -38,5 +38,6 @@ class ProductModel(db.Model):
 
 class ImageModel(db.Model):
     title = db.StringProperty(multiline=False)
-    content = db.BlobProperty() 
+    content = db.BlobProperty()
+    date = db.DateTimeProperty(auto_now_add=True) 
 

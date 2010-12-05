@@ -27,6 +27,7 @@ def prepare_glob_dict():
     product_list.fetch(50)
     
     images_list = ImageModel().all()
+    images_list.order("-date")
     images_list.fetch(50)
     
     glob_dict = {
