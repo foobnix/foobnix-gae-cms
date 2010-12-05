@@ -4,7 +4,7 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from web.model import MenuModel, PageModel
+from web.model import MenuModel, PageModel, EmailModel
 from web.config import layouts
 def prepare_glob_dict():
     menu_list = MenuModel().all()
@@ -18,9 +18,14 @@ def prepare_glob_dict():
     page_list.order("-date")
     page_list.fetch(50)
     
+    email_list = EmailModel().all()
+    email_list.order("-date")
+    page_list.fetch(50)
+    
     glob_dict = {
      'menu_list':menu_list,
-     'page_list':page_list
+     'page_list':page_list,
+     'email_list':email_list
      }
     return glob_dict
 

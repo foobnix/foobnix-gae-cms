@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+<h2>Send Eamils</h2>
+ <div class="span-20">  
+        <form action="{{admin_model.link_id}}" method="get">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Email Notification</legend>
+            
+            <p> 
+              <label>ID: {{email.key.id}}</label>
+              <input type="hidden" name="email.key_id" value="{{email.key.id}}" />
+            </p>
+            
+           <p>
+             <label>Subject:</label><br>
+		         <input type="text" class="text" name="email.subject" value="{{email.subject}}">
+		    </p>
+		    
+		    <p>
+             <label>From:</label><br>
+		         <input type="text" class="text" name="email.send_from" value="{{email.send_from}}">
+		          <span class="notice">myaddress@site.com</span>
+            </p>
+            
+             <p>
+             <label>To Emails:</label><br>
+		      <textarea name="email.send_to" >{{email.send_to}}</textarea>
+		    </p>
+		    
+		    <p>
+             <label>Message:</label><br>
+		      <textarea name="email.message" >{{email.message}}</textarea>
+		    </p>
+            
+            
+            
+            <p> 
+              <input type="submit" value="Save">
+              <input type="submit" value="Save and Send"> 
+            </p> 
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div>
+      
+      
+       <div class="span-20">
+	
+	<fieldset> 
+            <legend>Email lists</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Subject</th>
+          <th>Date</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		{% for item in email_list %}
+		  <tr>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=delete&email.key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.subject}}</td>
+	          <td>{{item.date|date:"d/m/y H:m"}}</td>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=edit&email.key_id={{item.key.id}}" >edit</a>
+	          </td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+       
+{% endblock%}
+
+ 
+     

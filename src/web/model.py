@@ -13,8 +13,12 @@ class MenuModel(db.Model):
     index = db.IntegerProperty()
     is_visible = db.BooleanProperty()
     
-    def get_name(self):
-        return "menu"
+class EmailModel(db.Model):
+    subject = db.StringProperty(multiline=False)
+    send_from = db.StringProperty(multiline=False)
+    send_to = db.StringProperty(multiline=True)
+    message = db.TextProperty()
+    date = db.DateTimeProperty(auto_now_add=True)
 
 class PageModel(db.Model):
     title = db.StringProperty(multiline=False)
@@ -23,7 +27,4 @@ class PageModel(db.Model):
     is_visible = db.BooleanProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     fk_menu = db.StringProperty(multiline=False)
-    
-    def get_name(self):
-        return "page"
 

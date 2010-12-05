@@ -2,63 +2,61 @@ from google.appengine.ext import webapp
 import os
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
-from web.config import admin_menu, layouts, positions
+from web.config import admin_menu, layouts, positions, CMS_URL, CMS_EDIT, \
+    CMS_VIEW
 from web.util import prepare_glob_dict
-from web.model import MenuModel, PageModel
 
 class ViewEditAdminPage():
-    def __init__(self, handler, model, glob_dict, name=None):
-        self.parent_page = "admin"
+    def __init__(self, handler, admin_model, glob_dict):
         self.request = handler.request
         self.redirect = handler.redirect
         self.response = handler.response
         self.glob_dict = glob_dict
-        self.model = model
-        if name:
-            self.name = name
-        else:
-            self.name = model.get_name()
+        self.admin_model = admin_model
         
     def proccess(self):
+        template_dict = self.admin_model["template_dict"]
+        self.model = self.admin_model["model"]
+        
         if self.request.get('action') == "edit":
-            key_id = self.request.get(self.name + '.key_id')
+            key_id = self.request.get(template_dict + '.key_id')
             db_model = None
             if key_id:
                 db_model = self.model.get_by_id(int(key_id))
 
             if not db_model:
-                db_model = self.request_to_model(self.model, self.request)
+                db_model = self.request_to_model(self.admin_model["model"], self.request, template_dict)
                 db_model.put()
                 
-            self.glob_dict[self.name] = db_model
+            self.glob_dict[template_dict] = db_model
             
                         
         elif self.request.get('action') == "addupdate":
-            key_id = self.request.get(self.name + '.key_id')
+            key_id = self.request.get(template_dict + '.key_id')
             if key_id:
                 db_model = self.model.get_by_id(int(key_id))
             else:
-                db_model = self.model
-            add = self.request_to_model(db_model, self.request)
+                db_model = self.admin_model["model"]
+            add = self.request_to_model(db_model, self.request, template_dict)
             add.put()
-            self.glob_dict[self.name] = add
-            #self.redirect("/%s/%s" % (self.parent_page, self.name))
+            self.glob_dict[template_dict] = add
             
         elif self.request.get('action') == "delete":
-            key_id = self.request.get(self.name + '.key_id')
+            key_id = self.request.get(template_dict + '.key_id')
             model = self.model.get_by_id(int(key_id))
             if model:
                 model.delete()
-                
-            self.redirect("/%s/%s" % (self.parent_page, self.name))
+             
+            self.redirect(self.admin_model["link_id"])
+            return None
         
-        path = os.path.join(os.path.dirname(__file__), '%s-%s.html' % (self.parent_page, self.name))
+        path = os.path.join(os.path.dirname(__file__), self.admin_model["template"])
         self.response.out.write(template.render(path, self.glob_dict))
     
-    def request_to_model(self, model, request):
+    def request_to_model(self, model, request, prefix):
         for properie in model.properties():
             db_type = model.properties()[properie]
-            request_propertrie = model.get_name() + "." + properie
+            request_propertrie = prefix + "." + properie
             request_value = request.get(request_propertrie)
             
             #if getattr(model, properie):
@@ -86,27 +84,19 @@ class AdminPage(webapp.RequestHandler):
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         
-        glob_dict["parent"] = "admin"
-        
-        
-        if admin_page == "menu": 
-            glob_dict["name"] = "menu"
-            page = ViewEditAdminPage(self, MenuModel(), glob_dict)
-            page.proccess()
-            
-        elif admin_page == "page":       
-            glob_dict["name"] = "page"
-            view_menu = ViewEditAdminPage(self, PageModel(), glob_dict)
-            view_menu.proccess()
-            
-        elif admin_page == "pageslist":       
-            glob_dict["name"] = "pageslist"
-            #path = os.path.join(os.path.dirname(__file__), 'admin-pageslist.html')
-            #self.response.out.write(template.render(path, glob_dict))
-            view_menu = ViewEditAdminPage(self, PageModel(), glob_dict, "pageslist")
-            view_menu.proccess()
-            
-            
-        else:
+        find = False
+        for admin_model in admin_menu:
+            page_link = admin_model["link_id"][len(CMS_URL) + 1:]
+            if page_link == admin_page:
+                find = True
+                glob_dict["admin_model"] = admin_model
+                
+                if admin_model["type"] == CMS_EDIT:            
+                    page = ViewEditAdminPage(self, admin_model, glob_dict)
+                    page.proccess()
+                elif admin_model["type"] == CMS_VIEW:
+                    path = os.path.join(os.path.dirname(__file__), admin_model["template"])
+                    self.response.out.write(template.render(path, glob_dict))
+        if not find:
             path = os.path.join(os.path.dirname(__file__), 'admin.html')
             self.response.out.write(template.render(path, glob_dict))

@@ -14,9 +14,9 @@
  	{% for item in admin_menu %}
  	
  	{% ifequal item.link_id active %}
- 		<li class="tabs-selected"><a href="/{{ item.id }}">{{ item.text }}</a></li>
+ 		<li class="tabs-selected"><a href="{{ item.id }}">{{ item.text }}</a></li>
  		{% else %}
- 		<li class="tabs-container"><a href="/{{ item.link_id }}">{{ item.text }}</a></li>
+ 		<li class="tabs-container"><a href="{{ item.link_id }}">{{ item.text }}</a></li>
  		{% endifequal %}  
 	{% endfor %}
 	
