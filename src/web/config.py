@@ -7,7 +7,36 @@ Created on 4 дек. 2010
 from web.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 
 positions = ["TOP", "LEFT", "No"]
-layouts = ["one_page", "list_page"]
+
+LAYOUT_ONE_PAGE = "one_page"
+LAYOUT_LIST_PAGE = "list_page"
+LAYOUT_CATALOG_PAGE = "catalog_page"
+#layouts = [LAYOUT_ONE_PAGE, LAYOUT_LIST_PAGE, LAYOUT_CATALOG_PAGE]
+
+layouts = [{
+            "id":LAYOUT_ONE_PAGE,
+            "template":"one_page.html",
+            "child_template":"one_page.html",
+            "name":"One Page",
+            "model":PageModel()
+            },
+            {
+            "id":LAYOUT_LIST_PAGE,
+            "template":"list_page.html",
+            "child_template":"view_page.html",
+            "name":"List Page",
+            "model":PageModel()
+            },
+            {
+            "id":LAYOUT_CATALOG_PAGE,
+            "template":"catalog_page.html",
+            "child_template":"view_product.html",
+            "name":"Catalog Page",
+            "model":ProductModel()
+            },
+]
+
+IMAGE_NOT_FOUND = "/images/image-not-found.gif"
 
 CMS_URL = "/admin"
 CMS_VIEW = "CMS_VIEW"

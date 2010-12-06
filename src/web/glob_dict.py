@@ -39,19 +39,25 @@ def prepare_glob_dict():
      }
     return glob_dict
 
+def get_layout(layout_id):
+    for layout in layouts:
+        if layout["id"] == layout_id:
+            return layout
+    return None 
+        
+
 def get_pages(menu_name):
     page = PageModel().all()
     page.filter("fk_menu", menu_name)
     return page
 
-def get_menu_layout(menu_name):
+
+def get_menu_by(link_id):
     page = MenuModel().all()
-    page.filter("link_id", menu_name)
-    
-    layout = layouts[0]
+    page.filter("link_id", link_id)
     
     if page.count() >= 1:
-        layout = page[0].layout
+        return page[0]
         
-    return layout
+    return None
     

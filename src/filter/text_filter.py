@@ -6,12 +6,13 @@ Created on 5 дек. 2010
 '''
 
 from google.appengine.ext import webapp
+from web.config import IMAGE_NOT_FOUND
 register = webapp.template.create_template_register()
 
-@register.filter
-def split(value, prefix):
+def split(value, prefix=","):
     if not value:
         return []
+
     list = value.split(prefix)
     filtered = []
     for line in list:
@@ -20,3 +21,12 @@ def split(value, prefix):
             filtered.append(line)
         
     return filtered
+
+@register.filter
+def first_image(value):
+    list = split(value, ",")
+    if list:
+        return list[0]
+    else:
+        return IMAGE_NOT_FOUND
+    

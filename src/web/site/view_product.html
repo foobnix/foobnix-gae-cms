@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+<h2>{{product.title}}</h2>
+
+ 	<div >
+      		  	<a href="/admin/product?action=delete&product.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
+      		  	<a href="/admin/product?action=edit&product.key_id={{item.key.id}}" >edit</a><br>
+      		  	<b>images</b>:{{item.images}}<br/>
+      		  		<b>{{item.description}}</b><br/>
+  					<img src="/img/{{ item.images|first_image }}" alt="{{item.title}}"></a>
+  				<h3><strike>{{item.old_price}}</strike> {{item.new_price}} </h3>
+  				
+  			{% if product %}
+        		{% img_preview_from_list product.images %}
+        	{% endif %}   				
+	</div>
+				
+{% endblock %}

@@ -29,7 +29,7 @@
             <p> 
               <label for="dummy3">Layout</label><br> 
 				{% for item in layouts %}
-						 <input type="radio" name="menu.layout" value="{{ item }}" {% ifequal item menu.layout %}CHECKED{% endifequal %} >{{ item }}
+						 <input type="radio" name="menu.layout" value="{{ item.id }}" {% ifequal item.id menu.layout %}CHECKED{% endifequal %} >{{ item.name }}
 				{% endfor %}
             </p>
             

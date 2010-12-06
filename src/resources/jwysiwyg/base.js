@@ -48,9 +48,9 @@
               tooltip: 'Header 6'
       },
       
-      cut   : { visible : true },
-      copy  : { visible : true },
-      paste : { visible : true },
+      cut   : { visible : false },
+      copy  : { visible : false },
+      paste : { visible : false },
       html  : { visible: true },
       exam_html: { exec: function() { this.insertHtml('<abbr title="exam">Jam</abbr>') }, visible: true  }
     },

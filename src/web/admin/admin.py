@@ -2,14 +2,13 @@ from google.appengine.ext import webapp
 import os
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
-from web.config import admin_menu, layouts, positions, CMS_URL, CMS_EDIT, \
-    CMS_VIEW
+from web.config import admin_menu, positions, CMS_URL, CMS_EDIT, \
+    CMS_VIEW, layouts
 from web.glob_dict import prepare_glob_dict
 from web.model import ImageModel
 from google.appengine.api import images
 import copy
 import datetime
-import time
 
 class ViewImage (webapp.RequestHandler):
     def get(self, image_key_id):

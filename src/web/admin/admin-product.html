@@ -38,7 +38,7 @@
 		    <p>
              <label>Images:</label><br>
 		         <input type="text" class="text" name="product.images" value="{{product.images}}">
-		          <span class="notice">1, 2, 43, 34</span> 
+		          <span class="notice">1, 2, 10, 15</span> 
 		    </p>
             
             <p> 
@@ -57,17 +57,10 @@
       <div class="span-12 push-0">
         <fieldset> 
         <legend>Product Images</legend>
-        <div>
-        {% for image_id in product.images|split:"," %}
-       		
-       		<div class="span-4 left image_border">
-       			<b>id:</b><input type="text" class="span-3" value="{{image_id}}" /><br/>
-      		  	<b>{{item.title}}</b><br/>      		  	
-      		  	<a href="/admin/image?action=edit&image.key_id={{image_id}}" >edit</a><br/>
-	            <img src="/img/{{image_id}}" width="150" />
-       		</div>
-       	{% endfor %}
-        
+        <div>     
+        	{% if product %}
+        	{% img_preview_from_list product.images %}
+        	{% endif %}        	        
         </div>
         
        </fieldset>
@@ -75,20 +68,7 @@
         <fieldset> 
         <legend>Last Added images</legend>
         <div>
-        {% for item in image_list|slice:":4" %}
-       
-       		<div class="span-4 left image_border">
-       			<b>id:</b><input type="text" class="span-3" value="{{item.key.id}}" /><br/>
-      		  	<b>{{item.title}}</b><br/>
-      		  	<a href="{{admin_model.link_id}}?action=delete&image.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
-      		  	<a href="{{admin_model.link_id}}?action=edit&image.key_id={{item.key.id}}" >edit</a><br/>
-              	
-      		  
-	          <img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}">
-       		</div>
-       	 
-       	{% endfor %}
-        
+        	{% all_img_preview 4%}        
         </div>
         
        </fieldset>

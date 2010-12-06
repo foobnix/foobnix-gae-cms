@@ -5,6 +5,7 @@ from web.site.view import ViewPage
 #logging.getLogger().setLevel(logging.DEBUG)
 
 webapp.template.register_template_library('filter.text_filter')
+webapp.template.register_template_library('web.admin.tags')
 
 ROUTES = [
   (r'/img/(.*)/', ViewImage),
