@@ -9,13 +9,44 @@ from google.appengine.ext import webapp
 import os
 from web.config import admin_menu
 from web.glob_dict import prepare_glob_dict, get_pages, get_menu_by, get_layout
+from web.model import EmailModel
+from google.appengine.api import mail
+import re
+
+def is_valid_email(email):
+    if len(email) > 7:
+        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
+            return True
+    return False
+
+class SendEmails(webapp.RequestHandler):
+    def get(self, key_id):
+        email = EmailModel().get_by_id(int(key_id))
+        
+        for to in re.split("[ ,\n\r]", email.send_to):
+            if to and is_valid_email(to):
+                email.status = "Send"
+                mail.send_mail(
+                      sender=email.send_from,
+                      to=to,
+                      subject=email.subject,
+                      body=email.message)
+        email.put()
+        self.redirect("/admin/email")
+   
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
-    def get(self, menu_link_id, page_key_id=None):
+    def get(self, menu_link_id=None, page_key_id=None):
         glob_dict = prepare_glob_dict()        
         
         menu = get_menu_by(menu_link_id)
+        if not menu:
+            result_layout = "base.html"
+            path = os.path.join(os.path.dirname(__file__), result_layout)
+            return self.response.out.write(template.render(path, glob_dict))
+            
+        
         layout = get_layout(menu.layout)
         
         if page_key_id:

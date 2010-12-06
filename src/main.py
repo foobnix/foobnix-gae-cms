@@ -1,13 +1,15 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from web.admin.admin import AdminPage, ViewImage
-from web.site.view import ViewPage
+from web.site.view import ViewPage, SendEmails
 #logging.getLogger().setLevel(logging.DEBUG)
 
 webapp.template.register_template_library('filter.text_filter')
 webapp.template.register_template_library('web.admin.tags')
 
 ROUTES = [
+          
+  (r'/send_emails/(.*)', SendEmails),
   (r'/img/(.*)/', ViewImage),
   (r'/img/(.*)', ViewImage),
   (r'/admin/(.*)/', AdminPage),

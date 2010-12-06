@@ -19,6 +19,7 @@ class EmailModel(db.Model):
     send_to = db.StringProperty(multiline=True)
     message = db.TextProperty()
     date = db.DateTimeProperty(auto_now_add=True)
+    status = db.StringProperty(multiline=False)
 
 class PageModel(db.Model):
     title = db.StringProperty(multiline=False)

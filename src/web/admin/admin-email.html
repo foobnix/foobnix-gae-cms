@@ -40,7 +40,13 @@
             
             <p> 
               <input type="submit" value="Save">
-              <input type="submit" value="Save and Send"> 
+              {% if email%}
+              	{% if email.status%}
+              		<a href="/send_emails/{{email.key.id}}" > Send Emails Again </a>
+              	{% else%}
+              		<a href="/send_emails/{{email.key.id}}" > Send Emails </a>
+              	{% endif%}
+              {% endif %} 
             </p> 
  
           </fieldset> 
@@ -59,6 +65,7 @@
           <th>&nbsp;</th>
           <th>Subject</th>
           <th>Date</th>
+          <th>status</th>
           <th>&nbsp;</th>
         </tr>
 		</thead>			
@@ -70,6 +77,7 @@
 	          </td>
 	          <td>{{item.subject}}</td>
 	          <td>{{item.date|date:"d/m/y H:m"}}</td>
+	          <td>{{item.status}}</td>
 	          <td>
 	          	<a href="{{admin_model.link_id}}?action=edit&email.key_id={{item.key.id}}" >edit</a>
 	          </td>

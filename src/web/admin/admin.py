@@ -5,10 +5,11 @@ from google.appengine.ext import db
 from web.config import admin_menu, positions, CMS_URL, CMS_EDIT, \
     CMS_VIEW, layouts
 from web.glob_dict import prepare_glob_dict
-from web.model import ImageModel
-from google.appengine.api import images
 import copy
 import datetime
+from web.model import ImageModel
+from google.appengine.api import images
+
 
 class ViewImage (webapp.RequestHandler):
     def get(self, image_key_id):
@@ -120,3 +121,4 @@ class AdminPage(webapp.RequestHandler):
         if not find:
             path = os.path.join(os.path.dirname(__file__), 'admin.html')
             self.response.out.write(template.render(path, glob_dict))
+

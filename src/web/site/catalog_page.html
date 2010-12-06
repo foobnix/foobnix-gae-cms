@@ -9,7 +9,9 @@
 <div>
 	       	<div class="span-4 left image_border">
       		  	<a href="/admin/product?action=delete&product.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
-      		  	<a href="/admin/product?action=edit&product.key_id={{item.key.id}}" >edit</a><br>
+      		  	<a href="/admin/product?action=edit&product.key_id={{item.key.id}}" >edit</a>
+      		  	<input type="text" class="span-1" value="{{item.key.id}}" />
+      		  	<br>
       		  	<b>images</b>:{{item.images}}<br/>
       		  	 	<a href="/{{active}}/{{item.key.id}}" >
       		  			<b>{{item.title}}</b><br/>
