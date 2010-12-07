@@ -6,16 +6,16 @@ api_version: 1
 handlers:
 
 - url: /jwysiwyg
-  static_dir: resources/jwysiwyg
+  static_dir: administrator/templates/default/jwysiwyg
 
 - url: /css
-  static_dir: resources/css
+  static_dir: templates/default/css
  
 - url: /js
-  static_dir: resources/js
+  static_dir: templates/default/js
  
 - url: /images
-  static_dir: resources/images
+  static_dir: templates/default/images
 
 - url: /.*
   script: main.py
