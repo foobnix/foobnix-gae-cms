@@ -39,7 +39,9 @@ class SendEmails(webapp.RequestHandler):
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
     def get(self, menu_link_id=None, page_key_id=None):
-        glob_dict = prepare_glob_dict()        
+        glob_dict = prepare_glob_dict()
+        glob_dict["mode"] = self.request.get("mode")
+                
         
         menu = get_menu_by(menu_link_id)
         if not menu:

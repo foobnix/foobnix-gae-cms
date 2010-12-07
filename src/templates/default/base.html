@@ -6,16 +6,32 @@
 
 	<div id="header-seperator">&nbsp;</div>		
 	<div id="sidebar">
-	{% include "left_slot.html" %}
+		<ul id="lnav">
+		{% for item in menu_list %}
+	 	{% ifequal item.position "LEFT" %}
+	 		{% ifequal item.link_id active %}
+	 			<li class="tabs-selected"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
+	 		{% else %}
+	 			<li class="tabs-container"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
+	 		{% endifequal %}
+	 	{% endifequal %}  
+		{% endfor %}
+	  </ul>
 	</div>
 	
     <div id="container">
+    	{% ifequal mode "debug" %}
      	<a href="/admin/menu?action=edit&menu.key_id={{active_menu.key.id}}" >edit menu</a>
+     	{% endifequal %}
+     	
   		{% block content_slot %}
   		{% endblock%}
 	</div>
 	
 	<div id="footer">
+		<a href="/admin/">Admin CMS</a>
+		<a href="?mode=live">Live</a>
+		<a href="?mode=debug">Debug</a>
 	</div>
 	
 	
