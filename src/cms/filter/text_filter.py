@@ -6,7 +6,7 @@ Created on 5 дек. 2010
 '''
 
 from google.appengine.ext import webapp
-from web.config import IMAGE_NOT_FOUND
+from cms.admin_config import IMAGE_NOT_FOUND
 register = webapp.template.create_template_register()
 
 def split(value, prefix=","):

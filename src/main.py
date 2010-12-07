@@ -1,11 +1,22 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from web.admin.admin import AdminPage, ViewImage
-from web.site.view import ViewPage, SendEmails
-#logging.getLogger().setLevel(logging.DEBUG)
+import logging
 
-webapp.template.register_template_library('filter.text_filter')
-webapp.template.register_template_library('web.admin.tags')
+from cms.view import SendEmails, ViewPage
+from cms.admin import ViewImage, AdminPage
+import os
+
+#sys.path.insert(0, APP_ROOT_DIR)
+#sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
+
+logging.getLogger().setLevel(logging.DEBUG)
+
+webapp.template.register_template_library('cms.filter.text_filter')
+webapp.template.register_template_library('cms.tag')
+
+logging.info('Loading %s, app version = %s',
+             __name__, os.getenv('CURRENT_VERSION_ID'))
+
 
 ROUTES = [
           

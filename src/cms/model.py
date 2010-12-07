@@ -5,6 +5,7 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from google.appengine.ext import db
+
 class MenuModel(db.Model):
     link_id = db.StringProperty(multiline=False)
     name = db.StringProperty(multiline=False)

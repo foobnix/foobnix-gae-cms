@@ -1,14 +1,15 @@
 from google.appengine.ext import webapp
 import os
-from google.appengine.ext.webapp import template
 from google.appengine.ext import db
-from web.config import admin_menu, positions, CMS_URL, CMS_EDIT, \
+from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
     CMS_VIEW, layouts
-from web.glob_dict import prepare_glob_dict
+from cms.glob_dict import prepare_glob_dict
 import copy
 import datetime
-from web.model import ImageModel
+from cms.model import ImageModel
 from google.appengine.api import images
+from configuration import ADMIN_TEMPLATE_PATH
+from google.appengine.ext.webapp import template
 
 
 class ViewImage (webapp.RequestHandler):
@@ -64,9 +65,9 @@ class ViewEditAdminPage():
             self.redirect(self.admin_model["link_id"])
             return None
         
-        path = os.path.join(os.path.dirname(__file__), self.admin_model["template"])
+        path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
         self.response.out.write(template.render(path, self.glob_dict))
-    
+        
     def request_to_model(self, model, request, prefix):
         for properie in model.properties():
             db_type = model.properties()[properie]
@@ -116,9 +117,9 @@ class AdminPage(webapp.RequestHandler):
                     page = ViewEditAdminPage(self, admin_model, glob_dict)
                     page.proccess()
                 elif admin_model["type"] == CMS_VIEW:
-                    path = os.path.join(os.path.dirname(__file__), admin_model["template"])
+                    path = os.path.join(ADMIN_TEMPLATE_PATH, admin_model["template"])
                     self.response.out.write(template.render(path, glob_dict))
         if not find:
-            path = os.path.join(os.path.dirname(__file__), 'admin.html')
+            path = os.path.join(ADMIN_TEMPLATE_PATH, 'admin.html')
             self.response.out.write(template.render(path, glob_dict))
 

@@ -4,8 +4,8 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from web.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
-from web.config import layouts
+from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
+from cms.admin_config import layouts
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")

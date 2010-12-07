@@ -1,8 +1,8 @@
 
 from google.appengine.ext import webapp
 import os
-from web.glob_dict import prepare_glob_dict
-from web.config import IMAGE_NOT_FOUND
+from cms.admin_config import IMAGE_NOT_FOUND
+from cms.glob_dict import prepare_glob_dict
 register = webapp.template.create_template_register()
 from google.appengine.ext.webapp import template
 

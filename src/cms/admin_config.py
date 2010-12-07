@@ -4,8 +4,7 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from web.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
-
+from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"

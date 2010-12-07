@@ -7,11 +7,12 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from web.config import admin_menu
-from web.glob_dict import prepare_glob_dict, get_pages, get_menu_by, get_layout
-from web.model import EmailModel
 from google.appengine.api import mail
 import re
+from configuration import TEMPLATE_PATH
+from cms.model import EmailModel
+from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout
+from cms.admin_config import admin_menu
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -42,8 +43,8 @@ class ViewPage(webapp.RequestHandler):
         
         menu = get_menu_by(menu_link_id)
         if not menu:
-            result_layout = "base.html"
-            path = os.path.join(os.path.dirname(__file__), result_layout)
+            #result_layout = INDEX_TEMPLATE
+            path = os.path.join(TEMPLATE_PATH, "base.html")            
             return self.response.out.write(template.render(path, glob_dict))
             
         
@@ -63,5 +64,5 @@ class ViewPage(webapp.RequestHandler):
         glob_dict["active"] = menu_link_id        
         glob_dict["active_menu"] = get_menu_by(menu_link_id)
         
-        path = os.path.join(os.path.dirname(__file__), result_layout)
+        path = os.path.join(TEMPLATE_PATH, result_layout)
         self.response.out.write(template.render(path, glob_dict))
