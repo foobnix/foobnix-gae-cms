@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-25 14:26+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: i18n.py:112
+msgid "Internationalization"
+msgstr "I18N 國際化"
+
+#: conf/settings.py:6
+msgid "English"
+msgstr "英文"
+
+#: conf/settings.py:7
+msgid "Chinese"
+msgstr "中文"
+
+#: template/i18n.html:10
+msgid "Set Cookie['django_language'] to en"
+msgstr "設定 Cookie['django_language'] 為 en"
+
+#: template/i18n.html:11
+msgid "Set Cookie['django_language'] to zh_TW"
+msgstr "設定 Cookie['django_language'] 為 zh_TW"
+
+#: template/i18n.html:12
+msgid "Unset Cookie['django_language']"
+msgstr "移除 Cookie['django_language']"

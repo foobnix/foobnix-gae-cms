@@ -6,6 +6,7 @@ Created on 4 дек. 2010
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 from cms.admin_config import layouts
+from cms.localization18n import Resources
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
@@ -29,6 +30,7 @@ def prepare_glob_dict():
     images_list = ImageModel().all()
     images_list.order("-date")
     images_list.fetch(50)
+    
     
     glob_dict = {
      'menu_list':menu_list,

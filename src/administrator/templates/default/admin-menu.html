@@ -4,11 +4,11 @@
 
 <h2>Add Update Delete Menus</h2>
  <div class="span-12 left">  
-        <form action="{{admin_model.link_id}}" method="get">
+        <form action="{{admin_model.link_id}}" method="post">
 		<input type="hidden" name="action" value="addupdate" />
  
           <fieldset> 
-            <legend>Add Menu</legend> 
+            <legend>{% text "admin.add.menu" %}</legend> 
             <p> 
               <label>ID: {{menu.key.id}}</label>
               <input type="hidden" name="menu.key_id" value="{{menu.key.id}}" />
