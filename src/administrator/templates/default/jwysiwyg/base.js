@@ -66,6 +66,6 @@
     }
   });
 
-  $('#wysiwyg').wysiwyg('insertHtml', 'sample code');
+  $('#wysiwyg').wysiwyg('insertHtml', '');
 
 })(jQuery);

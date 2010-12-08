@@ -33,9 +33,14 @@
 		    
 		    <p>
              <label>Message:</label><br>
-		      <textarea name="email.message" >{{email.message}}</textarea>
-		    </p>
             
+		     <p>
+		      <textarea name="email.message" id="wysiwyg" class="wysiwyg_textarea" >{{email.message}}</textarea>
+		    </p>
+		    <script type="text/javascript" src="/jwysiwyg/lib/jquery-1.4.2.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/jquery.wysiwyg.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/lib/jquery.simplemodal.js"></script>
+		    <script type="text/javascript" src="/jwysiwyg/base.js"></script>
             
             
             <p> 
@@ -53,6 +58,12 @@
         </form> 
  
       </div>
+      
+      
+       	<fieldset>
+            <a href="/admin/email">New Notification</a>  
+        </fieldset>
+	
       
       
        <div class="span-20">

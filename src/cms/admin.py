@@ -7,7 +7,7 @@ from cms.glob_dict import prepare_glob_dict
 import copy
 import datetime
 from cms.model import ImageModel
-from google.appengine.api import images
+from google.appengine.api import images, users
 from configuration import ADMIN_TEMPLATE_PATH
 from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
@@ -102,10 +102,12 @@ class AdminPage(webapp.RequestHandler):
         self.get(admin_page)
         
     def get(self, admin_page=None):
-        check_user_admin(self)
+        user = users.get_current_user()
+        check_user_admin(self, user)
         
         glob_dict = prepare_glob_dict()
         glob_dict["admin_menu"] = admin_menu
+        glob_dict["user"] = user
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         

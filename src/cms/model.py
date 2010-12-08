@@ -18,8 +18,8 @@ class EmailModel(db.Model):
     subject = db.StringProperty(multiline=False)
     send_from = db.StringProperty(multiline=False)
     send_to = db.StringProperty(multiline=True)
-    message = db.TextProperty()
     date = db.DateTimeProperty(auto_now_add=True)
+    message = db.TextProperty()
     status = db.StringProperty(multiline=False)
 
 class PageModel(db.Model):

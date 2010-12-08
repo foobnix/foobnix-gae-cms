@@ -7,8 +7,7 @@ Created on 7 дек. 2010
 from google.appengine.api import users
 from configuration import admins
 
-def check_user_admin(requestHandler):
-    user = users.get_current_user()
+def check_user_admin(requestHandler, user):
     if user and user.email() in admins:
         return user
     requestHandler.redirect(users.create_login_url(requestHandler.request.uri))
