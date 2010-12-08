@@ -31,7 +31,8 @@ class SendEmails(webapp.RequestHandler):
                       sender=email.send_from,
                       to=to,
                       subject=email.subject,
-                      body=email.message)
+                      body=email.message,
+                      html=email.message)
         email.put()
         self.redirect("/admin/email")
    
