@@ -4,6 +4,7 @@ import os
 from cms.admin_config import IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 from cms.localization18n import Resources
+from configuration import CMS_CFG
 register = webapp.template.create_template_register()
 from google.appengine.ext.webapp import template
 
@@ -21,9 +22,9 @@ def all_img_preview(count=None):
     list = prepare_glob_dict()["image_list"]    
     path = os.path.join(os.path.dirname(__file__), "all_img_preview.html")
     if count:
-        return template.render(path, {"image_list":list[:int(count)]})
+        return template.render(path, {"image_list":list[:int(count)], "cfg":CMS_CFG})
     else:
-        return template.render(path, {"image_list":list})  
+        return template.render(path, {"image_list":list, "cfg":CMS_CFG})  
 
 
 @register.simple_tag

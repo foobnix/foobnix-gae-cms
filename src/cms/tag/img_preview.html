@@ -1,9 +1,10 @@
-<div class="span-4 left image_border">
+<div class="span-6 left image_border">
+				<small>{{cfg.host}}/img/{{item.key.id}}/{{item.title}}.png</small><br>
        			<b>id:</b><input type="text" class="span-3" value="{{item.key.id}}" /><br/>
       		  	<b>{{item.title}}</b><br/>
       		  	<a href="/admin/image?action=delete&image.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
       		  	<a href="/admin/image?action=edit&image.key_id={{item.key.id}}" >edit</a><br/>
-      		  	<small>{{item.date|date:"d/m/y H:m:s"}}</small>
-  <a href="/admin/image?action=edit&image.key_id={{item.key.id}}" ><img src="/img/{{item.key.id}}" width="150" alt="{{item.title}}"></a>
+      		  	<small>{{item.date|date:"d/m/y H:m:s"}}</small><br>
+  <a href="/admin/image?action=edit&image.key_id={{item.key.id}}" ><img src="/img/{{item.key.id}}" height="90" alt="{{item.title}}"></a>
 </div>
 

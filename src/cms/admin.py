@@ -2,7 +2,7 @@ from google.appengine.ext import webapp
 import os
 from google.appengine.ext import db
 from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
-    CMS_VIEW, layouts
+    CMS_VIEW, layouts, IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 import copy
 import datetime
@@ -11,17 +11,24 @@ from google.appengine.api import images, users
 from configuration import ADMIN_TEMPLATE_PATH
 from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
+import logging
 
 
 class ViewImage (webapp.RequestHandler):
-    def get(self, image_key_id):
-        model = ImageModel().get_by_id(int(image_key_id))
+    def get(self, image_key_id, name=None):
+        try:
+            model = ImageModel().get_by_id(int(image_key_id))
+        except Exception, e:
+            logging.error(e)
+            self.redirect(IMAGE_NOT_FOUND)
+            return
+            
+            
         if model:
             self.response.headers['Content-Type'] = "image/png"
             self.response.out.write(model.content)
         else:
-            self.response.out.write("No image")
-
+            self.redirect(IMAGE_NOT_FOUND)
 class ViewEditAdminPage():
     def __init__(self, handler, admin_model, glob_dict):
         self.request = handler.request
@@ -110,6 +117,7 @@ class AdminPage(webapp.RequestHandler):
         glob_dict["user"] = user
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
+        glob_dict["host"] = self.request.headers['Host']
         
         glob_dict["mode"] = "debug"
         

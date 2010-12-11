@@ -21,8 +21,11 @@ logging.info('Loading %s, app version = %s',
 ROUTES = [
           
   (r'/send_emails/(.*)', SendEmails),
+  
+  (r'/img/(.*)/(.*)', ViewImage),
   (r'/img/(.*)/', ViewImage),
   (r'/img/(.*)', ViewImage),
+  
   (r'/admin/(.*)/', AdminPage),
   (r'/admin/(.*)', AdminPage),
   (r'/admin/', AdminPage),

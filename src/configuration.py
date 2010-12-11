@@ -23,6 +23,7 @@ ADMIN_TEMPLATE_PATH = os.path.dirname(ADMIN_TEMPLATE_INDEX)
 
 
 CMS_CFG = {
+    "host":"http://" + os.environ['HTTP_HOST'],
     "version": "0.1",
     "html_type": "text/html",
     "charset": "utf-8",

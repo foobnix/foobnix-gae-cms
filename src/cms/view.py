@@ -51,6 +51,7 @@ class ViewPage(webapp.RequestHandler):
     def get(self, menu_link_id=None, page_key_id=None):
         glob_dict = prepare_glob_dict()
         glob_dict["mode"] = self.request.get("mode")
+        glob_dict["host"] = self.request.headers['Host']
                 
         
         menu = get_menu_by(menu_link_id)
