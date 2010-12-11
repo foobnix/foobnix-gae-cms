@@ -14,12 +14,18 @@
         <meta name="keywords" content="Foobnix">
         <meta name="description" content="Foobnix music player for Linux">
         
-<link rel="stylesheet" type="text/css" href="/jwysiwyg-color/jquery.wysiwyg.css" media="screen, projection, print" />
-<script type="text/javascript" src="/jwysiwyg-color/jquery.js"></script>
-<script type="text/javascript" src="/jwysiwyg-color/jquery.wysiwyg.js"></script>
-
-<link rel="stylesheet" href="/jwysiwyg-color/js_color_picker_v2.css" media="screen">
-<script type="text/javascript" src="/jwysiwyg-color/color_functions.js"></script>
-<script type="text/javascript" src="/jwysiwyg-color/js_color_picker_v2.js"></script>
-<script type="text/javascript" src="/jwysiwyg-color/base.js"></script>
+        
+   	<link rel="stylesheet" type="text/css" href="/cleditor/jquery.cleditor.css" />
+   	
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/cleditor/jquery.cleditor.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#cleditor").cleditor({
+        		width:        700, 
+                height:       450,
+        		});
+        
+      });
+    </script>
     </head>

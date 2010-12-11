@@ -9,6 +9,8 @@
       justifyCenter : { visible : true },
       justifyRight  : { visible : true },
       justifyFull   : { visible : true },
+      createLink   : { visible : true },
+      insertImage   : { visible : true },
       
       indent  : { visible : true },
       outdent : { visible : true },
