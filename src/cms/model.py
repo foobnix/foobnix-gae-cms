@@ -21,6 +21,7 @@ class EmailModel(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
     message = db.TextProperty()
     status = db.StringProperty(multiline=False)
+    attachments = db.StringProperty(multiline=False)
 
 class PageModel(db.Model):
     title = db.StringProperty(multiline=False)

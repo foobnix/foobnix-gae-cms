@@ -10,7 +10,7 @@ import os
 from google.appengine.api import mail
 import re
 from configuration import TEMPLATE_PATH
-from cms.model import EmailModel
+from cms.model import EmailModel, ImageModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout
 from cms.admin_config import admin_menu
 
@@ -26,13 +26,22 @@ class SendEmails(webapp.RequestHandler):
         
         for to in re.split("[ ,\n\r]", email.send_to):
             if to and is_valid_email(to):
+                attachments = []
+                if email.attachments:
+                    list = email.attachments.split(",")
+                    for id in list: 
+                        image = ImageModel.get_by_id(int(id))
+                        if image:
+                            attachments.append((image.title + ".png", image.content))
+                
                 email.status = "Send"
                 mail.send_mail(
                       sender=email.send_from,
                       to=to,
                       subject=email.subject,
                       body=email.message,
-                      html=email.message)
+                      html=email.message,
+                      attachments=attachments)
         email.put()
         self.redirect("/admin/email")
    

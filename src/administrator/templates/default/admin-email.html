@@ -33,14 +33,16 @@
 		    
 		    <p>
              <label>Message:</label><br>
-            
-		     <p>
-		      <textarea name="email.message" id="wysiwyg" class="wysiwyg_textarea" >{{email.message}}</textarea>
+		      <textarea name="email.message" id="editorText" class="wysiwyg_textarea" >{{email.message}}</textarea>
 		    </p>
-		    <script type="text/javascript" src="/jwysiwyg/lib/jquery-1.4.2.js"></script>
-		    <script type="text/javascript" src="/jwysiwyg/jquery.wysiwyg.js"></script>
-		    <script type="text/javascript" src="/jwysiwyg/lib/jquery.simplemodal.js"></script>
-		    <script type="text/javascript" src="/jwysiwyg/base.js"></script>
+		    
+		    
+		    <p>
+             <label>Attachments:</label><br>
+		       <input type="text" class="text" name="email.attachments" value="{{email.attachments}}">
+		       <span class="notice">1,2,3,10,15,25</span>
+		    </p>	
+		    	
             
             
             <p> 
@@ -60,13 +62,17 @@
       </div>
       
       
-       	<fieldset>
+      <div class="span-20">
+        <fieldset> 
+        <legend>Last Added images</legend>
+        <div>
+        	{% all_img_preview 4%}        
+        </div>
+      </fieldset>
+      
+       <fieldset>
             <a href="/admin/email">New Notification</a>  
         </fieldset>
-	
-      
-      
-       <div class="span-20">
 	
 	<fieldset> 
             <legend>Email lists</legend>  

@@ -5,8 +5,8 @@ api_version: 1
 
 handlers:
 
-- url: /jwysiwyg
-  static_dir: administrator/templates/default/jwysiwyg
+- url: /jwysiwyg-color
+  static_dir: administrator/templates/default/jwysiwyg-color
 
 - url: /css
   static_dir: templates/default/css
