@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
-List page layout {% include "helper_page.html" %}
+{% include "helper_page.html" %}
 {% for page in pages%}
 
 <h2><a href="/{{active}}/{{page.key.id}}">{{page.title}}</a></h2>
 {% include "helper_page.html" %}
-<pre>
 {{page.content}}
-</pre>
 {% endfor %}
 
 {% endblock %}

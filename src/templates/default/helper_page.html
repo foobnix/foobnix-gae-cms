@@ -1,4 +1,5 @@
 {% ifequal mode "debug" %}
+{{menu.layout}}
 	{% if page %}
 		<a href="/admin/page?action=edit&page.key_id={{page.key.id}}"">edit page</a>
 	{% else%}

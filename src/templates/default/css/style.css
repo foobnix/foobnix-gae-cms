@@ -96,42 +96,6 @@ div.image_border {
 	    width: 400px;	
             background: url(/images/anniversary-small.png) no-repeat;
         }
-        #rnav li.rnav-download a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_DownloadLibreOffice_Default.png) no-repeat;
-        }
-        #rnav li.rnav-download a:hover {
-            background: url(/images/ControlElement_Button_DownloadLibreOffice_Mouseover.png) no-repeat;
-        }
-
-        #rnav li.rnav-blue a {
-            background: url(/images/ControlElement_Button_Wide_Blue_Default.png) no-repeat;
-        }
-        #rnav li.rnav-blue a:hover {
-            background: url(/images/ControlElement_Button_Wide_Blue_Mouseover.png) no-repeat;
-        }
-
-        #rnav li.rnav-green a {
-            background: url(/images/ControlElement_Button_Wide_Green_Default.png) no-repeat;
-        }
-        #rnav li.rnav-green a:hover {
-            background: url(/images/ControlElement_Button_Wide_Green_Mouseover.png) no-repeat;
-        }
-
-        #rnav li.rnav-magenta a {
-            background: url(/images/ControlElement_Button_Wide_Magenta_Default.png) no-repeat;
-        }
-        #rnav li.rnav-magenta a:hover {
-            background: url(/images/ControlElement_Button_Wide_Magenta_Mouseover.png) no-repeat;
-        }
-
-        #rnav li.rnav-orange a {
-            background: url(/images/ControlElement_Button_Wide_Orange_Default.png) no-repeat;
-        }
-        #rnav li.rnav-orange a:hover {
-            background: url(/images/ControlElement_Button_Wide_Orange_Mouseover.png) no-repeat;
-        }
-
 #right-download {
     float: right;
     margin-left: auto;
@@ -489,7 +453,7 @@ p {
     position: relative; 
     list-style: none;
     margin-left: 0px;
-    background: url(/images/li-bullet-single-dark.png) no-repeat; 
+    background: url(/images/li-bullet-single-dark1.png) no-repeat; 
     background-position: 4px 8px;
     padding-left: 30px;
     display: block; 
@@ -512,8 +476,8 @@ p {
     position: relative; 
     list-style: none;
     margin-left: 0px;
-    background: url(/images/li-bullet-single-dark.png) no-repeat; 
-    background-position: 4px 8px;
+    background: url(/images/li-bullet-single-dark1.png) no-repeat; 
+    background-position: 10px 2px;
     padding-left: 30px;
     display: block; 
     color: #000;
@@ -627,56 +591,9 @@ p {
 	height: 450px; 
 	padding:5px; }
 	
-/* Easy Slider */
-
-	/** 
- * Slideshow style rules.
- */
-#slideshow {
-	margin:0 auto;
-	width:640px;
-	height:263px;
-	background:transparent url(img/bg_slideshow.jpg) no-repeat 0 0;
-	position:relative;
-}
-#slideshow #slidesContainer {
-  margin:0 auto;
-  width:560px;
-  height:263px;
-  overflow:auto; /* allow scrollbar */
-  position:relative;
-}
-#slideshow #slidesContainer .slide {
-  margin:0 auto;
-  width:540px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
-  height:263px;
-}
-
-/** 
- * Slideshow controls style rules.
- */
-.control {
-  display:block;
-  width:39px;
-  height:263px;
-  text-indent:-10000px;
-  position:absolute;
-  cursor: pointer;
-}
-#leftControl {
-  top:0;
-  left:0;
-  background:transparent url(img/control_left.jpg) no-repeat 0 0;
-}
-#rightControl {
-  top:0;
-  right:0;
-  background:transparent url(img/control_right.jpg) no-repeat 0 0;
-}
-
 div#feature_list {
-	width: 900px;
-	height: 550px;
+	width: 920px;
+	height: 380px;
 	overflow: hidden;
 	position: relative;
 	
@@ -693,7 +610,7 @@ div#feature_list ul {
 ul#tabs {
 	left: 0;
 	z-index: 2;
-	width: 300px;
+	width: 280px;
 }
 
 
@@ -702,6 +619,7 @@ ul#tabs {
 ul#tabs li {
 	padding:0px;
 	margin-top:0px;
+	background: #FFFFFF;
 	}
 
 ul#tabs li img {
@@ -721,6 +639,7 @@ ul#tabs li a {
 }
 
 ul#tabs li a:hover {
+	background: #FFFFFF;
 	text-decoration: none;
 }
 
