@@ -3,10 +3,13 @@
 
 {% block content_slot %}
 
-{% for page in pages|slice:":1" %}
-{% include "helper_page.html" %}
-<h2>{{page.title}}</h2>
 
+
+{% for page in pages|slice:":1" %}
+
+{% include "helper_page.html" %}
+
+<h2>{{page.title}}</h2>
 
 {{page.content}}
 

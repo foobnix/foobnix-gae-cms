@@ -43,4 +43,12 @@ class ImageModel(db.Model):
     title = db.StringProperty(multiline=False)
     content = db.BlobProperty()
     date = db.DateTimeProperty(auto_now_add=True) 
+    
+class CommentModel(db.Model):
+    name = db.StringProperty(multiline=False)
+    site = db.StringProperty(multiline=False)
+    email = db.StringProperty(multiline=False)
+    comment = db.TextProperty()
+    date = db.DateTimeProperty(auto_now_add=True)    
+         
 
