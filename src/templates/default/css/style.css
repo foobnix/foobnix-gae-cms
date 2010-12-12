@@ -2,7 +2,7 @@ body          { font-size: 87.5%; font-family: Arial, Verdana, sans-serif; }  /*
 html > body   { font-size: 14px; }
 
 h3, h4, h5 {
-    clear: left;
+   clear: left;
 }
 
 h2 {
