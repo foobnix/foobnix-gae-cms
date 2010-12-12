@@ -97,7 +97,7 @@ class ViewEditAdminPage():
                 setattr(model, properie, datetime.datetime.utcnow())
             elif type(db_type) == db.BlobProperty:
                 if request_value:
-                    resized = images.resize(request_value, 350)
+                    resized = images.resize(request_value, 550)
                     setattr(model, properie, db.Blob(resized))
             else:
                 setattr(model, properie, request_value)

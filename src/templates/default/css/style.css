@@ -626,3 +626,139 @@ p {
 	width: 700px; 
 	height: 450px; 
 	padding:5px; }
+	
+/* Easy Slider */
+
+	/** 
+ * Slideshow style rules.
+ */
+#slideshow {
+	margin:0 auto;
+	width:640px;
+	height:263px;
+	background:transparent url(img/bg_slideshow.jpg) no-repeat 0 0;
+	position:relative;
+}
+#slideshow #slidesContainer {
+  margin:0 auto;
+  width:560px;
+  height:263px;
+  overflow:auto; /* allow scrollbar */
+  position:relative;
+}
+#slideshow #slidesContainer .slide {
+  margin:0 auto;
+  width:540px; /* reduce by 20 pixels of #slidesContainer to avoid horizontal scroll */
+  height:263px;
+}
+
+/** 
+ * Slideshow controls style rules.
+ */
+.control {
+  display:block;
+  width:39px;
+  height:263px;
+  text-indent:-10000px;
+  position:absolute;
+  cursor: pointer;
+}
+#leftControl {
+  top:0;
+  left:0;
+  background:transparent url(img/control_left.jpg) no-repeat 0 0;
+}
+#rightControl {
+  top:0;
+  right:0;
+  background:transparent url(img/control_right.jpg) no-repeat 0 0;
+}
+
+div#feature_list {
+	width: 900px;
+	height: 550px;
+	overflow: hidden;
+	position: relative;
+	
+}
+
+div#feature_list ul {
+	position: absolute;
+	top: 0;
+	list-style: none;	
+	padding: 0;
+	margin: 0;
+}
+
+ul#tabs {
+	left: 0;
+	z-index: 2;
+	width: 300px;
+}
+
+
+
+
+ul#tabs li {
+	padding:0px;
+	margin-top:0px;
+	}
+
+ul#tabs li img {
+	padding: 5px;
+	border: none;
+	float: left;
+	margin: 10px 10px 0 0;
+}
+
+ul#tabs li a {
+	color: #222;
+	text-decoration: none;	
+	display: block;
+	padding: 10px;
+	height: 30px;
+	outline: none;
+}
+
+ul#tabs li a:hover {
+	text-decoration: none;
+}
+
+ul#tabs li a.current {
+	text-decoration: underline;
+	color: #000000;
+}
+
+ul#tabs li a.current:hover {
+	text-decoration: none;
+	cursor: default;
+}
+
+ul#output {
+	right: 0;
+	width: 663px;
+	height: 240px;
+	position: relative;
+}
+
+ul#output li {
+	position: absolute;
+	width: 663px;
+	height: 240px;
+}
+
+ul#output li a {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	padding: 8px 12px;
+	text-decoration: none;
+	font-size: 11px;
+	color: #FFF;
+	background: #000;
+	-moz-border-radius: 5px;
+}
+
+ul#output li a:hover {
+	background: #D33431;
+}
