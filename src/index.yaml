@@ -25,6 +25,15 @@ indexes:
 
 - kind: MenuModel
   properties:
+  - name: lang
+  - name: is_visible
+    direction: desc
+  - name: position
+    direction: desc
+  - name: index
+
+- kind: MenuModel
+  properties:
   - name: positin
   - name: index
 

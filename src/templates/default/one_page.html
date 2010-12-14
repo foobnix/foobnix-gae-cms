@@ -3,15 +3,15 @@
 
 {% block content_slot %}
 
-
+{% include "helper_page.html" %}
 
 {% for page in pages|slice:":1" %}
 
 {% include "helper_page.html" %}
 
-<h2>{{page.title}}</h2>
+<h2>{% get_attr page 'title_' lang %}</h2>
 
-{{page.content}}
+{% get_attr page 'content_' lang %}
 
 {% endfor %}
 

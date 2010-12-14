@@ -2,13 +2,13 @@
 
 {% block content_slot %}
 
-  <div class="span-20">
+  <div >
 	<fieldset> 
             <legend>Pages List</legend>  
       <table>
 	  <thead>
         <tr>
-          <th>&nbsp;</th>          
+          <th>&nbsp;</th>
           <th>Title</th>
           <th>Menu</th>
           <th>Date</th>
@@ -25,7 +25,7 @@
 	          <td>
 	          	<a href="{{admin_model.link_id}}?action=delete&page.key_id={{item.key.id}}" >delete</a>
 	          </td>
-	          <td>{{item.title}}</td>
+	          <td>{{item.title_ru}}:{{item.title_en}}</td>
 	          <td>{{item.fk_menu}}</td>
 	          <td>{{item.date|date:"d/m/y H:m"}}</td>
 	          <td>{{item.is_comment}}</td>

@@ -1,0 +1,21 @@
+<p> 
+<label>Lang: </label>
+
+<select name="{{model}}.lang"> 
+   {% for ln in langs %}
+	 <option value="{{ ln }}" {% ifequal ln lang %}selected="selected"{% endifequal %}>{% lang_name ln %}</option>
+	{% endfor %} 
+</select>
+<br/>
+
+{% for ln in langs %}              	
+	{% ifequal ln lang%}
+		<b>{% lang_name ln %}</b>
+	{% else %}
+	<a href="?lang={{ln}}">{% lang_name ln %}</a>
+	{% endifequal %}
+{% endfor %}
+
+ 
+
+</p>

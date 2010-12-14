@@ -8,10 +8,12 @@ import copy
 import datetime
 from cms.model import ImageModel
 from google.appengine.api import images, users
-from configuration import ADMIN_TEMPLATE_PATH
+from configuration import ADMIN_TEMPLATE_PATH, CMS_LANGUAGES, \
+    LANG_CODE_DEFAULT
 from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
 import logging
+from cms.utils.translate import get_translated
 
 
 class ViewImage (webapp.RequestHandler):
@@ -72,6 +74,8 @@ class ViewEditAdminPage():
              
             self.redirect(self.admin_model["link_id"])
             return None
+        else:
+            self.glob_dict[template_dict] = None
         
         path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
         self.response.out.write(template.render(path, self.glob_dict))
@@ -82,8 +86,13 @@ class ViewEditAdminPage():
             request_propertrie = prefix + "." + properie
             request_value = request.get(request_propertrie)
             
-            #if getattr(model, properie):
-            #    continue;             
+            if not request_value and "_" in properie:
+                name = properie[:-3]
+                lang = properie[-2:]                
+                if lang != LANG_CODE_DEFAULT and lang in CMS_LANGUAGES.keys():
+                    """translate"""
+                    origin = request.get(prefix + "." + name + "_" + LANG_CODE_DEFAULT)
+                    request_value = get_translated(origin, LANG_CODE_DEFAULT, lang)
             
             if type(db_type) == db.IntegerProperty:
                 if not request_value:
@@ -103,6 +112,12 @@ class ViewEditAdminPage():
                 setattr(model, properie, request_value)
         return model
 
+def get_lang(request):
+    if request.get("lang"):
+        return request.get("lang") 
+    else:
+        return LANG_CODE_DEFAULT
+
 class AdminPage(webapp.RequestHandler):
     """param1 - menu name"""
     def post(self, admin_page=None):
@@ -112,12 +127,16 @@ class AdminPage(webapp.RequestHandler):
         user = users.get_current_user()
         check_user_admin(self, user)
         
+        lang = get_lang(self.request)
+        
         glob_dict = prepare_glob_dict()
+        glob_dict["lang"] = lang
         glob_dict["admin_menu"] = admin_menu
         glob_dict["user"] = user
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         glob_dict["host"] = self.request.headers['Host']
+        
         
         glob_dict["mode"] = "debug"
         

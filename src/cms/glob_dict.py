@@ -6,7 +6,7 @@ Created on 4 дек. 2010
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 from cms.admin_config import layouts
-from cms.localization18n import Resources
+from configuration import CMS_LANGUAGES, LANG_CODE_RU
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
@@ -33,8 +33,9 @@ def prepare_glob_dict():
     
     
     glob_dict = {
-     'menu_list':menu_list,
+     'langs':CMS_LANGUAGES,
      'page_list':page_list,
+     'menu_list':menu_list,
      'email_list':email_list,
      'product_list':product_list,
      'image_list':images_list
@@ -59,9 +60,6 @@ def get_pages(menu_name):
 
 def get_menu_by(link_id):
     page = MenuModel().all()
-    if link_id:
-        page.filter("link_id", link_id)
-    
     if page.count() >= 1:
         return page[0]
         

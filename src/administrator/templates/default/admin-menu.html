@@ -8,7 +8,7 @@
 		<input type="hidden" name="action" value="addupdate" />
  
           <fieldset> 
-            <legend>{% text "admin.add.menu" %}</legend> 
+            <legend>Add Menu </legend>
             <p> 
               <label>ID: {{menu.key.id}}</label>
               <input type="hidden" name="menu.key_id" value="{{menu.key.id}}" />
@@ -18,13 +18,14 @@
               <input type="text" class="text" name="menu.link_id" value="{{menu.link_id}}">
               <span class="notice">welcome</span> 
             </p>
-            `
+            
+            {% for ln in langs %}`
             <p> 
-              <label>Name</label><br> 
-              <input type="text" class="text" name="menu.name" value="{{menu.name}}">
+              <label>Name [{{ln}}]</label><br> 
+              <input type="text" class="text" name="menu.name_{{ln}}" value="{% get_attr menu 'name_' ln %}">
               <span class="notice">Welcome</span> 
             </p>
-            
+            {% endfor %}
             
             <p> 
               <label for="dummy3">Layout</label><br> 
@@ -86,7 +87,7 @@
 	          </td>
 	          <td>{{item.index}}</td>
 	          <td>{{item.link_id}}</td>
-	          <td>{{item.name}}</td>
+	          <td>{{item.name_ru}}:{{item.name_en}}</td>
 	          <td>{{item.layout}}</td>
 	          <td>{{item.position}}</td>
 		  	  <td>{{item.key.id}}</td>

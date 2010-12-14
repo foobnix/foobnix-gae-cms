@@ -33,3 +33,14 @@ CMS_CFG = {
 
 admins = ["ivan.ivanenko@gmail.com", "nataly.sokolenko@gmail.com", "7funnyday7@gmail.com"]
 
+
+
+
+LANG_CODE_RU = "ru"
+LANG_CODE_EN = "en"
+CMS_LANGUAGES = {
+                 LANG_CODE_RU:"Русский",
+                 LANG_CODE_EN:"English"
+                 }
+
+LANG_CODE_DEFAULT = LANG_CODE_RU           

@@ -4,14 +4,27 @@ import os
 from cms.admin_config import IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 from cms.localization18n import Resources
-from configuration import CMS_CFG
+from configuration import CMS_CFG, CMS_LANGUAGES, LANG_CODE_RU, \
+    LANG_CODE_DEFAULT
 register = webapp.template.create_template_register()
 from google.appengine.ext.webapp import template
+
+@register.simple_tag
+def lang_name(lang_code):
+    if lang_code and CMS_LANGUAGES.has_key(lang_code):
+        return CMS_LANGUAGES[lang_code]
+    else:
+        return CMS_LANGUAGES[LANG_CODE_RU]
 
 @register.simple_tag
 def img_preview(item):
     path = os.path.join(os.path.dirname(__file__), "img_preview.html")
     return template.render(path, {"item":item})  
+
+@register.simple_tag
+def change_langs(model, lang, id=None):
+    path = os.path.join(os.path.dirname(__file__), "lang.html")
+    return template.render(path, {"langs": CMS_LANGUAGES, "lang":lang, "id":id, "model":model})  
 
 @register.simple_tag
 def image_not_found():
@@ -45,3 +58,9 @@ def text(param):
     res = Resources()
     return res.get(param)
     
+@register.simple_tag
+def get_attr(object, param, param1=LANG_CODE_DEFAULT):
+    if not object:
+        return ""
+    return getattr(object, param + param1)
+

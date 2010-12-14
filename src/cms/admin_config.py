@@ -9,7 +9,6 @@ positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
 LAYOUT_LIST_PAGE = "list_page"
-LAYOUT_FEATURES_PAGE = "features_page"
 LAYOUT_CATALOG_PAGE = "catalog_page"
 #layouts = [LAYOUT_ONE_PAGE, LAYOUT_LIST_PAGE, LAYOUT_CATALOG_PAGE]
 
@@ -18,13 +17,6 @@ layouts = [{
             "template":"one_page.html",
             "child_template":"one_page.html",
             "name":"One Page",
-            "model":PageModel()
-            },
-            {
-            "id":LAYOUT_FEATURES_PAGE,
-            "template":"features_page.html",
-            "child_template":"features_page.html",
-            "name":"Features List",
             "model":PageModel()
             },
             {

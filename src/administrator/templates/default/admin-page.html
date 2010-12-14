@@ -3,29 +3,36 @@
 {% block content_slot %}
 
 <h2>Add Update Delete Pages</h2>
- <div class="span-20">  
+ <div>  
         <form action="{{admin_model.link_id}}" method="post">
 		<input type="hidden" name="action" value="addupdate" />
+		
  
           <fieldset> 
-            <legend>Add Page</legend> 
+            <legend>Add Page </legend>
+             
             <p> 
               <label>ID: {{page.key.id}}</label>
               <input type="hidden" name="page.key_id" value="{{page.key.id}}" />
             </p>
             <p> 
               <label>Title</label><br> 
-              <input type="text" class="text" name="page.title" value="{{page.title}}">
+             
+            <p>  
+             {% for ln in langs %}
+              <b>{{ln}}:</b><input type="text" class="text" name="page.title_{{ln}}" value="{% get_attr page 'title_' ln %}">              
+            {% endfor %}
             </p>
             
              <p>
-		      <textarea name="page.content" id="cleditor" class="wysiwyg_textarea" >{{page.content}}</textarea>
+		      <textarea name="page.content_ru" id="cleditor" class="wysiwyg_textarea" >{{page.content_ru}}</textarea>
+		      <b>en:</b><br><textarea name="page.content_en">{{page.content_en}}</textarea>
 		    </p>		   
             
             <p><label>Section Menu</label><br>
             <select name="page.fk_menu"> 
             	{% for key in menu_list %}
-				 <option value="{{ key.link_id }}" {% ifequal key.link_id page.fk_menu %}selected="selected"{% endifequal %}>{{ key.name }}</option>
+				 <option value="{{ key.link_id }}" {% ifequal key.link_id page.fk_menu %}selected="selected"{% endifequal %}>{% get_attr key 'name_' lang %}</option>
 				{% endfor %} 
 			</select>
           	</p> 

@@ -8,11 +8,13 @@ from google.appengine.ext import db
 
 class MenuModel(db.Model):
     link_id = db.StringProperty(multiline=False)
-    name = db.StringProperty(multiline=False)
+    name_ru = db.StringProperty(multiline=False)
+    name_en = db.StringProperty(multiline=False)
     layout = db.StringProperty(multiline=False)
     position = db.StringProperty(multiline=False)
     index = db.IntegerProperty()
     is_visible = db.BooleanProperty()
+    
     
 class EmailModel(db.Model):
     subject = db.StringProperty(multiline=False)
@@ -24,13 +26,17 @@ class EmailModel(db.Model):
     attachments = db.StringProperty(multiline=False)
 
 class PageModel(db.Model):
-    title = db.StringProperty(multiline=False)
-    content = db.TextProperty()
+    title_ru = db.StringProperty(multiline=False)
+    title_en = db.StringProperty(multiline=False)
+    
+    content_ru = db.TextProperty()
+    content_en = db.TextProperty()
+    
     is_comment = db.BooleanProperty()
     is_visible = db.BooleanProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     fk_menu = db.StringProperty(multiline=False)
-    
+
 class ProductModel(db.Model):
     title = db.StringProperty(multiline=False)
     description = db.StringProperty(multiline=True)
@@ -49,6 +55,7 @@ class CommentModel(db.Model):
     site = db.StringProperty(multiline=False)
     email = db.StringProperty(multiline=False)
     comment = db.TextProperty()
+    comment_en = db.TextProperty()
     date = db.DateTimeProperty(auto_now_add=True)    
          
 
