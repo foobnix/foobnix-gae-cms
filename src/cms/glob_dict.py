@@ -5,7 +5,7 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
-from cms.admin_config import layouts
+from cms.admin_config import layouts, admin_menu
 from configuration import CMS_LANGUAGES, LANG_CODE_RU
 def prepare_glob_dict():
     menu_list = MenuModel().all()
@@ -38,7 +38,8 @@ def prepare_glob_dict():
      'menu_list':menu_list,
      'email_list':email_list,
      'product_list':product_list,
-     'image_list':images_list
+     'image_list':images_list,
+      "admin_menu" : admin_menu
      }
     return glob_dict
 
@@ -58,10 +59,19 @@ def get_pages(menu_name):
     return page
 
 
+def get_default_menu_id():   
+    menu = get_menu_by(None)
+    if menu:
+        return menu.link_id
+ 
 def get_menu_by(link_id):
-    page = MenuModel().all()
-    if page.count() >= 1:
-        return page[0]
+    menu_list = MenuModel().all()
+    if not link_id:
+            menu_list.order("-is_visible")
+            menu_list.order("-position")
+            menu_list.order("index")
+    if menu_list.count() >= 1:
+        return menu_list[0]
         
     return None
     

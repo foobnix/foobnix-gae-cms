@@ -45,7 +45,7 @@ admin_menu = [
         {
          "template_dict":"menu",
          "link_id":CMS_URL + "/menu",
-         "text":"Add Menu",
+         "text":"New-Edit Menu",
          "template":"admin-menu.html",
          "model":MenuModel(),
          "type":CMS_EDIT
@@ -53,7 +53,7 @@ admin_menu = [
         {
          "template_dict":"page",
          "link_id":CMS_URL + "/page",
-         "text":"Add Page",
+         "text":"New Page",
          "template":"admin-page.html",
          "model":PageModel(),
          "type":CMS_EDIT
@@ -61,7 +61,7 @@ admin_menu = [
         {
          "template_dict":"page",
          "link_id":CMS_URL + "/pageslist",
-         "text":"Pages List",
+         "text":"All Pages",
          "template":"admin-pageslist.html",
          "model":PageModel(),
          "type":CMS_EDIT
@@ -77,7 +77,7 @@ admin_menu = [
           {
          "template_dict":"product",
          "link_id":CMS_URL + "/product",
-         "text":"Add Product",
+         "text":"New Product",
          "template":"admin-product.html",
          "model":ProductModel(),
          "type":CMS_EDIT
@@ -85,7 +85,7 @@ admin_menu = [
          {
          "template_dict":"image",
          "link_id":CMS_URL + "/image",
-         "text":"Add Image",
+         "text":"New Image",
          "template":"admin-image.html",
          "model":ImageModel(),
          "type":CMS_EDIT

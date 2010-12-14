@@ -11,7 +11,8 @@ from google.appengine.api import mail
 import re
 from configuration import TEMPLATE_PATH
 from cms.model import EmailModel, ImageModel
-from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout
+from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
+    get_default_menu_id
 from cms.admin_config import admin_menu
 from cms.admin import get_lang
 
@@ -51,9 +52,15 @@ class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
     def get(self, menu_link_id=None, page_key_id=None):
         lang = get_lang(self.request)
+        if not menu_link_id:
+            menu_link_id = get_default_menu_id()
         
         glob_dict = prepare_glob_dict()
-        glob_dict["mode"] = self.request.get("mode")
+        if not self.request.get("mode"):
+            glob_dict["mode"] = "debug"
+        else:
+            glob_dict["mode"] = self.request.get("mode")
+            
         glob_dict["host"] = self.request.headers['Host']
         glob_dict["lang"] = lang
                 

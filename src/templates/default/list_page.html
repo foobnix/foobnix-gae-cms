@@ -4,9 +4,9 @@
 {% include "helper_page.html" %}
 {% for page in pages%}
 
-<h2><a href="/{{active}}/{{page.key.id}}">{{page.title}}</a></h2>
+<h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
 {% include "helper_page.html" %}
-{{page.content}}
+{% get_attr page 'content_' lang %}
 {% endfor %}
 
 {% endblock %}

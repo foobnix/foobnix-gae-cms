@@ -131,12 +131,10 @@ class AdminPage(webapp.RequestHandler):
         
         glob_dict = prepare_glob_dict()
         glob_dict["lang"] = lang
-        glob_dict["admin_menu"] = admin_menu
         glob_dict["user"] = user
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         glob_dict["host"] = self.request.headers['Host']
-        
         
         glob_dict["mode"] = "debug"
         
