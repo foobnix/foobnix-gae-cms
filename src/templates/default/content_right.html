@@ -1,0 +1,24 @@
+<h2>Blogs</h2>
+{% for page in page_list|slice:"2" %}
+<p>
+<a href="/page/{{page.key.id}}">{% get_attr page 'title_' lang %}</a>
+</p>
+{% endfor %}
+
+
+<h2>Last Comments</h2>
+{% for comment in comment_list|slice:"5" %}
+<p>
+<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {% get_attr comment 'comment_' lang%}<br>
+</p>
+{% endfor %}
+
+<h2>Twitters</h2>
+{% for item in twitters|slice:"15" %}
+<p>
+<b><a href="http://twitter.com/{{item.from_user}}">@{{item.from_user}}</a></b> {{item.text|urlize}}<br>
+</p>
+{% endfor %}
+
+
+

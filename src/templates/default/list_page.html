@@ -3,16 +3,20 @@
 {% block content_slot %}
 {% include "helper_page.html" %}
 {% for page in pages%}
-
+<div class="border">
 <h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
 {% include "helper_page.html" %}
 {% get_attr page 'content_' lang %}
 
+{% if page.is_comment %}
 <br>
+<span class="big_text">Comments ({{page.commentmodel_set.count}})</span> &nbsp;&nbsp;&nbsp;<a href="/{{active}}/{{page.key.id}}">Add new comment</a><br>
 {% for comment in page.commentmodel_set|slice:"2" %}
-<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {{comment.comment_ru}}<br>
+<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {% get_attr comment 'comment_' lang%}<br>
 {% endfor %}
+{% endif %}
 
+</div>
 {% endfor %}
 
 {% endblock %}

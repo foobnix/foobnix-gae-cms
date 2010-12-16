@@ -15,7 +15,7 @@ class TwitterTagCrawler(object):
     since_id is not always reliable, and so we probably want to de-dup ourselves
     at some level '''
  
-    def __init__(self, max_id, tag, interval):
+    def __init__(self, tag, max_id=None, interval=None):
         self.max_id = max_id
         self.tag = tag
         self.interval = interval
@@ -58,10 +58,9 @@ class TwitterTagCrawler(object):
  
     def submit(self, data):
         pass
-"""    
-tag = TwitterTagCrawler(10, "foobnix", 10)
-for line in tag.search():
-    print line['from_user'], " = ", line['text'], "id:", line["id_str"]
+
+#tag = TwitterTagCrawler("foobnix")
+#for line in tag.search():
+#    print line['from_user'], " = ", line['text'], "id:", line["id_str"]
     #print line
 #print tag.loop()
-"""

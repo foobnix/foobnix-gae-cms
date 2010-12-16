@@ -8,6 +8,11 @@ from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
     PropertieModel, CommentModel
 from cms.admin_config import layouts, admin_menu
 from configuration import CMS_LANGUAGES
+from cms.utils.twitter import TwitterTagCrawler
+
+
+twitters = TwitterTagCrawler("foobnix").search()
+
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
@@ -37,6 +42,7 @@ def prepare_glob_dict():
     
     
     glob_dict = {
+     'twitters':twitters,
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,
@@ -61,6 +67,7 @@ def get_layout(layout_id):
 
 def get_pages(menu_name):
     page = PageModel().all()
+    page.order("-date")
     page.filter("fk_menu", menu_name)
     return page
 

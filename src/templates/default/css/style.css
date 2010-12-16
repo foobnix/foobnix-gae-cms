@@ -6,7 +6,7 @@ h3, h4, h5 {
 }
 
 h2 {
-    padding: 20px 0 10px 0;
+    padding: 0px 0 10px 0;
 }
 
 h2, h3 {
@@ -685,3 +685,27 @@ ul#output li a:hover {
 .right{
 	float: right;
 }
+
+.border{
+ 	margin: 10px; 
+ 	border:.1em solid #ddd; 
+ 	padding:0 10px 10px 10px;	
+}
+
+.image_count {
+	background: transparent url(../images/comment_count_bg.png) no-repeat
+		scroll left center;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 32px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	text-align: center;
+	width: 33px;
+	height: 33px;
+}
+.big_text{
+	 font-size: 16px;
+	 font-weight: bold;
+	}

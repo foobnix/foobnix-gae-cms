@@ -18,6 +18,7 @@ from cms.admin import get_lang
 from cms.utils.request_model import request_to_model
 from appengine_utilities.sessions import Session
 import uuid
+from django.utils.html import urlize
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -123,6 +124,10 @@ class ViewPage(webapp.RequestHandler):
                 if not comment.comment_ru or not comment.comment_en:
                     comment.comment_error = True
                     correct = False
+                else:
+                    comment.comment_ru = urlize(comment.comment_ru)
+                    comment.comment_en = urlize(comment.comment_en)
+                    
                 
                 if not comment.site:
                     comment.site = "http://www.foobnix.com"
@@ -149,6 +154,8 @@ class ViewPage(webapp.RequestHandler):
         glob_dict["menu_id"] = menu_id
         glob_dict["page_id"] = page_id
         glob_dict["active_menu"] = get_menu_by(menu_id)
+        
+        glob_dict["content_right"] = template.render(os.path.join(TEMPLATE_PATH, "content_right.html"), glob_dict)
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
         self.response.out.write(template.render(path, glob_dict))

@@ -77,9 +77,21 @@ indexes:
 
 - kind: PageModel
   properties:
+  - name: fk_menu
+  - name: date
+    direction: desc
+
+- kind: PageModel
+  properties:
   - name: is_visible
   - name: date
     direction: desc
+
+- kind: PageModel
+  properties:
+  - name: is_visible
+    direction: desc
+  - name: date
 
 - kind: PageModel
   properties:
