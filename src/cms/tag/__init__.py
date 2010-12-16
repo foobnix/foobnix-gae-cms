@@ -6,6 +6,7 @@ from cms.glob_dict import prepare_glob_dict
 from cms.localization18n import Resources
 from configuration import CMS_CFG, CMS_LANGUAGES, LANG_CODE_RU, \
     LANG_CODE_DEFAULT
+from cms.model import PropertieModel
 register = webapp.template.create_template_register()
 from google.appengine.ext.webapp import template
 
@@ -59,8 +60,27 @@ def text(param):
     return res.get(param)
     
 @register.simple_tag
-def get_attr(object, param, param1=LANG_CODE_DEFAULT):
+def get_attr(object, param, lang=LANG_CODE_DEFAULT):
+    if lang not in CMS_LANGUAGES.keys():       
+        lang = LANG_CODE_DEFAULT
+    
     if not object:
         return ""
-    return getattr(object, param + param1)
+    return getattr(object, param + lang)
+
+@register.simple_tag
+def get_propertie(name_key, lang=LANG_CODE_DEFAULT):
+    if lang not in CMS_LANGUAGES.keys():       
+        lang = LANG_CODE_DEFAULT
+        
+    result = "[%s.%s]" % (name_key, lang)
+    
+    if lang in CMS_LANGUAGES.keys():         
+        properties = PropertieModel().all()
+        properties.filter("name", name_key)
+        
+        if properties.count() > 0:
+            result = getattr(properties[0], "value_" + lang)
+            
+    return result
 

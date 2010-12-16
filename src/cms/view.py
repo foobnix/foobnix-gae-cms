@@ -7,7 +7,7 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from google.appengine.api import mail
+from google.appengine.api import mail, users
 import re
 from configuration import TEMPLATE_PATH
 from cms.model import EmailModel, ImageModel
@@ -52,10 +52,16 @@ class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
     def get(self, menu_link_id=None, page_key_id=None):
         lang = get_lang(self.request)
+        
+        
         if not menu_link_id:
             menu_link_id = get_default_menu_id()
         
         glob_dict = prepare_glob_dict()
+        
+        user = users.get_current_user()
+        glob_dict["user"] = user
+        
         if not self.request.get("mode"):
             glob_dict["mode"] = "debug"
         else:

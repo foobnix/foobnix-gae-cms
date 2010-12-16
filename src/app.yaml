@@ -1,5 +1,5 @@
-application: foobnix-gae-cms
-version: 2
+application: foobnix-cms
+version: 1
 runtime: python
 api_version: 1
 
@@ -19,3 +19,7 @@ handlers:
 
 - url: /.*
   script: main.py
+  
+  
+builtins:
+- datastore_admin: on  

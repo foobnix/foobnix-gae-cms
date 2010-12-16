@@ -4,32 +4,33 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
+from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
+    PropertieModel
 from cms.admin_config import layouts, admin_menu
-from configuration import CMS_LANGUAGES, LANG_CODE_RU
+from configuration import CMS_LANGUAGES
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
     menu_list.order("-position")
     menu_list.order("index")
-    menu_list.fetch(50)
     
     page_list = PageModel().all()
     page_list.order("-is_visible")
     page_list.order("-date")
-    page_list.fetch(50)
+
     
     email_list = EmailModel().all()
     email_list.order("-date")
-    email_list.fetch(50)
+
     
     product_list = ProductModel().all()
     product_list.order("-date")
-    product_list.fetch(50)
     
     images_list = ImageModel().all()
     images_list.order("-date")
-    images_list.fetch(50)
+    
+    propertie_list = PropertieModel().all()
+    propertie_list.order("-date")
     
     
     glob_dict = {
@@ -39,6 +40,7 @@ def prepare_glob_dict():
      'email_list':email_list,
      'product_list':product_list,
      'image_list':images_list,
+     'propertie_list':propertie_list,
       "admin_menu" : admin_menu
      }
     return glob_dict

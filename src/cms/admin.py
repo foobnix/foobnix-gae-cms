@@ -130,6 +130,7 @@ class AdminPage(webapp.RequestHandler):
         lang = get_lang(self.request)
         
         glob_dict = prepare_glob_dict()
+        glob_dict["user"] = user
         glob_dict["lang"] = lang
         glob_dict["user"] = user
         glob_dict["layouts"] = layouts

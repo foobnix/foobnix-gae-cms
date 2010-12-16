@@ -1,22 +1,25 @@
- base:
-    {% for ln in langs %}              	
-	{% ifequal ln lang%}
-		<b>{% lang_name ln %}</b>
-	{% else %}
-	<a href="?lang={{ln}}">{% lang_name ln %}</a>
-	{% endifequal %}
-{% endfor %}
-<b>||</b>
-{% if active_menu%}
-<a href="/admin/menu?action=edit&menu.key_id={{active_menu.key.id}}" >Edit {% get_attr active_menu "name_" lang %} </a>
-<b>||</b>
+{% if user %}
+		{% for ln in langs %}              	
+		{% ifequal ln lang%}
+			<b>{% lang_name ln %}</b>
+		{% else %}
+		<a href="?lang={{ln}}">{% lang_name ln %}</a>
+		{% endifequal %}
+		{% endfor %}
+
+	<b>||</b>
+	{% if active_menu%}
+	<a href="/admin/menu?action=edit&menu.key_id={{active_menu.key.id}}" >Edit {% get_attr active_menu "name_" lang %} </a>
+	<b>||</b>
+	{% endif %}
+		
+	  {% for item in admin_menu %}
+	 		<a href="{{ item.link_id }}">{{ item.text }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  {% endfor %}
+	  
+	  <b>||</b>
+	   	
+	<a href="?mode=live&lang={{lang}}">Live</a>
+	<a href="?mode=debug&lang={{lang}}">Debug</a>
+
 {% endif %}
-	
-  {% for item in admin_menu %}
- 		<a href="{{ item.link_id }}">{{ item.text }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  {% endfor %}
-  
-  <b>||</b>
-   	
-<a href="?mode=live&lang={{lang}}">Live</a>
-<a href="?mode=debug&lang={{lang}}">Debug</a>

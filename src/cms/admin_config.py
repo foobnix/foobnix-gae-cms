@@ -4,7 +4,8 @@ Created on 4 дек. 2010
 
 @author: ivan
 '''
-from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
+from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
+    PropertieModel
 positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
@@ -66,14 +67,6 @@ admin_menu = [
          "model":PageModel(),
          "type":CMS_EDIT
          },
-        {
-         "template_dict":"email",
-         "link_id":CMS_URL + "/email",
-         "text":"Send Email",
-         "template":"admin-email.html",
-         "model":EmailModel(),
-         "type":CMS_EDIT
-         },
           {
          "template_dict":"product",
          "link_id":CMS_URL + "/product",
@@ -89,5 +82,21 @@ admin_menu = [
          "template":"admin-image.html",
          "model":ImageModel(),
          "type":CMS_EDIT
-         }                     
+         },
+         {
+         "template_dict":"email",
+         "link_id":CMS_URL + "/email",
+         "text":"Send Email",
+         "template":"admin-email.html",
+         "model":EmailModel(),
+         "type":CMS_EDIT
+         },
+         {
+         "template_dict":"propertie",
+         "link_id":CMS_URL + "/propertie",
+         "text":"New Propertie",
+         "template":"admin-propertie.html",
+         "model":PropertieModel(),
+         "type":CMS_EDIT
+         }
         ]

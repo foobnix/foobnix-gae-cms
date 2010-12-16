@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+<h2>Add Update Properties</h2>
+ <div>  
+        <form action="{{admin_model.link_id}}" method="post">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Properties </legend>
+            <p> 
+              <label>ID: {{propertie.key.id}}</label>
+              <input type="hidden" name="propertie.key_id" value="{{propertie.key.id}}" />
+            </p>
+            
+            <p> 
+              <label>Name Key</label><br> 
+              <input type="text" class="text" name="propertie.name" value="{{propertie.name}}">
+            </p>
+                     
+            {% for ln in langs %}`
+            <p> 
+              <label>Value [{{ln}}]</label><br> 
+              <input type="text" class="text" name="propertie.value_{{ln}}" value="{% get_attr propertie 'value_' ln %}">
+            </p>
+            {% endfor %}
+
+            <p> 
+              <input type="submit" value="Submit"> 
+            </p> 
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div> 
+	
+	<fieldset> 
+            <legend>Properties List</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Name</th>
+          <th>RU</th>
+          <th>EN</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		
+		{% for item in propertie_list %}
+		  <tr>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=delete&propertie.key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.value_ru}}</td>
+	          <td>{{item.value_en}}</td>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=edit&propertie.key_id={{item.key.id}}" >edit</a>
+	          </td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+
+<br style="clear:both" />
+
+{% endblock %}
+
+    
+
+
+
+ 
+     

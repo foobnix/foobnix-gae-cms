@@ -54,8 +54,14 @@ class CommentModel(db.Model):
     name = db.StringProperty(multiline=False)
     site = db.StringProperty(multiline=False)
     email = db.StringProperty(multiline=False)
-    comment = db.TextProperty()
+    comment_ru = db.TextProperty()
     comment_en = db.TextProperty()
     date = db.DateTimeProperty(auto_now_add=True)    
          
+
+class PropertieModel(db.Model):
+    name = db.StringProperty(multiline=False)
+    value_ru = db.StringProperty(multiline=False)
+    value_en = db.StringProperty(multiline=False)    
+    date = db.DateTimeProperty(auto_now_add=True)  
 
