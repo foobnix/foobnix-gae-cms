@@ -7,7 +7,7 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from google.appengine.api import mail, users
+from google.appengine.api import mail, users, memcache
 import re
 from configuration import TEMPLATE_PATH
 from cms.model import EmailModel, ImageModel, CommentModel
@@ -19,6 +19,7 @@ from cms.utils.request_model import request_to_model
 from appengine_utilities.sessions import Session
 import uuid
 from django.utils.html import urlize
+from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -50,7 +51,6 @@ class SendEmails(webapp.RequestHandler):
                       attachments=attachments)
         email.put()
         self.redirect("/admin/email")
-   
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
@@ -59,6 +59,14 @@ class ViewPage(webapp.RequestHandler):
          
     def get(self, menu_id=None, page_id=None):
         lang = get_lang(self.request)
+        action = self.request.get('action')
+        if action == "delete" or action == "addupdate":
+            flash_cache()
+        
+        template_cached = get_from_cache(menu_id, page_id, lang)
+        if  template_cached:
+            self.response.out.write(template_cached)
+            return None
         
         
         session = Session()
@@ -105,6 +113,7 @@ class ViewPage(webapp.RequestHandler):
             glob_dict["comments"] = comments
             
             if self.request.get('action') == "delete":
+                flash_cache()
                 id = self.request.get('comment.key_id')
                 comment = CommentModel().get_by_id(int(id))
                 if comment  and comment.user_id == session['user_id']:
@@ -112,7 +121,8 @@ class ViewPage(webapp.RequestHandler):
                     self.redirect("/%s/%s" % (menu_id, page_id)) 
                                 
             
-            if self.request.get('action') == "addupdate":            
+            if self.request.get('action') == "addupdate":
+                flash_cache()            
                 comment = request_to_model(CommentModel(), self.request, "comment")
                 comment.page = page
                 
@@ -158,4 +168,8 @@ class ViewPage(webapp.RequestHandler):
         glob_dict["content_right"] = template.render(os.path.join(TEMPLATE_PATH, "content_right.html"), glob_dict)
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
-        self.response.out.write(template.render(path, glob_dict))
+        
+        content = template.render(path, glob_dict)
+        put_to_cache(menu_id, page_id, lang, content)
+        
+        self.response.out.write(content)

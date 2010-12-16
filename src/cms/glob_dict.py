@@ -11,7 +11,7 @@ from configuration import CMS_LANGUAGES
 from cms.utils.twitter import TwitterTagCrawler
 
 
-twitters = TwitterTagCrawler("foobnix").search()
+twitters = TwitterTagCrawler("foobnix")
 
 def prepare_glob_dict():
     menu_list = MenuModel().all()
@@ -42,7 +42,7 @@ def prepare_glob_dict():
     
     
     glob_dict = {
-     'twitters':twitters,
+     'twitters':twitters.search(),
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,

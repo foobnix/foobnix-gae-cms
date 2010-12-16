@@ -3,7 +3,6 @@ from google.appengine.ext import webapp
 import os
 from cms.admin_config import IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
-from cms.localization18n import Resources
 from configuration import CMS_CFG, CMS_LANGUAGES, LANG_CODE_RU, \
     LANG_CODE_DEFAULT
 from cms.model import PropertieModel
@@ -53,12 +52,6 @@ def img_preview_from_list(list_ids):
     path = os.path.join(os.path.dirname(__file__), "all_img_preview.html")    
     return template.render(path, {"image_list":result})  
 
-
-@register.simple_tag
-def text(param):
-    res = Resources()
-    return res.get(param)
-    
 @register.simple_tag
 def get_attr(object, param, lang=LANG_CODE_DEFAULT):
     if lang not in CMS_LANGUAGES.keys():       

@@ -96,6 +96,8 @@ class AdminPage(webapp.RequestHandler):
         user = users.get_current_user()
         check_user_admin(self, user)
         
+        flash_cache()
+        
         lang = get_lang(self.request)
         
         glob_dict = prepare_glob_dict()

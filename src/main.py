@@ -5,6 +5,7 @@ import logging
 from cms.view import SendEmails, ViewPage
 from cms.admin import ViewImage, AdminPage
 import os
+from configuration import DEBUG
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -36,7 +37,7 @@ ROUTES = [
   (r'/(.*)', ViewPage)
   ]   
 
-application = webapp.WSGIApplication(ROUTES, debug=True)
+application = webapp.WSGIApplication(ROUTES, debug=DEBUG)
 
 def main():
     

@@ -8,7 +8,7 @@ import os
 import logging
 
 APP_ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
-DEBUG = True # os.environ['SERVER_SOFTWARE'].startswith('Dev')
+DEBUG = os.environ['SERVER_SOFTWARE'].startswith('Dev')
 logging.info("Starting application in DEBUG mode: %s", DEBUG)
 
 
