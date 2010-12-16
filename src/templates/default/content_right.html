@@ -1,5 +1,5 @@
 <h2>Blogs</h2>
-{% for page in page_list|slice:"2" %}
+{% for page in page_list|slice:":4" %}
 <p>
 <a href="/page/{{page.key.id}}">{% get_attr page 'title_' lang %}</a>
 </p>

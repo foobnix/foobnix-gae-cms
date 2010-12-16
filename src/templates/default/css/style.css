@@ -592,7 +592,7 @@ p {
 	padding:5px; }
 	
 div#feature_list {
-	width: 920px;
+	width: 850px;
 	height: 380px;
 	overflow: hidden;
 	position: relative;
@@ -655,8 +655,8 @@ ul#tabs li a.current:hover {
 
 ul#output {
 	right: 0;
-	width: 663px;
-	height: 240px;
+	width: 600px;
+	height: 420px;
 	position: relative;
 }
 
@@ -708,4 +708,7 @@ ul#output li a:hover {
 .big_text{
 	 font-size: 16px;
 	 font-weight: bold;
+	}
+.red{
+	background-color: RED;
 	}
