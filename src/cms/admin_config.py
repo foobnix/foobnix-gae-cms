@@ -5,7 +5,7 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
-    PropertieModel
+    PropertieModel, CommentModel
 positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
@@ -97,6 +97,14 @@ admin_menu = [
          "text":"New Propertie",
          "template":"admin-propertie.html",
          "model":PropertieModel(),
+         "type":CMS_EDIT
+         },
+         {
+         "template_dict":"comment",
+         "link_id":CMS_URL + "/comment",
+         "text":"New Comment",
+         "template":"admin-comment.html",
+         "model":CommentModel(),
          "type":CMS_EDIT
          }
         ]

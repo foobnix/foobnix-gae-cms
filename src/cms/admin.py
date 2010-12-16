@@ -14,6 +14,7 @@ from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
 import logging
 from cms.utils.translate import get_translated
+from cms.utils.request_model import request_to_model
 
 
 class ViewImage (webapp.RequestHandler):
@@ -50,7 +51,7 @@ class ViewEditAdminPage():
                 db_model = clean_model.get_by_id(int(key_id))
 
             if not db_model:
-                db_model = self.request_to_model(clean_model, self.request, template_dict)
+                db_model = request_to_model(clean_model, self.request, template_dict)
                 db_model.put()
                 
             self.glob_dict[template_dict] = db_model
@@ -62,7 +63,7 @@ class ViewEditAdminPage():
                 db_model = clean_model.get_by_id(int(key_id))
             else:
                 db_model = clean_model                
-            add = self.request_to_model(db_model, self.request, template_dict)
+            add = request_to_model(db_model, self.request, template_dict)
             add.put()
             self.glob_dict[template_dict] = add
             
@@ -78,40 +79,8 @@ class ViewEditAdminPage():
             self.glob_dict[template_dict] = None
         
         path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
-        self.response.out.write(template.render(path, self.glob_dict))
-        
-    def request_to_model(self, model, request, prefix):
-        for properie in model.properties():
-            db_type = model.properties()[properie]
-            request_propertrie = prefix + "." + properie
-            request_value = request.get(request_propertrie)
-            
-            if not request_value and "_" in properie:
-                name = properie[:-3]
-                lang = properie[-2:]                
-                if lang != LANG_CODE_DEFAULT and lang in CMS_LANGUAGES.keys():
-                    """translate"""
-                    origin = request.get(prefix + "." + name + "_" + LANG_CODE_DEFAULT)
-                    request_value = get_translated(origin, LANG_CODE_DEFAULT, lang)
-            
-            if type(db_type) == db.IntegerProperty:
-                if not request_value:
-                    request_value = 0;
-                setattr(model, properie, int(request_value))
-            elif  type(db_type) == db.BooleanProperty:
-                if not request_value:
-                    request_value = False;
-                setattr(model, properie, bool(request_value))
-            elif type(db_type) == db.DateTimeProperty:
-                setattr(model, properie, datetime.datetime.utcnow())
-            elif type(db_type) == db.BlobProperty:
-                if request_value:
-                    resized = images.resize(request_value, 550)
-                    setattr(model, properie, db.Blob(resized))
-            else:
-                setattr(model, properie, request_value)
-        return model
-
+        self.response.out.write(template.render(path, self.glob_dict))        
+   
 def get_lang(request):
     if request.get("lang"):
         return request.get("lang") 

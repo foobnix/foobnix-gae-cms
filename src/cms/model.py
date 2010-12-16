@@ -53,10 +53,11 @@ class ImageModel(db.Model):
 class CommentModel(db.Model):
     name = db.StringProperty(multiline=False)
     site = db.StringProperty(multiline=False)
-    email = db.StringProperty(multiline=False)
     comment_ru = db.TextProperty()
-    comment_en = db.TextProperty()
-    date = db.DateTimeProperty(auto_now_add=True)    
+    comment_en = db.TextProperty()    
+    page = db.ReferenceProperty(PageModel)
+    date = db.DateTimeProperty(auto_now_add=True)
+    user_id = db.StringProperty(multiline=False)    
          
 
 class PropertieModel(db.Model):

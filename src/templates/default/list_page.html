@@ -7,6 +7,12 @@
 <h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
 {% include "helper_page.html" %}
 {% get_attr page 'content_' lang %}
+
+<br>
+{% for comment in page.commentmodel_set|slice:"2" %}
+<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {{comment.comment_ru}}<br>
+{% endfor %}
+
 {% endfor %}
 
 {% endblock %}

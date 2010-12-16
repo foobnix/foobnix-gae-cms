@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+<h2>Comments</h2>
+ <div>  
+        <form action="{{admin_model.link_id}}" method="post">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Add New Comment</legend>
+            <p> 
+              <label>Name *</label><br> 
+              <input type="text" class="text" name="comment.name" value="{{comment.name}}">
+            </p>
+            <p> 
+              <label>Site</label><br> 
+              <input type="text" class="text" name="comment.name" value="{{comment.name}}">
+            </p>
+            
+            {% for ln in langs %}`
+            <p> 
+              <label>Comment [{{ln}}]</label><br> 
+              <textarea name="comment.comment_{{ln}}">{% get_attr comment 'comment_' ln %}</textarea> 
+            </p>
+            {% endfor %}
+ 
+          </fieldset> 
+        </form> 
+ 
+      </div> 
+	
+	<fieldset> 
+            <legend>Properties List</legend>  
+      <table>
+	  <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>key</th>
+          <th>RU</th>
+          <th>EN</th>
+          <th>Page</th>
+          <th>&nbsp;</th>
+        </tr>
+		</thead>			
+		<tbody>
+		
+		{% for item in comment_list %}
+		  <tr>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=delete&comment.key_id={{item.key.id}}" >delete</a>
+	          </td>
+	          <td>{{item.name}}</td>
+	          <td>{{item.comment_ru}}</td>
+	          <td>{{item.comment_en}}</td>
+	          <td>{{item.page.fk_menu}}</td>
+	          <td>
+	          	<a href="{{admin_model.link_id}}?action=edit&comment.key_id={{item.key.id}}" >edit</a>
+	          </td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+      </div> 
+
+<br style="clear:both" />
+
+{% endblock %}
+
+    
+
+
+
+ 
+     

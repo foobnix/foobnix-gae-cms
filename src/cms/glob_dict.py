@@ -5,7 +5,7 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
-    PropertieModel
+    PropertieModel, CommentModel
 from cms.admin_config import layouts, admin_menu
 from configuration import CMS_LANGUAGES
 def prepare_glob_dict():
@@ -32,6 +32,9 @@ def prepare_glob_dict():
     propertie_list = PropertieModel().all()
     propertie_list.order("-date")
     
+    comment_list = CommentModel().all()
+    comment_list.order("-date")
+    
     
     glob_dict = {
      'langs':CMS_LANGUAGES,
@@ -39,6 +42,7 @@ def prepare_glob_dict():
      'menu_list':menu_list,
      'email_list':email_list,
      'product_list':product_list,
+     'comment_list':comment_list,
      'image_list':images_list,
      'propertie_list':propertie_list,
       "admin_menu" : admin_menu

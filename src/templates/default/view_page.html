@@ -1,9 +1,57 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
-<h2>{{item.title}}</h2>
+<h2>{% get_attr item 'title_' lang %}</h2>
 
-{{item.content}}
+{% get_attr item 'content_' lang %}
+
+<form action="/{{menu_id}}/{{page_id}}" method="post">
+		<input type="hidden" name="action" value="addupdate" />
+ 
+          <fieldset> 
+            <legend>Add New Comment</legend>
+            
+			<p> 
+              <label>Name *</label><br> 
+              <input type="text" class="text" name="comment.name" value="{{comment.name}}">
+              {% if comment.name_error %}
+              <span class="notice">Required</span>
+              {% endif %} 
+            </p>
+            <p> 
+              <label>Site</label><br> 
+              <input type="text" class="text" name="comment.site" value="{{comment.site}}">
+            </p>
+            <p> 
+              <label>Comment *</label><br>
+              <textarea name="comment.comment_ru">{{comment.comment_ru}}</textarea>
+              {% if comment.comment_error %}
+              <br><span class="notice">Required</span>
+              {% endif %}              
+            </p>            
+            <input type="submit" value="Add comment" />       
+           </fieldset>
+</form>         
+
+<h2>Comments</h2>
+
+{% for comment in comments %}
+<p>
+<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {{comment.comment_ru}}
+
+{% ifequal comment.user_id session.user_id %}
+<a href="?action=delete&comment.key_id={{comment.key.id}}">delete</a>
+{% endifequal %}
+
+{% if user %}
+<a href=/admin/comment?action=delete&comment.key_id={{comment.key.id}}>spam</a>
+{% endif %}
+</p>
+
+
+
+{% endfor %}
+
 
 
 {% endblock %}
