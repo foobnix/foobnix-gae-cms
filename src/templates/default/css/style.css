@@ -545,44 +545,7 @@ p {
         #dlnav li a:hover {
             text-decoration: underline;
 	}
-
-        #dlnav li.dlnav-linux64 a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_Download_Orange_Linux64_Default.png) no-repeat;
-        }
-        #dlnav li.dlnav-linux64 a:hover {
-            background: url(/images/ControlElement_Button_Download_Orange_Linux64_Mouseover.png) no-repeat;
-        }
-
-        #dlnav li.dlnav-win32 a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_Download_Magenta_Windows_Default.png) no-repeat;
-        }
-        #dlnav li.dlnav-win32 a:hover {
-            background: url(/images/ControlElement_Button_Download_Magenta_Windows_Mouseover.png) no-repeat;
-        }
-        #dlnav li.dlnav-linux32 a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_Download_Orange_Linux_Default.png) no-repeat;
-        }
-        #dlnav li.dlnav-linux32 a:hover {
-            background: url(/images/ControlElement_Button_Download_Orange_Linux_Mouseover.png) no-repeat;
-        }
-        #dlnav li.dlnav-mac a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_Download_Blue_Mac_Default.png) no-repeat;
-        }
-        #dlnav li.dlnav-mac a:hover {
-            background: url(/images/ControlElement_Button_Download_Blue_Mac_Mouseover.png) no-repeat;
-        }
-        #dlnav li.dlnav-source a {
-            height: 81px;
-            background: url(/images/ControlElement_Button_Download_Green_Source_Default.png) no-repeat;
-        }
-        #dlnav li.dlnav-source a:hover {
-            background: url(/images/ControlElement_Button_Download_Green_Source_Mouseover.png) no-repeat;
-        }
-
+     
 .left{
 	float:left;
 }
@@ -640,7 +603,7 @@ ul#tabs li a {
 
 ul#tabs li a:hover {
 	background: #FFFFFF;
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 ul#tabs li a.current {
@@ -649,7 +612,7 @@ ul#tabs li a.current {
 }
 
 ul#tabs li a.current:hover {
-	text-decoration: none;
+	text-decoration: underline;
 	cursor: default;
 }
 

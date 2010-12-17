@@ -1,9 +1,9 @@
 import httplib
-import json
 import logging
 import socket
 import time
 import urllib
+import simplejson
  
 SEARCH_HOST = "search.twitter.com"
 SEARCH_PATH = "/search.json"
@@ -32,7 +32,7 @@ class TwitterTagCrawler(object):
             data = r.read()
             c.close()
             try:
-                result = json.loads(data)
+                result = simplejson.loads(data)
             except ValueError:
                 return None
             if 'results' not in result:

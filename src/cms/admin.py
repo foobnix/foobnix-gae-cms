@@ -1,20 +1,17 @@
 from google.appengine.ext import webapp
 import os
-from google.appengine.ext import db
 from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
     CMS_VIEW, layouts, IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 import copy
-import datetime
 from cms.model import ImageModel
-from google.appengine.api import images, users
-from configuration import ADMIN_TEMPLATE_PATH, CMS_LANGUAGES, \
-    LANG_CODE_DEFAULT
+from google.appengine.api import users
+from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT
 from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
 import logging
-from cms.utils.translate import get_translated
 from cms.utils.request_model import request_to_model
+from cms.utils.cache import flash_cache
 
 
 class ViewImage (webapp.RequestHandler):
@@ -79,7 +76,7 @@ class ViewEditAdminPage():
             self.glob_dict[template_dict] = None
         
         path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
-        self.response.out.write(template.render(path, self.glob_dict))        
+        self.response.out.write(unicode(template.render(path, self.glob_dict)))        
    
 def get_lang(request):
     if request.get("lang"):

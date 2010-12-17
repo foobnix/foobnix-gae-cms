@@ -5,12 +5,23 @@ Created on 16 дек. 2010
 @author: ivan
 '''
 from google.appengine.api import memcache
+
+def get_or_put_cache(key, func):
+    cache = memcache.get(key)
+    if cache:
+        return cache
+    else:
+        value = func()
+        memcache.add(key=key, value=value, time=3600) 
+        return value
+        
 def get_from_cache(menu_id, page_id, lang):
     cache = memcache.get(get_id(menu_id, page_id, lang))
     if cache:
         return cache
     else:
         return None
+    
 def flash_cache():
     memcache.flush_all()
 

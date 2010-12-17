@@ -9,9 +9,7 @@ from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel
 from cms.admin_config import layouts, admin_menu
 from configuration import CMS_LANGUAGES
 from cms.utils.twitter import TwitterTagCrawler
-
-
-twitters = TwitterTagCrawler("foobnix")
+from cms.utils.cache import get_or_put_cache
 
 def prepare_glob_dict():
     menu_list = MenuModel().all()
@@ -42,7 +40,7 @@ def prepare_glob_dict():
     
     
     glob_dict = {
-     'twitters':twitters.search(),
+     'twitters':get_or_put_cache("twitters", TwitterTagCrawler("foobnix", None, None).search),
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,

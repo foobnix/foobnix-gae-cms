@@ -7,7 +7,7 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from google.appengine.api import mail, users, memcache
+from google.appengine.api import mail, users
 import re
 from configuration import TEMPLATE_PATH
 from cms.model import EmailModel, ImageModel, CommentModel
@@ -59,12 +59,14 @@ class ViewPage(webapp.RequestHandler):
          
     def get(self, menu_id=None, page_id=None):
         lang = get_lang(self.request)
+        user = users.get_current_user()
+        
         action = self.request.get('action')
         if action == "delete" or action == "addupdate":
             flash_cache()
         
         template_cached = get_from_cache(menu_id, page_id, lang)
-        if  template_cached:
+        if not user and template_cached:
             self.response.out.write(template_cached)
             return None
         
@@ -78,7 +80,6 @@ class ViewPage(webapp.RequestHandler):
         
         glob_dict = prepare_glob_dict()
         
-        user = users.get_current_user()
         glob_dict["user"] = user
         
         if not self.request.get("mode"):
@@ -169,7 +170,6 @@ class ViewPage(webapp.RequestHandler):
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
         
-        content = template.render(path, glob_dict)
+        content = unicode(template.render(path, glob_dict))       
         put_to_cache(menu_id, page_id, lang, content)
-        
         self.response.out.write(content)
