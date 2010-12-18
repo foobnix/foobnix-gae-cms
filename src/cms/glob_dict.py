@@ -11,6 +11,9 @@ from configuration import CMS_LANGUAGES
 from cms.utils.twitter import TwitterTagCrawler
 from cms.utils.cache import get_or_put_cache
 
+def twits():
+    return TwitterTagCrawler("foobnix", None, None).search()
+
 def prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
@@ -40,7 +43,7 @@ def prepare_glob_dict():
     
     
     glob_dict = {
-     'twitters':get_or_put_cache("twitters", TwitterTagCrawler("foobnix", None, None).search),
+     'twitters':get_or_put_cache("twitters"),
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,

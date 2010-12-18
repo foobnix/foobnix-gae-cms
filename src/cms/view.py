@@ -66,7 +66,7 @@ class ViewPage(webapp.RequestHandler):
             flash_cache()
         
         template_cached = get_from_cache(menu_id, page_id, lang)
-        if not user and template_cached:
+        if template_cached:
             self.response.out.write(template_cached)
             return None
         
@@ -170,6 +170,7 @@ class ViewPage(webapp.RequestHandler):
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
         
-        content = unicode(template.render(path, glob_dict))       
-        put_to_cache(menu_id, page_id, lang, content)
+        content = template.render(path, glob_dict)
+        if not user:      
+            put_to_cache(menu_id, page_id, lang, content)
         self.response.out.write(content)

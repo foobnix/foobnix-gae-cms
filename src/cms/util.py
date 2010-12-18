@@ -1,4 +1,5 @@
-# http://appengine-cookbook.appspot.com/recipe/a-simple-cookie-class/
+#-*- coding: utf-8 -*-
+
 import UserDict
 from Cookie import BaseCookie
 class Cookies(UserDict.DictMixin):

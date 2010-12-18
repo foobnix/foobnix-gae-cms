@@ -14,7 +14,7 @@ def request_to_model(model, request, prefix):
     for properie in model.properties():
         db_type = model.properties()[properie]
         request_propertrie = prefix + "." + properie
-        request_value = request.get(request_propertrie)
+        request_value = unicode(request.get(request_propertrie))
         
         if not request_value and "_" in properie:
             name = properie[:-3]

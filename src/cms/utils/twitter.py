@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 import httplib
 import logging
 import socket

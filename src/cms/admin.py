@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 from google.appengine.ext import webapp
 import os
 from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
@@ -76,7 +78,7 @@ class ViewEditAdminPage():
             self.glob_dict[template_dict] = None
         
         path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
-        self.response.out.write(unicode(template.render(path, self.glob_dict)))        
+        self.response.out.write(template.render(path, self.glob_dict))        
    
 def get_lang(request):
     if request.get("lang"):
