@@ -60,9 +60,3 @@ class TwitterTagCrawler(object):
  
     def submit(self, data):
         pass
-
-#tag = TwitterTagCrawler("foobnix")
-#for line in tag.search():
-#    print line['from_user'], " = ", line['text'], "id:", line["id_str"]
-    #print line
-#print tag.loop()

@@ -11,10 +11,12 @@ from google.appengine.api import images
 import datetime
 
 def request_to_model(model, request, prefix):
+    if not model:
+        return None
     for properie in model.properties():
         db_type = model.properties()[properie]
         request_propertrie = prefix + "." + properie
-        request_value = unicode(request.get(request_propertrie))
+        request_value = request.get(request_propertrie)
         
         if not request_value and "_" in properie:
             name = properie[:-3]
@@ -41,6 +43,6 @@ def request_to_model(model, request, prefix):
         elif type(db_type) == db.ReferenceProperty:
             pass             
         else:
-            if hasattr(model, properie):            
+            if hasattr(model, properie):    
                 setattr(model, properie, request_value)
     return model

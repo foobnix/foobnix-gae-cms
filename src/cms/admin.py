@@ -9,11 +9,11 @@ import copy
 from cms.model import ImageModel
 from google.appengine.api import users
 from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT
-from google.appengine.ext.webapp import template
 from cms.login import check_user_admin
 import logging
 from cms.utils.request_model import request_to_model
 from cms.utils.cache import flash_cache
+from google.appengine.ext.webapp import template
 
 
 class ViewImage (webapp.RequestHandler):
@@ -32,14 +32,13 @@ class ViewImage (webapp.RequestHandler):
         else:
             self.redirect(IMAGE_NOT_FOUND)
 class ViewEditAdminPage():
-    def __init__(self, handler, admin_model, glob_dict):
+    def __init__(self, handler, admin_model):
         self.request = handler.request
         self.redirect = handler.redirect
         self.response = handler.response
-        self.glob_dict = glob_dict
         self.admin_model = admin_model
         
-    def proccess(self):
+    def proccess(self, glob_dict):
         template_dict = self.admin_model["template_dict"]
         clean_model = copy.copy(self.admin_model["model"])
         
@@ -53,7 +52,7 @@ class ViewEditAdminPage():
                 db_model = request_to_model(clean_model, self.request, template_dict)
                 db_model.put()
                 
-            self.glob_dict[template_dict] = db_model
+            glob_dict[template_dict] = db_model
             
                         
         elif self.request.get('action') == "addupdate":
@@ -64,7 +63,7 @@ class ViewEditAdminPage():
                 db_model = clean_model                
             add = request_to_model(db_model, self.request, template_dict)
             add.put()
-            self.glob_dict[template_dict] = add
+            glob_dict[template_dict] = add
             
         elif self.request.get('action') == "delete":
             key_id = self.request.get(template_dict + '.key_id')
@@ -75,10 +74,11 @@ class ViewEditAdminPage():
             self.redirect(self.admin_model["link_id"])
             return None
         else:
-            self.glob_dict[template_dict] = None
+            glob_dict[template_dict] = ""
         
         path = os.path.join(ADMIN_TEMPLATE_PATH, self.admin_model["template"])
-        self.response.out.write(template.render(path, self.glob_dict))        
+        return template.render(path, glob_dict)
+                
    
 def get_lang(request):
     if request.get("lang"):
@@ -102,7 +102,6 @@ class AdminPage(webapp.RequestHandler):
         glob_dict = prepare_glob_dict()
         glob_dict["user"] = user
         glob_dict["lang"] = lang
-        glob_dict["user"] = user
         glob_dict["layouts"] = layouts
         glob_dict["positions"] = positions
         glob_dict["host"] = self.request.headers['Host']
@@ -117,8 +116,8 @@ class AdminPage(webapp.RequestHandler):
                 glob_dict["admin_model"] = admin_model
                 
                 if admin_model["type"] == CMS_EDIT:            
-                    page = ViewEditAdminPage(self, admin_model, glob_dict)
-                    page.proccess()
+                    page = ViewEditAdminPage(self, admin_model)
+                    self.response.out.write(page.proccess(glob_dict))
                 elif admin_model["type"] == CMS_VIEW:
                     path = os.path.join(ADMIN_TEMPLATE_PATH, admin_model["template"])
                     self.response.out.write(template.render(path, glob_dict))

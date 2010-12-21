@@ -8,9 +8,18 @@ from cms.view import SendEmails, ViewPage
 from cms.admin import ViewImage, AdminPage
 import os
 from configuration import DEBUG
+import sys
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
+
+if not DEBUG:
+    try:
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
+    except Exception, e:
+        logging.error(e)
+
 
 logging.getLogger().setLevel(logging.DEBUG)
 

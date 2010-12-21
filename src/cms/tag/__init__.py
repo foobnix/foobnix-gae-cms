@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 
 from google.appengine.ext import webapp
 import os
@@ -59,7 +60,11 @@ def get_attr(object, param, lang=LANG_CODE_DEFAULT):
     
     if not object:
         return ""
-    return getattr(object, param + lang)
+    
+    if hasattr(object, param + lang):
+        return getattr(object, param + lang)
+    else:
+        return "[%s]" % param + lang
 
 @register.simple_tag
 def get_propertie(name_key, lang=LANG_CODE_DEFAULT):
