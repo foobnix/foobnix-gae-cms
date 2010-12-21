@@ -44,7 +44,7 @@ def prepare_glob_dict():
     
     
     glob_dict = {
-     'twitters':get_or_put_cache("twitters"),
+     'twitters':get_or_put_cache("twitters", twits),
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,

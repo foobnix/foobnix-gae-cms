@@ -1,8 +1,11 @@
 <h2>{% get_propertie "prop.blog" lang %}</h2>
 {% for page in page_list|slice:":4" %}
+{% ifequal page.fk_menu "blog" %}
+
 <p>
 <a href="/page/{{page.key.id}}">{% get_attr page 'title_' lang %}</a>
 </p>
+{% endifequal %}
 {% endfor %}
 
 

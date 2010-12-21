@@ -5,14 +5,13 @@ Created on 16 дек. 2010
 @author: ivan
 '''
 from google.appengine.api import memcache
-from cms.utils.twitter import TwitterTagCrawler
 
-def get_or_put_cache(key):
+def get_or_put_cache(key, func):
     cache = memcache.get(key)
     if cache:
         return cache
     else:
-        value = TwitterTagCrawler("foobnix", None, None).search()
+        value = func()
         memcache.add(key=key, value=value, time=3600) 
         return value
         

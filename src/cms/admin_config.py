@@ -126,6 +126,7 @@ p("prop.required", "Обязательное", "Required"),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
+p("config.blog.section", "blog", "blog"),
 
 
 ]
