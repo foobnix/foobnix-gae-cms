@@ -3,7 +3,7 @@
 {% ifequal page.fk_menu "blog" %}
 
 <p>
-<a href="/page/{{page.key.id}}?lang={{lang}}">{% get_attr page 'title_' lang %}</a>
+<a href="/{{page.fk_menu}}/{{page.key.id}}?lang={{lang}}">{% get_attr page 'title_' lang %}</a>
 </p>
 {% endifequal %}
 {% endfor %}
@@ -12,7 +12,7 @@
 <h2>{% get_propertie "prop.comments" lang %}</h2>
 {% for comment in comment_list|slice:"5" %}
 <p>
-<a href="/page/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b> {% get_attr comment 'comment_' lang%}</a> <br>
+<a href="/{{comment.page.fk_menu}}/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b> {% get_attr comment 'comment_' lang%}</a> <br>
 </p>
 {% endfor %}
 

@@ -80,11 +80,14 @@ def get_default_menu_id():
         return menu.link_id
  
 def get_menu_by(link_id):
-    menu_list = MenuModel().all()
+    menu_list = MenuModel().all()    
     if not link_id:
             menu_list.order("-is_visible")
             menu_list.order("-position")
             menu_list.order("index")
+    else:
+        menu_list.filter("link_id", link_id)
+        
     if menu_list.count() >= 1:
         return menu_list[0]
         

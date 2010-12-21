@@ -10,7 +10,7 @@ import os
 from google.appengine.api import mail, users
 import re
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT
-from cms.model import EmailModel, ImageModel, CommentModel
+from cms.model import EmailModel, ImageModel, CommentModel, PageModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
 from cms.admin_config import admin_menu
@@ -78,7 +78,7 @@ class ViewPage(webapp.RequestHandler):
         session = Session()
         if not session.has_key('user_id'):
             session['user_id'] = uuid.uuid4().hex        
-                
+        
         if not menu_id:
             menu_id = get_default_menu_id()
         
@@ -97,10 +97,8 @@ class ViewPage(webapp.RequestHandler):
                 
         
         menu = get_menu_by(menu_id)
-        if not menu:
-            #result_layout = INDEX_TEMPLATE
-            path = os.path.join(TEMPLATE_PATH, "base.html")            
-            return self.response.out.write(template.render(path, glob_dict))
+        if not menu:            
+            return self.redirect("/" + get_default_menu_id())
             
         
         layout = get_layout(menu.layout)
@@ -109,6 +107,10 @@ class ViewPage(webapp.RequestHandler):
         if page_id:
             
             page = layout["model"].get_by_id(int(page_id))
+            if not page:
+                self.redirect("/") 
+                
+            
             result_layout = layout["child_template"]
             glob_dict["item"] = page
             
