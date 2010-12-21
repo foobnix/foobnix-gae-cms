@@ -9,7 +9,7 @@ from google.appengine.ext import webapp
 import os
 from google.appengine.api import mail, users
 import re
-from configuration import TEMPLATE_PATH
+from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT
 from cms.model import EmailModel, ImageModel, CommentModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
@@ -60,6 +60,9 @@ class ViewPage(webapp.RequestHandler):
          
     def get(self, menu_id=None, page_id=None):
         lang = get_lang(self.request)
+        if not lang or lang not in CMS_LANGUAGES:
+            lang = LANG_CODE_DEFAULT
+            
         user = users.get_current_user()
         
         action = self.request.get('action')
@@ -102,6 +105,7 @@ class ViewPage(webapp.RequestHandler):
         
         layout = get_layout(menu.layout)
         
+        correct = True
         if page_id:
             
             page = layout["model"].get_by_id(int(page_id))
@@ -120,15 +124,13 @@ class ViewPage(webapp.RequestHandler):
                 comment = CommentModel().get_by_id(int(id))
                 if comment  and comment.user_id == session['user_id']:
                     comment.delete()
-                    self.redirect("/%s/%s" % (menu_id, page_id)) 
+                    self.redirect("/%s/%s?lang=%s" % (menu_id, page_id, lang)) 
                                 
             
             if self.request.get('action') == "addupdate":
-                flash_cache()            
                 comment = request_to_model(CommentModel(), self.request, "comment")
                 comment.page = page
                 
-                correct = True
                 if not comment.name:
                     comment.name_error = True
                     correct = False
@@ -155,12 +157,16 @@ class ViewPage(webapp.RequestHandler):
                 if not comment.site.startswith("http://"):
                     comment.site = "http://" + comment.site  
                 
+                flash_cache()
+                
                 if correct:
                     comment.user_id = session['user_id']
                     comment.put()
-                    self.redirect("/%s/%s" % (menu_id, page_id))
+                    glob_dict["comment"] = None
+                    self.redirect("/%s/%s?lang=%s" % (menu_id, page_id, lang))
+                else:
+                    glob_dict["comment"] = comment
                 
-                glob_dict["comment"] = comment
                 
                 
             
@@ -180,6 +186,6 @@ class ViewPage(webapp.RequestHandler):
         path = os.path.join(TEMPLATE_PATH, result_layout)
         
         content = template.render(path, glob_dict)
-        if not user:      
+        if not user and correct:      
             put_to_cache(menu_id, page_id, lang, content)
         self.response.out.write(content)
