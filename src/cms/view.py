@@ -15,7 +15,7 @@ from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout,
     get_default_menu_id
 from cms.admin_config import admin_menu
 from cms.admin import get_lang
-from cms.utils.request_model import request_to_model
+from cms.utils.request_model import request_to_model, translate_models
 from appengine_utilities.sessions import Session
 import uuid
 from django.utils.html import urlize

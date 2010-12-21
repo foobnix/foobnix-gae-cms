@@ -12,7 +12,7 @@
 <h2>{% get_propertie "prop.comments" lang %}</h2>
 {% for comment in comment_list|slice:"5" %}
 <p>
-<b><a href="{{comment.site}}">@{{comment.name}}</a></b> {% get_attr comment 'comment_' lang%}<br>
+<a href="/page/{{comment.page.key.id}}"><b>@{{comment.name}}</b> {% get_attr comment 'comment_' lang%}</a> <br>
 </p>
 {% endfor %}
 

@@ -6,22 +6,19 @@
     <div id="wrap">
 	{% include "navigation.html" %}
 
-	<div id="header-seperator">&nbsp;</div>		
-	<div id="sidebar">
-		<ul id="lnav">
-		{% for item in menu_list %}
-	 	{% ifequal item.position "LEFT" %}
-	 		{% ifequal item.link_id active %}
-	 			<li class="tabs-selected"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
-	 		{% else %}
-	 			<li class="tabs-container"><a href="/{{item.link_id }}">{{ item.name }}</a></li>
-	 		{% endifequal %}
-	 	{% endifequal %}  
-		{% endfor %}
-	  </ul>
-	</div>
-	
+	<div id="header-seperator">&nbsp;</div>
+			
     <div id="container">
+    <div id="sidebar">
+		{% for ln in langs %}              	
+			{% ifequal ln lang%}				
+				{% lang_name ln %}
+			{% else %}
+				<a href="?lang={{ln}}">{% lang_name ln %}</a>			
+			{% endifequal %}			
+		{% endfor %}				
+	  </div>
+    
      	<div class="span-22 left" style="background-color:#FFFFFF">
   		{% block content_slot %}
   		{% endblock %}

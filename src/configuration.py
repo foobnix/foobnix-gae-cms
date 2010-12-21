@@ -40,7 +40,7 @@ admins = ["ivan.ivanenko@gmail.com", "nataly.sokolenko@gmail.com", "7funnyday7@g
 LANG_CODE_RU = "ru"
 LANG_CODE_EN = "en"
 CMS_LANGUAGES = {
-                 LANG_CODE_RU:"Russian",
+                 LANG_CODE_RU:"Русский",
                  LANG_CODE_EN:"English"
                  }
 

@@ -10,6 +10,22 @@ from google.appengine.ext import db
 from google.appengine.api import images
 import datetime
 
+def translate_models(models, lang):
+    result = []
+    for model in models:
+        result.append(translate_model(model, lang))
+    return result
+
+def translate_model(model, lang):
+    for properie in model.properties():
+        db_type = model.properties()[properie]
+        if type(db_type) == db.StringProperty or type(db_type) == db.TextProperty:
+            value = getattr(model, properie)
+            if value:
+                translated = "TR" + value #get_translated(value, LANG_CODE_DEFAULT, lang)
+                setattr(model, properie, translated)
+    return model
+
 def request_to_model(model, request, prefix):
     if not model:
         return None
