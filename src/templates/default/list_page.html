@@ -10,7 +10,7 @@
 
 {% if page.is_comment %}
 <br>
-<span class="big_text">Comments ({{page.commentmodel_set.count}})</span> &nbsp;&nbsp;&nbsp;<a href="/{{active}}/{{page.key.id}}">Add new comment</a><br>
+<span class="big_text">{% get_propertie "prop.comments" lang %} ({{page.commentmodel_set.count}})</span> &nbsp;&nbsp;&nbsp;<a href="/{{active}}/{{page.key.id}}">{% get_propertie "prop.add.new.commment" lang %}</a><br>
 {% for comment in page.commentmodel_set|slice:"2" %}
 <b><a href="{{comment.site}}">@{{comment.name}}</a></b> {% get_attr comment 'comment_' lang%}<br>
 {% endfor %}

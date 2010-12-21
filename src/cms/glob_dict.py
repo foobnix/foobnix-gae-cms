@@ -22,7 +22,8 @@ def prepare_glob_dict():
     
     page_list = PageModel().all()
     page_list.order("-is_visible")
-    page_list.order("-date")
+    page_list.order("fk_menu")
+    page_list.order("-index")
 
     
     email_list = EmailModel().all()
@@ -68,7 +69,7 @@ def get_layout(layout_id):
 
 def get_pages(menu_name):
     page = PageModel().all()
-    page.order("-date")
+    page.order("index")
     page.filter("fk_menu", menu_name)
     return page
 

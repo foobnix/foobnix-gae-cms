@@ -45,9 +45,16 @@
               <label>Page Visible</label><br> 
               <input type="checkbox" class="text" name="page.is_visible" value="False" {%if page.is_visible %} checked="checked"{% endif %}">
             </p>
+            
+            <p> 
+              <label>Index</label><br> 
+              <input type="text" class="text" name="page.index" value="{{page.index}}">
+              <span class="notice">1..n</span> 
+            </p>
+            
             <p> 
               <input type="submit" value="Submit"> 
-              <input type="reset" value="Reset"> 
+               
             </p> 
  
           </fieldset> 

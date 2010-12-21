@@ -20,6 +20,7 @@ from appengine_utilities.sessions import Session
 import uuid
 from django.utils.html import urlize
 from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
+from recaptcha.client import captcha
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -138,7 +139,15 @@ class ViewPage(webapp.RequestHandler):
                 else:
                     comment.comment_ru = urlize(comment.comment_ru)
                     comment.comment_en = urlize(comment.comment_en)
-                    
+                
+                remote_ip = self.request.remote_addr
+                challenge = self.request.get('recaptcha_challenge_field')
+                response = self.request.get('recaptcha_response_field')
+                recaptcha_response = captcha.submit(challenge, response, "6Ld9tL0SAAAAAA8RPX--P6dgmyJ2HUeUdBUfLLAM", remote_ip)
+                
+                if not recaptcha_response.is_valid:
+                    comment.recaptcha_error = True
+                    correct = False                    
                 
                 if not comment.site:
                     comment.site = "http://www.foobnix.com"

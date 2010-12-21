@@ -7,12 +7,12 @@
 
 {% if item.is_comment %}
 
-<h2>Comments</h2>
+<h2>{% get_propertie "prop.comments" lang %}</h2>
 
 
 {% for comment in comments %}
 {% ifequal comment.user_id session.user_id %}
-<a href="?action=delete&comment.key_id={{comment.key.id}}">delete</a>
+<a href="?action=delete&comment.key_id={{comment.key.id}}">{% get_propertie "prop.delete" lang %}</a>
 {% endifequal %}
 {% if user %}
 <a href=/admin/comment?action=delete&comment.key_id={{comment.key.id}}>spam</a>
@@ -30,27 +30,46 @@
 		<input type="hidden" name="action" value="addupdate" />
  
           <fieldset> 
-            <legend>Add New Comment</legend>
+            <legend>{% get_propertie "prop.add.new.comment" lang %}</legend>
             
 			<p> 
-              <label>Name *</label><br> 
+              <label>{% get_propertie "prop.name" lang %} *</label><br> 
               <input type="text" class="text" name="comment.name" value="{{comment.name}}">
               {% if comment.name_error %}
-              <span class="notice">Required</span>
+              <span class="notice">{% get_propertie "prop.required" lang %}</span>
               {% endif %} 
             </p>
             <p> 
-              <label>Site</label><br> 
+              <label>{% get_propertie "prop.site" lang %}</label><br> 
               <input type="text" class="text" name="comment.site" value="{{comment.site}}">
             </p>
             <p> 
-              <label>Comment *</label><br>
+              <label>{% get_propertie "prop.comment" lang %} *</label><br>
               <textarea name="comment.comment_ru">{{comment.comment_ru}}</textarea>
               {% if comment.comment_error %}
-              <br><span class="notice">Required</span>
+              <br><span class="notice">{% get_propertie "prop.required" lang %}</span>
               {% endif %}              
-            </p>            
-            <input type="submit" value="Add comment" />       
+            </p>    
+            <p>
+                       
+            <script type="text/javascript"
+       src="http://www.google.com/recaptcha/api/challenge?k=6Ld9tL0SAAAAABLhM86KAtJKzgyTjukZuBtkEuGq">
+    </script>
+    <noscript>
+       <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Ld9tL0SAAAAABLhM86KAtJKzgyTjukZuBtkEuGq"
+           height="300" width="500" frameborder="0"></iframe><br>
+       <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+       </textarea>
+       <input type="hidden" name="recaptcha_response_field"
+           value="manual_challenge">
+    </noscript>    	
+    		{% if comment.recaptcha_error %}
+              <br><span class="notice">{% get_propertie "prop.wrong.text lang %}</span>
+            {% endif %}   
+            </p>
+            <br>
+             <br>       
+            <input type="submit" value="{% get_propertie "prop.add" lang %}" />       
            </fieldset>
 </form>  
 

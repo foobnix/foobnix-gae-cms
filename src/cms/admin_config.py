@@ -108,3 +108,24 @@ admin_menu = [
          "type":CMS_EDIT
          }
         ]
+
+
+def p(name, value1, value2):
+    return {"name":name, "value_ru":value1, "value_en":value2}
+default_properties = [
+p("foobnix.header.slogan", "Foobnix простой и мощный плеер музыки для Linux", "Foobnix simple and powerful music player for Linux"),
+p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
+p("prop.blog", "Блог", "Blog"),
+p("prop.comments", "Комментарии", "Comments"),
+p("prop.comment", "Комментарий", "Comment"),
+p("prop.twitter", "Твиттер", "Twitter"),
+p("prop.add.new.comment", "Добавить комментарий", "Add new comment"),
+p("prop.add", "Добавить", "Add"),
+p("prop.delete", "Удалить", "Delete"),
+p("prop.required", "Обязательное", "Required"),
+p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
+p("prop.name", "Имя", "Name"),
+p("prop.site", "Сайт", "Site"),
+
+
+]

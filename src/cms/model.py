@@ -36,6 +36,9 @@ class PageModel(db.Model):
     is_visible = db.BooleanProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     fk_menu = db.StringProperty(multiline=False)
+    
+    index = db.IntegerProperty()
+    
 
 class ProductModel(db.Model):
     title = db.StringProperty(multiline=False)
@@ -62,7 +65,7 @@ class CommentModel(db.Model):
 
 class PropertieModel(db.Model):
     name = db.StringProperty(multiline=False)
-    value_ru = db.StringProperty(multiline=False)
-    value_en = db.StringProperty(multiline=False)    
+    value_ru = db.StringProperty(multiline=True)
+    value_en = db.StringProperty(multiline=True)    
     date = db.DateTimeProperty(auto_now_add=True)  
 

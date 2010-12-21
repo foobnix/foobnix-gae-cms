@@ -22,7 +22,7 @@
             {% for ln in langs %}`
             <p> 
               <label>Value [{{ln}}]</label><br> 
-              <input type="text" class="text" name="propertie.value_{{ln}}" value="{% get_attr propertie 'value_' ln %}">
+              <textarea name="propertie.value_{{ln}}">{% get_attr propertie 'value_' ln %}</textarea>              
             </p>
             {% endfor %}
 

@@ -9,6 +9,7 @@ from cms.admin import ViewImage, AdminPage
 import os
 from configuration import DEBUG
 import sys
+from cms.utils.properties import populate_properties
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -29,6 +30,7 @@ webapp.template.register_template_library('cms.tag')
 logging.info('Loading %s, app version = %s',
              __name__, os.getenv('CURRENT_VERSION_ID'))
 
+populate_properties()
 
 ROUTES = [
           
@@ -49,6 +51,8 @@ ROUTES = [
   ]   
 
 application = webapp.WSGIApplication(ROUTES, debug=DEBUG)
+
+
 
 def main():
     

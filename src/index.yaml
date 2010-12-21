@@ -83,6 +83,32 @@ indexes:
 
 - kind: PageModel
   properties:
+  - name: fk_menu
+  - name: date
+    direction: desc
+  - name: index
+
+- kind: PageModel
+  properties:
+  - name: fk_menu
+  - name: date
+    direction: desc
+  - name: index
+    direction: desc
+
+- kind: PageModel
+  properties:
+  - name: fk_menu
+  - name: index
+
+- kind: PageModel
+  properties:
+  - name: fk_menu
+  - name: index
+    direction: desc
+
+- kind: PageModel
+  properties:
   - name: is_visible
   - name: date
     direction: desc
@@ -98,6 +124,22 @@ indexes:
   - name: is_visible
     direction: desc
   - name: date
+    direction: desc
+
+- kind: PageModel
+  properties:
+  - name: is_visible
+    direction: desc
+  - name: date
+    direction: desc
+  - name: index
+
+- kind: PageModel
+  properties:
+  - name: is_visible
+    direction: desc
+  - name: fk_menu
+  - name: index
     direction: desc
 
 - kind: PageModel
