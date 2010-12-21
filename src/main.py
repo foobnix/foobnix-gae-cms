@@ -10,6 +10,7 @@ import os
 from configuration import DEBUG
 import sys
 from cms.utils.properties import populate_properties
+from cms.utils.twitter import TwitterTagCrawler
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -32,8 +33,16 @@ logging.info('Loading %s, app version = %s',
 
 populate_properties()
 
+
+class Twits(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write("<br>begin<br>")        
+        self.response.out.write(TwitterTagCrawler("foobnix", None, None).search())
+        self.response.out.write("<br>eng<br>")
+
 ROUTES = [
-          
+  
+  ('/twits', Twits),
   (r'/send_emails/(.*)', SendEmails),
   
   (r'/img/(.*)/(.*)', ViewImage),

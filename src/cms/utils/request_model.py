@@ -9,21 +9,16 @@ from cms.utils.translate import get_translated
 from google.appengine.ext import db
 from google.appengine.api import images
 import datetime
+from django.utils.html import escape
 
-def translate_models(models, lang):
-    result = []
-    for model in models:
-        result.append(translate_model(model, lang))
-    return result
-
-def translate_model(model, lang):
+def safe_model(model):
     for properie in model.properties():
         db_type = model.properties()[properie]
         if type(db_type) == db.StringProperty or type(db_type) == db.TextProperty:
             value = getattr(model, properie)
             if value:
-                translated = "TR" + value #get_translated(value, LANG_CODE_DEFAULT, lang)
-                setattr(model, properie, translated)
+                safe = escape(value)
+                setattr(model, properie, safe)
     return model
 
 def request_to_model(model, request, prefix):

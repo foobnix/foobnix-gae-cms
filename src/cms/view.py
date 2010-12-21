@@ -10,12 +10,12 @@ import os
 from google.appengine.api import mail, users
 import re
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT
-from cms.model import EmailModel, ImageModel, CommentModel, PageModel
+from cms.model import EmailModel, ImageModel, CommentModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
 from cms.admin_config import admin_menu
 from cms.admin import get_lang
-from cms.utils.request_model import request_to_model, translate_models
+from cms.utils.request_model import request_to_model, safe_model
 from appengine_utilities.sessions import Session
 import uuid
 from django.utils.html import urlize
@@ -105,10 +105,13 @@ class ViewPage(webapp.RequestHandler):
         
         correct = True
         if page_id:
-            
-            page = layout["model"].get_by_id(int(page_id))
+            try:
+                page = layout["model"].get_by_id(int(page_id))
+            except:
+                return self.redirect("/" + menu_id)
+                
             if not page:
-                self.redirect("/") 
+                return self.redirect("/" + menu_id)
                 
             
             result_layout = layout["child_template"]
@@ -140,9 +143,6 @@ class ViewPage(webapp.RequestHandler):
                 if not comment.comment_ru or not comment.comment_en:
                     comment.comment_error = True
                     correct = False
-                else:
-                    comment.comment_ru = urlize(comment.comment_ru)
-                    comment.comment_en = urlize(comment.comment_en)
                 
                 remote_ip = self.request.remote_addr
                 challenge = self.request.get('recaptcha_challenge_field')
@@ -161,8 +161,15 @@ class ViewPage(webapp.RequestHandler):
                 
                 flash_cache()
                 
+                
+                
                 if correct:
                     comment.user_id = session['user_id']
+                    
+                    comment = safe_model(comment)
+                    comment.comment_ru = urlize(comment.comment_ru)
+                    comment.comment_en = urlize(comment.comment_en)
+                    
                     comment.put()
                     glob_dict["comment"] = None
                     self.redirect("/%s/%s?lang=%s" % (menu_id, page_id, lang))

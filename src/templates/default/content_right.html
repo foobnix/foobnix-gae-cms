@@ -19,7 +19,7 @@
 <h2>{% get_propertie "prop.twitter" lang %}</h2>
 {% for item in twitters|slice:"15" %}
 <p>
-<b><a href="http://twitter.com/{{item.from_user}}">@{{item.from_user}}</a></b> {{item.text|urlize}}<br>
+<b><a target="_blank" href="http://twitter.com/{{item.from_user}}">@{{item.from_user}}</a></b> {{item.text|urlize}}<br>
 </p>
 {% endfor %}
 

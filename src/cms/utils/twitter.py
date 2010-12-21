@@ -2,8 +2,6 @@
 
 import httplib
 import logging
-import socket
-import time
 import urllib
 import simplejson
  
@@ -41,22 +39,6 @@ class TwitterTagCrawler(object):
                 return None
             self.max_id = result['max_id']
             return result['results']
-        except (httplib.HTTPException, socket.error, socket.timeout), e:
+        except Exception, e:
             logging.error("search() error: %s" % (e))
             return None
- 
-    def loop(self):
-        while True:
-            logging.info("Starting search")
-            data = self.search()
-            if data:
-                logging.info("%d new result(s)" % (len(data)))
-                self.submit(data)
-            else:
-                logging.info("No new results")
-            logging.info("Search complete sleeping for %d seconds"
-                    % (self.interval))
-            time.sleep(float(self.interval))
- 
-    def submit(self, data):
-        pass
