@@ -61,11 +61,21 @@ class CommentModel(db.Model):
     page = db.ReferenceProperty(PageModel)
     date = db.DateTimeProperty(auto_now_add=True)
     user_id = db.StringProperty(multiline=False)    
-         
 
 class PropertieModel(db.Model):
     name = db.StringProperty(multiline=False)
     value_ru = db.StringProperty(multiline=True)
     value_en = db.StringProperty(multiline=True)    
     date = db.DateTimeProperty(auto_now_add=True)  
+
+
+class StatisticModel(db.Model):
+    userUUID = db.StringProperty(multiline=False)
+    host = db.StringProperty(multiline=False)
+    date = db.DateProperty(auto_now_add=True)
+    version = db.StringProperty(multiline=False)
+
+class CommonStatisticModel(db.Model):    
+    date = db.DateProperty(auto_now_add=True)
+    count = db.IntegerProperty(default=1) 
 

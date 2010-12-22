@@ -23,3 +23,9 @@ def populate_properties():
             new.value_ru = propertie["value_ru"]
             new.value_en = propertie["value_en"]
             new.put()
+
+def get_propertie(name):
+    model = PropertieModel().all()
+    model.filter("name", name)
+    return model.get().value_ru
+    

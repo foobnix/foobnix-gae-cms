@@ -11,6 +11,7 @@ from configuration import DEBUG
 import sys
 from cms.utils.properties import populate_properties
 from cms.utils.twitter import TwitterTagCrawler
+from cms.statistics import SubmitVersion
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -43,6 +44,8 @@ class Twits(webapp.RequestHandler):
 ROUTES = [
   
   ('/twits', Twits),
+  ('/version', SubmitVersion),
+  
   (r'/send_emails/(.*)', SendEmails),
   
   (r'/img/(.*)/(.*)', ViewImage),

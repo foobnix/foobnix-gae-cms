@@ -14,7 +14,8 @@ from cms.utils.cache import get_or_put_cache
 def twits():
     return TwitterTagCrawler("foobnix", None, None).search()
 
-def prepare_glob_dict():
+
+def _prepare_glob_dict():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
     menu_list.order("-position")
@@ -24,6 +25,7 @@ def prepare_glob_dict():
     page_list.order("-is_visible")
     page_list.order("fk_menu")
     page_list.order("-index")
+    page_list.order("-date")
 
     
     email_list = EmailModel().all()
@@ -54,8 +56,11 @@ def prepare_glob_dict():
      'image_list':images_list,
      'propertie_list':propertie_list,
       "admin_menu" : admin_menu
-     }
+     }    
     return glob_dict
+
+def prepare_glob_dict():
+    return _prepare_glob_dict()
 
 def get_layout(layout_id):
     if not layout_id:

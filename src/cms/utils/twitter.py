@@ -4,6 +4,7 @@ import httplib
 import logging
 import urllib
 import simplejson
+import time
  
 SEARCH_HOST = "search.twitter.com"
 SEARCH_PATH = "/search.json"
@@ -20,25 +21,32 @@ class TwitterTagCrawler(object):
         self.tag = tag
         self.interval = interval
  
-    def search(self):
+    def _search(self):
         c = httplib.HTTPConnection(SEARCH_HOST)
         params = {'q' : self.tag}
-        if self.max_id is not None:
-            params['since_id'] = self.max_id
         path = "%s?%s" % (SEARCH_PATH, urllib.urlencode(params))
         try:
             c.request('GET', path)
             r = c.getresponse()
             data = r.read()
-            c.close()
-            try:
-                result = simplejson.loads(data)
-            except ValueError:
-                return None
-            if 'results' not in result:
-                return None
-            self.max_id = result['max_id']
-            return result['results']
+            c.close()            
+            result = simplejson.loads(data)
+            if result.has_key('result'):          
+                return result['results']
         except Exception, e:
             logging.error("search() error: %s" % (e))
-            return None
+            
+    
+    def search(self):
+        result = None
+        for i in xrange(2):
+            if not result:
+                result = self._search()
+                time.sleep(0.2)
+            else:
+                return result
+        return result
+                
+                
+            
+        

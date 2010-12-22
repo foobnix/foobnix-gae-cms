@@ -6,7 +6,7 @@ from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
     CMS_VIEW, layouts, IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 import copy
-from cms.model import ImageModel
+from cms.model import ImageModel, CommonStatisticModel
 from google.appengine.api import users
 from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT
 from cms.login import check_user_admin
@@ -40,7 +40,17 @@ class ViewEditAdminPage():
         
     def proccess(self, glob_dict):
         template_dict = self.admin_model["template_dict"]
+        
+        if template_dict == "statistic":
+            glob_dict['stats'] = CommonStatisticModel().all().order("-date").fetch(7)
+        
         clean_model = copy.copy(self.admin_model["model"])
+        
+        items = clean_model.all()
+        if hasattr(clean_model, "date"):
+            items.order("-date")
+            
+        glob_dict["items"] = items 
         
         if self.request.get('action') == "edit":
             key_id = self.request.get(template_dict + '.key_id')

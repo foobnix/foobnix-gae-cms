@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+  <div>
+	<fieldset> 
+            <legend>User Statistics</legend>  
+      <table>
+      
+      <thead>
+        <tr>
+          <th>date</th>
+          <th>count</th>
+        </tr>
+		</thead>			
+		<tbody>
+		{% for stat in stats %}
+	    <tr>
+	          <td>{{stat.date}}</td>
+	          <td>{{stat.count}}</td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+      <table>
+	  <thead>
+        <tr>
+          <th>uuid</th>
+          <th>host</th>
+          <th>date</th>
+          <th>version</th>
+        </tr>
+		</thead>			
+		<tbody>
+		{% for item in items %}
+	    <tr>
+	          <td>{{item.userUUID}}</td>
+	          <td>{{item.host}}</td>
+	          <td>{{item.date|date:"d/m/y"}}</td>	          
+	          <td>{{item.version}}</td>		  	  
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+      
+ </fieldset>
+</div> 
+{% endblock%}

@@ -144,6 +144,16 @@ indexes:
 
 - kind: PageModel
   properties:
+  - name: is_visible
+    direction: desc
+  - name: fk_menu
+  - name: index
+    direction: desc
+  - name: date
+    direction: desc
+
+- kind: PageModel
+  properties:
   - name: visible
   - name: date
     direction: desc

@@ -5,7 +5,7 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
-    PropertieModel, CommentModel
+    PropertieModel, CommentModel, StatisticModel, CommonStatisticModel
 positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
@@ -106,6 +106,14 @@ admin_menu = [
          "template":"admin-comment.html",
          "model":CommentModel(),
          "type":CMS_EDIT
+         },
+         {
+         "template_dict":"statistic",
+         "link_id":CMS_URL + "/statistic",
+         "text":"View Statistics",
+         "template":"admin-statistic.html",
+         "model":StatisticModel(),
+         "type":CMS_EDIT
          }
         ]
 
@@ -114,6 +122,7 @@ def p(name, value1, value2):
     return {"name":name, "value_ru":value1, "value_en":value2}
 default_properties = [
 p("foobnix.header.slogan", "Foobnix простой и мощный плеер музыки для Linux", "Foobnix simple and powerful music player for Linux"),
+p("foobnix.title.slogan", "Хороший плеер для музыки и видео", "Good music and video player"),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.blog", "Блог", "Blog"),
 p("prop.comments", "Комментарии", "Comments"),
@@ -127,6 +136,8 @@ p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
 p("config.blog.section", "blog", "blog"),
+p("config.version", "0.2.2-10", "0.2.2-10"),
+
 
 
 ]
