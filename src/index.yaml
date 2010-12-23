@@ -12,6 +12,19 @@ indexes:
 
 - kind: CommentModel
   properties:
+  - name: category
+  - name: category
+  - name: date
+    direction: desc
+
+- kind: CommentModel
+  properties:
+  - name: category
+  - name: date
+    direction: desc
+
+- kind: CommentModel
+  properties:
   - name: page
   - name: date
     direction: desc
@@ -105,6 +118,14 @@ indexes:
   properties:
   - name: fk_menu
   - name: index
+    direction: desc
+
+- kind: PageModel
+  properties:
+  - name: fk_menu
+  - name: index
+    direction: desc
+  - name: date
     direction: desc
 
 - kind: PageModel

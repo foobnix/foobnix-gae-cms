@@ -14,16 +14,18 @@
 			{% ifequal ln lang%}				
 				{% lang_name ln %}
 			{% else %}
-				<a href="?lang={{ln}}">{% lang_name ln %}</a>			
+				<a href="?lang={{ln}}">{% lang_name ln %}</a>	
 			{% endifequal %}			
-		{% endfor %}				
+		{% endfor %}
+		<br>
+		{% include "ads/ads_left.html" %}				
 	  </div>
     
      	<div class="span-22 left" style="background-color:#FFFFFF">
   		{% block content_slot %}
   		{% endblock %}
   		</div>  		
-  		<div class="span-7 left apepnd-1 prepend-1 border">
+  		<div class="span-6 left apepnd-1 prepend-1 border">
   			{{content_right}}
   		</div>
   		

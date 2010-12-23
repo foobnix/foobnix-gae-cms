@@ -5,15 +5,10 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
-    PropertieModel, CommentModel
+    PropertieModel, CommentModel, COMMENT_CATEGORY_PAGE, \
+    COMMENT_CATEGORY_TWITTER
 from cms.admin_config import layouts, admin_menu
 from configuration import CMS_LANGUAGES
-from cms.utils.twitter import TwitterTagCrawler
-from cms.utils.cache import get_or_put_cache
-
-def twits():
-    return TwitterTagCrawler("foobnix", None, None).search()
-
 
 def _prepare_glob_dict():
     menu_list = MenuModel().all()
@@ -42,17 +37,22 @@ def _prepare_glob_dict():
     propertie_list.order("-date")
     
     comment_list = CommentModel().all()
+    comment_list.filter("category", COMMENT_CATEGORY_PAGE)
     comment_list.order("-date")
+    
+    twitter_list = CommentModel().all()
+    twitter_list.filter("category", COMMENT_CATEGORY_TWITTER)
+    twitter_list.order("-date")
     
     
     glob_dict = {
-     'twitters':get_or_put_cache("twitters", twits),
      'langs':CMS_LANGUAGES,
      'page_list':page_list,
      'menu_list':menu_list,
      'email_list':email_list,
      'product_list':product_list,
      'comment_list':comment_list,
+     'twitter_list':twitter_list,
      'image_list':images_list,
      'propertie_list':propertie_list,
       "admin_menu" : admin_menu
@@ -74,7 +74,8 @@ def get_layout(layout_id):
 
 def get_pages(menu_name):
     page = PageModel().all()
-    page.order("index")
+    page.order("-index")
+    page.order("-date")
     page.filter("fk_menu", menu_name)
     return page
 

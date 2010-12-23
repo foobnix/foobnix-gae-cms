@@ -1,0 +1,4 @@
+cron:
+- description: update twitter list
+  url: /update_twitters
+  schedule: every 1 hours

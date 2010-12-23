@@ -1,10 +1,9 @@
-#-*- coding: utf-8 -*-
-
 import httplib
 import logging
+import socket
+import time
 import urllib
 import simplejson
-import time
  
 SEARCH_HOST = "search.twitter.com"
 SEARCH_PATH = "/search.json"
@@ -16,37 +15,44 @@ class TwitterTagCrawler(object):
     since_id is not always reliable, and so we probably want to de-dup ourselves
     at some level '''
  
-    def __init__(self, tag, max_id=None, interval=None):
+    def __init__(self, tag, max_id=None, interval=0.5):
         self.max_id = max_id
         self.tag = tag
         self.interval = interval
  
-    def _search(self):
+    def search(self):
         c = httplib.HTTPConnection(SEARCH_HOST)
         params = {'q' : self.tag}
+        if self.max_id is not None:
+            params['since_id'] = self.max_id
         path = "%s?%s" % (SEARCH_PATH, urllib.urlencode(params))
         try:
             c.request('GET', path)
             r = c.getresponse()
             data = r.read()
-            c.close()            
-            result = simplejson.loads(data)
-            if result.has_key('result'):          
-                return result['results']
-        except Exception, e:
+            c.close()
+            try:
+                result = simplejson.loads(data)
+            except ValueError:
+                return None
+            if 'results' not in result:
+                return None
+            self.max_id = result['max_id']
+            return result['results']
+        except (httplib.HTTPException, socket.error, socket.timeout), e:
             logging.error("search() error: %s" % (e))
-            
-    
-    def search(self):
-        result = None
-        for i in xrange(2):
-            if not result:
-                result = self._search()
-                time.sleep(0.2)
+            return None
+ 
+    def loop_search(self):
+        for i in xrange(10):
+            logging.info("Starting search")
+            data = self.search()
+            if data:
+                logging.info("%d new result(s)" % (len(data)))
+                return data
             else:
-                return result
-        return result
-                
-                
-            
-        
+                logging.info("No new results")
+            logging.info("Search complete sleeping for %d seconds"
+                    % (self.interval))
+            time.sleep(float(self.interval))
+        return None

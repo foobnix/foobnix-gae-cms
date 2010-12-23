@@ -10,7 +10,8 @@ import os
 from google.appengine.api import mail, users
 import re
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT
-from cms.model import EmailModel, ImageModel, CommentModel
+from cms.model import EmailModel, ImageModel, CommentModel, \
+    COMMENT_CATEGORY_PAGE
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
 from cms.admin_config import admin_menu
@@ -169,6 +170,7 @@ class ViewPage(webapp.RequestHandler):
                     comment = safe_model(comment)
                     comment.comment_ru = urlize(comment.comment_ru)
                     comment.comment_en = urlize(comment.comment_en)
+                    comment.category = COMMENT_CATEGORY_PAGE
                     
                     comment.put()
                     glob_dict["comment"] = None

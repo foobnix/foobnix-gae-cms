@@ -53,11 +53,14 @@ class ImageModel(db.Model):
     content = db.BlobProperty()
     date = db.DateTimeProperty(auto_now_add=True) 
     
+COMMENT_CATEGORY_TWITTER = "twitter"
+COMMENT_CATEGORY_PAGE = "page"     
 class CommentModel(db.Model):
     name = db.StringProperty(multiline=False)
     site = db.StringProperty(multiline=False)
     comment_ru = db.TextProperty()
-    comment_en = db.TextProperty()    
+    comment_en = db.TextProperty()   
+    category = db.StringProperty(multiline=False)
     page = db.ReferenceProperty(PageModel)
     date = db.DateTimeProperty(auto_now_add=True)
     user_id = db.StringProperty(multiline=False)    

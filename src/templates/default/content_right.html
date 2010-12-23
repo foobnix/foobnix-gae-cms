@@ -12,14 +12,14 @@
 <h2>{% get_propertie "prop.comments" lang %}</h2>
 {% for comment in comment_list|slice:"5" %}
 <p>
-<a href="/{{comment.page.fk_menu}}/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b> {% get_attr comment 'comment_' lang%}</a> <br>
+<a href="/{{comment.page.fk_menu}}/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b></a> {% get_attr comment 'comment_' lang%} <br>
 </p>
 {% endfor %}
 
 <h2>{% get_propertie "prop.twitter" lang %}</h2>
-{% for item in twitters|slice:"15" %}
+{% for item in twitter_list|slice:"15" %}
 <p>
-<b><a target="_blank" href="http://twitter.com/{{item.from_user}}">@{{item.from_user}}</a></b> {{item.text|urlize}}<br>
+<b><a target="_blank" href="{{item.site}}">@{{item.name}}</a></b> {{item.comment_ru|urlize}}<br>
 </p>
 {% endfor %}
 
