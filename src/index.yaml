@@ -53,6 +53,15 @@ indexes:
 
 - kind: MenuModel
   properties:
+  - name: link_id
+  - name: is_visible
+    direction: desc
+  - name: position
+    direction: desc
+  - name: index
+
+- kind: MenuModel
+  properties:
   - name: positin
   - name: index
 
@@ -130,6 +139,15 @@ indexes:
 
 - kind: PageModel
   properties:
+  - name: fk_menu
+  - name: is_visible
+    direction: desc
+  - name: index
+  - name: date
+    direction: desc
+
+- kind: PageModel
+  properties:
   - name: is_visible
   - name: date
     direction: desc
@@ -154,6 +172,15 @@ indexes:
   - name: date
     direction: desc
   - name: index
+
+- kind: PageModel
+  properties:
+  - name: is_visible
+    direction: desc
+  - name: fk_menu
+  - name: index
+  - name: date
+    direction: desc
 
 - kind: PageModel
   properties:
