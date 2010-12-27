@@ -1,20 +1,49 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
-<div id="wrap">
+<div id="wrap_product">
+ 
  		{% if user %}
       		  	<a href="/admin/product?action=delete&product.key_id={{item.key.id}}" >delete</a>&nbsp;&nbsp;&nbsp;
       		  	<a href="/admin/product?action=edit&product.key_id={{item.key.id}}" >edit</a><br>
       		  	<b>images</b>:{{item.images}}<br/>
   					
-		{% endif %}  	
-		<div class="art_citate" >
-				<h2>{{item.title}}</h2>
-				<p >
+		{% endif %}
+		<img id='image' src='{{item.catalog_path}}/0000.jpg.png' width='600' height='600' >  	
+		<div class="art_citate" style="padding-left:100px">
+		
+				<h2>{{item.title}}</h2>				
+				<p>
   					{{item.description}}
   				</p>
-		</div>					
-  				<img src="/img/{{ item.images|first_image }}" alt="{{item.title}}" class="left">
+		</div>			
+		     
+    <script type='text/javascript'>
+
+       function images(prefix, count){
+         var stack= []
+
+
+         for(var i= 1; i <= count; i+= 1){
+             if (i<10)
+                   var name= prefix+'000'+i+ '.jpg.png'
+             else
+                   var name= prefix+'00'+i+ '.jpg.png'
+
+           stack.push(name)
+         }
+         return stack
+       }
+
+        $(document).ready(function(){
+                $('#image').reel({
+                  speed:   0.5,                  
+                  images: images('{{item.catalog_path}}',36)
+                });
+
+        });
+   </script>
+  				
   		
   				{% if item %}
   					{% for item in item.images|split %}

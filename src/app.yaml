@@ -1,5 +1,5 @@
-application: senin
-version: 0
+application: igor-senin
+version: 1
 runtime: python
 api_version: 1
 

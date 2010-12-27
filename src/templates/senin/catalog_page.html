@@ -6,8 +6,12 @@
 
 
 {% for item in product_list %}
-	       	<div class="art_citate left box">      		  	      		  	 	
+	       	<div class="art_citate left box">      		  	      	
+	       	{% if item.images %}	  	 	
   			<a href="/{{active}}/{{item.key.id}}" ><img src="/img/{{ item.images|first_image }}" width="150" alt="{{item.title}}"></a>
+  			{% else%}
+  			<a href="/{{active}}/{{item.key.id}}" ><img src="{{item.image_path }}" width="150" alt="{{item.title}}"></a>
+  			{% endif %}
   			<h4>{{item.title}}</h4>  					
 			</div>
 {% endfor %}

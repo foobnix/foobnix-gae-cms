@@ -12,7 +12,7 @@ def getSplits(text, splitLength=4500):
     return (text[index:index + splitLength] for index in xrange(0, len(text), splitLength))
 
 
-def get_translated(text, src='en', to='ru'):
+def get_translated(text, src='ru', to='en'):
     text = (u"" + text).encode('utf-8')
     
     '''
