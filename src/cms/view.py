@@ -7,9 +7,9 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from google.appengine.api import mail, users
+from google.appengine.api import mail, users, memcache
 import re
-from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT
+from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT, DEBUG
 from cms.model import EmailModel, ImageModel, CommentModel, \
     COMMENT_CATEGORY_PAGE
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
@@ -22,6 +22,8 @@ import uuid
 from django.utils.html import urlize
 from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
 from recaptcha.client import captcha
+import random
+import logging
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -60,6 +62,10 @@ class ViewPage(webapp.RequestHandler):
         self.get(menu_id, page_id)
          
     def get(self, menu_id=None, page_id=None):
+        
+        if DEBUG:
+            memcache.flush_all()
+        
         lang = get_lang(self.request)
         if not lang or lang not in CMS_LANGUAGES:
             lang = LANG_CODE_DEFAULT
@@ -69,6 +75,12 @@ class ViewPage(webapp.RequestHandler):
         action = self.request.get('action')
         if action == "delete" or action == "addupdate":
             flash_cache()
+            
+        if action == "random":
+            pages = get_pages(menu_id)
+            page = pages[random.randint(0, pages.count() - 1)]
+            page_id = page.key().id()
+            self.redirect("/%s/%s?lang=%s" % (menu_id, page_id, lang))            
         
         template_cached = get_from_cache(menu_id, page_id, lang)
         if template_cached:
@@ -98,12 +110,17 @@ class ViewPage(webapp.RequestHandler):
                 
         
         menu = get_menu_by(menu_id)
+        glob_dict["menu"] = menu
         if not menu:            
-            return self.redirect("/" + get_default_menu_id())
+            id = get_default_menu_id()
+            if id:
+                return self.redirect("/" + id)
             
-        
-        layout = get_layout(menu.layout)
-        
+        if menu:
+            layout = get_layout(menu.layout)
+        else:
+            layout = {"template":"base.html"}
+            
         correct = True
         if page_id:
             try:
@@ -116,6 +133,7 @@ class ViewPage(webapp.RequestHandler):
                 
             
             result_layout = layout["child_template"]
+            logging.debug("Result layout", "result_layout")
             glob_dict["item"] = page
             
             
@@ -191,8 +209,9 @@ class ViewPage(webapp.RequestHandler):
         glob_dict["menu_id"] = menu_id
         glob_dict["page_id"] = page_id
         glob_dict["active_menu"] = get_menu_by(menu_id)
-        
-        glob_dict["content_right"] = template.render(os.path.join(TEMPLATE_PATH, "content_right.html"), glob_dict)
+        path = os.path.join(TEMPLATE_PATH, "content_right.html")
+        if os.path.exists(path):
+            glob_dict["content_right"] = template.render(path, glob_dict)
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
         

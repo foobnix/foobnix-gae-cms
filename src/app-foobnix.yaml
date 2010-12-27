@@ -1,0 +1,28 @@
+application: foobnix-cms
+version: 7
+runtime: python
+api_version: 1
+
+handlers:
+
+- url: /cleditor
+  static_dir: administrator/templates/default/cleditor
+
+- url: /css
+  static_dir: templates/foobnix/css
+ 
+- url: /js
+  static_dir: templates/foobnix/js
+ 
+- url: /images
+  static_dir: templates/foobnix/images
+
+- url: /.*
+  script: main.py
+  
+  
+builtins:
+- datastore_admin: on  
+
+inbound_services:
+- mail

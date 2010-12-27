@@ -1,4 +1,6 @@
+<div>
 {% if user %}
+		<a href="/" >Home</a>||
 		{% for ln in langs %}              	
 		{% ifequal ln lang%}
 			<b>{% lang_name ln %}</b>
@@ -23,3 +25,4 @@
 	<a href="?mode=debug&lang={{lang}}">Debug</a>
 
 {% endif %}
+</div>

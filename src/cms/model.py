@@ -14,6 +14,7 @@ class MenuModel(db.Model):
     position = db.StringProperty(multiline=False)
     index = db.IntegerProperty()
     is_visible = db.BooleanProperty()
+    background = db.StringProperty(multiline=False)
     
     
 class EmailModel(db.Model):

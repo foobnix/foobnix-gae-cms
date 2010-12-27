@@ -48,9 +48,8 @@ def request_to_model(model, request, prefix):
         elif type(db_type) == db.DateTimeProperty:
             setattr(model, properie, datetime.datetime.utcnow())
         elif type(db_type) == db.BlobProperty:
-            if request_value:
-                resized = images.resize(request_value, 550)
-                setattr(model, properie, db.Blob(resized))
+            if request_value:                
+                setattr(model, properie, db.Blob(request_value))
         elif type(db_type) == db.ReferenceProperty:
             pass             
         else:

@@ -17,6 +17,10 @@
               <label>Site</label><br> 
               <input type="text" class="text" name="comment.name" value="{{comment.name}}">
             </p>
+            <p> 
+              <label>Category</label><br> 
+              <input type="text" class="text" name="comment.category" value="{{comment.category}}">
+            </p>
             
             {% for ln in langs %}`
             <p> 
@@ -24,8 +28,12 @@
               <textarea name="comment.comment_{{ln}}">{% get_attr comment 'comment_' ln %}</textarea> 
             </p>
             {% endfor %}
- 
-          </fieldset> 
+			<p>
+			<input type="submit" value="Add" >
+			</p>
+			 			
+          </fieldset>
+           
         </form> 
  
       </div> 
@@ -52,7 +60,7 @@
 	          </td>
 	          <td>{{item.name}}</td>
 	          <td>{{item.comment_ru}}</td>
-	          <td>{{item.comment_en}}</td>
+	          <td>{{item.comment_en}}</td>	          
 	          <td>{{item.page.fk_menu}}</td>
 	          <td>
 	          	<a href="{{admin_model.link_id}}?action=edit&comment.key_id={{item.key.id}}" >edit</a>

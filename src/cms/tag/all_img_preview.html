@@ -2,9 +2,11 @@
 		{% include "img_preview.html" %}
 	{% endfor %}
 	
+	{% if user %}
 	<div class="span-4 left image_border">
 	   <fieldset>
 	   <a href="/admin/image">Add new Image</a>
        </fieldset>
        </div>
+       {% endif %}
         		

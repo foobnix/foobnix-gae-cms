@@ -1,3 +1,5 @@
+{% if user %}
+
 <div class="span-6 left image_border">
 				<small>{{cfg.host}}/img/{{item.key.id}}/{{item.title}}.png</small><br>
        			<b>id:</b><input type="text" class="span-3" value="{{item.key.id}}" /><br/>
@@ -7,4 +9,9 @@
       		  	<small>{{item.date|date:"d/m/y H:m:s"}}</small><br>
   <a href="/admin/image?action=edit&image.key_id={{item.key.id}}" ><img src="/img/{{item.key.id}}" height="90" alt="{{item.title}}"></a>
 </div>
+{% else %}
+<b>{{item.title}}</b><br/>
+<a href="/admin/image?action=edit&image.key_id={{item.key.id}}" ><img src="/img/{{item.key.id}}" height="90" alt="{{item.title}}"></a>
+
+{% endif %}
 

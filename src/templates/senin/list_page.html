@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content_slot %}
+
+{% include "helper_page.html" %}
+
+{% for page in pages|slice:":1" %}
+
+{% include "helper_page.html" %}
+
+<div id="wrap" class="art_citate">
+
+<h2>{% get_attr page 'title_' lang %}</h2>
+{% get_attr page 'content_' lang %}
+</div>
+<p class="normal"><a href="/senin?action=random&lang={{lang}}" class="">Другие факты</a></p>
+
+
+{% endfor %}
+
+{% endblock %}

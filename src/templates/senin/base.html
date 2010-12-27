@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+	<title>Sening</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" href="/css/base.css" />	
+	<script  src="http://code.jquery.com/jquery-1.4.4.min.js" ></script>
+	
+	</head>
+<body>
+<div>
+<img id="background" src="{{menu.background}}" />
+</div>
+
+<div id="fixed">
+<div id="logo">
+<a href="/">
+<img src="/images/logo.png"></a>
+</div>
+<ul class="panel-nav-top">
+{% include "../../administrator/templates/default/top_admin_panel.html" %}
+{% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		{% ifequal item.link_id active %}
+ 			<li class="current"><a class="disabled" href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>
+ 		{% else %} 			
+ 			<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+	</ul>
+	
+</div>
+
+{% block content_slot %}
+{% endblock %}
+
+</body>
+</html>

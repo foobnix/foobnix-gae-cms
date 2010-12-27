@@ -1,5 +1,5 @@
-application: foobnix-cms
-version: 6
+application: senin
+version: 0
 runtime: python
 api_version: 1
 
@@ -9,13 +9,13 @@ handlers:
   static_dir: administrator/templates/default/cleditor
 
 - url: /css
-  static_dir: templates/default/css
+  static_dir: templates/senin/css
  
 - url: /js
-  static_dir: templates/default/js
+  static_dir: templates/senin/js
  
 - url: /images
-  static_dir: templates/default/images
+  static_dir: templates/senin/images
 
 - url: /.*
   script: main.py

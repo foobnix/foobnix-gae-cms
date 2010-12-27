@@ -9,6 +9,7 @@ from google.appengine.ext import webapp
 from cms.admin_config import IMAGE_NOT_FOUND
 register = webapp.template.create_template_register()
 
+@register.filter
 def split(value, prefix=","):
     if not value:
         return []

@@ -5,6 +5,7 @@ Created on 16 дек. 2010
 @author: ivan
 '''
 from google.appengine.api import memcache
+from configuration import CMS_CFG
 
 def get_or_put_cache(key, func):
     cache = memcache.get(key)
@@ -12,7 +13,7 @@ def get_or_put_cache(key, func):
         return cache
     else:
         value = func()
-        memcache.add(key=key, value=value, time=3600) 
+        memcache.add(key=key, value=value, time=CMS_CFG["cache_time"]) 
         return value
         
 def get_from_cache(menu_id, page_id, lang):
@@ -27,7 +28,7 @@ def flash_cache():
 
 def put_to_cache(menu_id, page_id, lang, content):
     id = get_id(menu_id, page_id, lang)
-    memcache.add(key=id, value=content, time=3600)   
+    memcache.add(key=id, value=content, time=CMS_CFG["cache_time"])   
        
 def get_id(menu_id, page_id, lang):
     if not menu_id:
