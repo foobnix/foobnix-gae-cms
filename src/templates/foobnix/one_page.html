@@ -6,13 +6,13 @@
 {% include "helper_page.html" %}
 
 {% for page in pages|slice:":1" %}
-
+<div class="border">
 {% include "helper_page.html" %}
 
 <h2>{% get_attr page 'title_' lang %}</h2>
 
 {% get_attr page 'content_' lang %}
-
+</div>
 {% endfor %}
 
 {% endblock %}

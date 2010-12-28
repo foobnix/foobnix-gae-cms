@@ -5,7 +5,8 @@ Created on 4 дек. 2010
 @author: ivan
 '''
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
-    PropertieModel, CommentModel, StatisticModel, CommonStatisticModel
+    PropertieModel, CommentModel, StatisticModel
+from cms.utils.translate import get_translated
 positions = ["TOP", "LEFT", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
@@ -117,12 +118,18 @@ admin_menu = [
          }
         ]
 
+footer = """
+<p>Foobnix бесплатный плеер для Linux. Автор Иван Иваненко. 2010-2011 <a href="mailto:ivan.ivanenko@gmail.com"> ivan.ivanenko@gmail.com</a><br/>
+              Сайт работает на движке <a href="https://github.com/foobnix/foobnix-gae-cms">foobnix-gae-cms</a></p>
+"""
+
 
 def p(name, value1, value2):
     return {"name":name, "value_ru":value1, "value_en":value2}
 default_properties = [
 p("foobnix.header.slogan", "Foobnix простой и мощный плеер музыки для Linux", "Foobnix simple and powerful music player for Linux"),
 p("foobnix.title.slogan", "Хороший плеер для музыки и видео", "Good music and video player"),
+p("foobnix.footer.text", footer, get_translated(footer)),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.blog", "Блог", "Blog"),
 p("prop.comments", "Комментарии", "Comments"),
@@ -137,6 +144,7 @@ p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
 p("config.blog.section", "blog", "blog"),
 p("config.version", "0.2.2-10", "0.2.2-10"),
+
 
 
 

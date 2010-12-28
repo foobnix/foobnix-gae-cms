@@ -24,6 +24,16 @@
      	<div class="span-22 left" style="background-color:#FFFFFF">
   		{% block content_slot %}
   		{% endblock %}
+  		
+  		<div style="padding:20px">
+  		{% include "ads/ads_bottom.html" %}
+  		</div>
+  		
+  		<div style="padding:20px">
+  			{% get_propertie "foobnix.footer.text" lang %}
+  		</div>
+  		
+  		
   		</div>  		
   		<div class="span-5 left apepnd-1 prepend-1 border">
   			{{content_right}}
@@ -31,11 +41,6 @@
   		
   	<br style="clear:both" />	
 	</div>
-	
-	
-	<div id="footer">
-	</div>
-	
 	
     </div>
     
