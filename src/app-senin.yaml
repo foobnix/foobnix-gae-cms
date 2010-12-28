@@ -5,8 +5,9 @@ api_version: 1
 
 handlers:
 
-- url: /cleditor
-  static_dir: administrator/templates/default/cleditor
+- url: /static
+  static_dir: administrator/templates/default/static
+
 
 - url: /css
   static_dir: templates/senin/css

@@ -118,7 +118,7 @@ admin_menu = [
          }
         ]
 
-footer = """
+footer = u"""
 <p>Foobnix бесплатный плеер для Linux. Автор Иван Иваненко. 2010-2011 <a href="mailto:ivan.ivanenko@gmail.com"> ivan.ivanenko@gmail.com</a><br/>
               Сайт работает на движке <a href="https://github.com/foobnix/foobnix-gae-cms">foobnix-gae-cms</a></p>
 """
