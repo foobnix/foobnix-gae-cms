@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
+<div class="border">
 <h2>{% get_attr item 'title_' lang %}</h2>
 
 {% get_attr item 'content_' lang %}
@@ -75,6 +76,6 @@
 </form>  
 
 {% endif %}
-
+</div>
 {% endblock %}
 
