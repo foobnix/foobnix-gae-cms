@@ -23,6 +23,7 @@ def get_pages(menu_name=None):
 def get_menus():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
+    menu_list.order("-parent_id")
     menu_list.order("-position")
     menu_list.order("index")
     return menu_list

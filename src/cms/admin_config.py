@@ -7,7 +7,7 @@ Created on 4 дек. 2010
 from cms.model import MenuModel, PageModel, EmailModel, ProductModel, ImageModel, \
     PropertieModel, CommentModel, StatisticModel
 from cms.utils.translate import get_translated
-positions = ["TOP", "LEFT", "No"]
+positions = ["TOP", "BLOCK", "FOOTER", "ADDITIONAL", "No"]
 
 LAYOUT_ONE_PAGE = "one_page"
 LAYOUT_LIST_PAGE = "list_page"

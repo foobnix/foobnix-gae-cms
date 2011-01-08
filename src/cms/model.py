@@ -12,6 +12,7 @@ class MenuModel(db.Model):
     name_en = db.StringProperty(multiline=False)
     layout = db.StringProperty(multiline=False)
     position = db.StringProperty(multiline=False)
+    parent_id = db.StringProperty(multiline=False)
     index = db.IntegerProperty()
     is_visible = db.BooleanProperty()
     background = db.StringProperty(multiline=False)

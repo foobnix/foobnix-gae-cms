@@ -11,7 +11,14 @@
             <legend>Add Menu </legend>
             <p> 
               <label>ID: {{menu.key.id}}</label>
+              <b>Parent</b>
               <input type="hidden" name="menu.key_id" value="{{menu.key.id}}" />
+              <select name="menu.parent_id">
+              	<option value=""></option> 
+              {% for key in menu_list %}
+				 <option value="{{ key.link_id }}" {% ifequal key.link_id menu.parent_id %}selected="selected"{% endifequal %}>{% get_attr key 'name_' lang %}</option>
+				{% endfor %} 
+			</select>
             </p>
             <p> 
               <label>Menu Link</label><br> 
@@ -19,13 +26,14 @@
               <span class="notice">welcome</span> 
             </p>
             
-            {% for ln in langs %}`
-            <p> 
-              <label>Name [{{ln}}]</label><br> 
-              <input type="text" class="text" name="menu.name_{{ln}}" value="{% get_attr menu 'name_' ln %}">
-              <span class="notice">Welcome</span> 
+            
+            <p>
+            <label>Name</label><br/> 
+            {% for ln in langs %}
+              <b>{{ln}}</b>: <input type="text" class="text" style="width:160px;" name="menu.name_{{ln}}" value="{% get_attr menu 'name_' ln %}">
+              {% endfor %} 
             </p>
-            {% endfor %}
+            
             
             <p> 
               <label for="dummy3">Layout</label><br> 
@@ -77,6 +85,7 @@
           <th>Name</th>
           <th>Layout</th>
           <th>Position</th>
+          <th>Parent</th>
           <th>id</th>
           <th>Visible</th>
           <th>&nbsp;</th>
@@ -94,6 +103,7 @@
 	          <td>{{item.name_ru}}:{{item.name_en}}</td>
 	          <td>{{item.layout}}</td>
 	          <td>{{item.position}}</td>
+	          <td>{{item.parent_id}}</td>
 		  	  <td>{{item.key.id}}</td>
 	          <td>{{item.is_visible}}</td>
 	          <td>

@@ -1,4 +1,8 @@
-<div>
+<div style="position: absolute; z-index: 199; padding-top:8px;">
+
+{% ifequal mode "live" %}
+live <a href="?mode=debug&lang={{lang}}">Debug</a>
+{% else%}
 {% if user %}
 		<a href="/" >Home</a>||
 		{% for ln in langs %}              	
@@ -25,4 +29,5 @@
 	<a href="?mode=debug&lang={{lang}}">Debug</a>
 
 {% endif %}
+{% endifequal %}
 </div>

@@ -38,6 +38,16 @@ indexes:
   properties:
   - name: is_visible
     direction: desc
+  - name: parent_id
+    direction: desc
+  - name: position
+    direction: desc
+  - name: index
+
+- kind: MenuModel
+  properties:
+  - name: is_visible
+    direction: desc
   - name: position
     direction: desc
   - name: index
@@ -46,6 +56,17 @@ indexes:
   properties:
   - name: lang
   - name: is_visible
+    direction: desc
+  - name: position
+    direction: desc
+  - name: index
+
+- kind: MenuModel
+  properties:
+  - name: link_id
+  - name: is_visible
+    direction: desc
+  - name: parent_id
     direction: desc
   - name: position
     direction: desc

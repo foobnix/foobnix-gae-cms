@@ -87,11 +87,11 @@ class ViewPage(webapp.RequestHandler):
             self.response.out.write(template_cached)
             return None
         
-        
+        """
         session = Session()
         if not session.has_key('user_id'):
             session['user_id'] = uuid.uuid4().hex        
-        
+        """
         if not menu_id:
             menu_id = get_default_menu_id()
         
@@ -103,10 +103,12 @@ class ViewPage(webapp.RequestHandler):
             glob_dict["mode"] = "debug"
         else:
             glob_dict["mode"] = self.request.get("mode")
+        
+        glob_dict["display"] = self.request.get("mode") != "live" 
             
         glob_dict["host"] = self.request.headers['Host']
         glob_dict["lang"] = lang
-        glob_dict["session"] = session
+        #glob_dict["session"] = session
                 
         
         menu = get_menu_by(menu_id)

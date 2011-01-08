@@ -118,6 +118,7 @@ class AdminPage(webapp.RequestHandler):
         
         glob_dict["mode"] = "debug"
         
+        
         find = False
         for admin_model in admin_menu:
             page_link = admin_model["link_id"][len(CMS_URL) + 1:]
