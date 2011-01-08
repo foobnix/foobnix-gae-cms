@@ -104,7 +104,7 @@ class ViewPage(webapp.RequestHandler):
         else:
             glob_dict["mode"] = self.request.get("mode")
         
-        glob_dict["display"] = self.request.get("mode") != "live" 
+        glob_dict["display"] = user and self.request.get("mode") != "live" 
             
         glob_dict["host"] = self.request.headers['Host']
         glob_dict["lang"] = lang

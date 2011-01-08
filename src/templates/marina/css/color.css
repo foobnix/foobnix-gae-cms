@@ -1,0 +1,152 @@
+body{
+color: #3C3C3C;
+/* Edit on 31-05-21010 background:#ffffff url(/images/../images/bg.gif) repeat-x left top; */
+background:#ffffff url(/images/bg1.gif) repeat-x left top;
+}
+.bodySeo{
+color: #3C3C3C;
+/*background:#ffffff url(/images/../images/bg_seo.jpg) repeat-x left top;*/
+background:#ffffff url(/images/bg_seo1.gif) repeat-x left top;
+}
+
+/* Top Navigation Css */
+
+.topNav{
+color: #ffffff;
+}
+
+.topNav ul{
+color: #ffffff;
+}
+
+.topNav li{
+color: #ffffff;
+}
+
+.topNav li a, .topNav li a:link, .topNav li a:active, .topNav li a:visited{
+color: #ffffff;
+}
+
+
+.topNav li a:hover{
+color: #fbcf73;
+}
+
+.topNav li.active a{
+color: #ffffff;
+}
+
+/* Dropdown Css */
+.subMenu  {
+	color:#fff;
+	text-align:left;
+	}
+.subMenu  a, .subMenu  a:visited {
+	color:#fff;
+	background-color:#6a6c6e;
+	border-bottom:1px solid #fff;
+	}
+.subMenu  a:hover {
+	color:#fff;
+	background:#4a4c4d;
+	}
+.subMenu a.noborder{
+	border: none;
+	}
+	
+
+
+/* Left Container Css */
+.iconContIn .width2 h1{
+color: #CD0400;
+}
+
+.iconContIn .width2 h1 a{
+color: #CD0400;
+}
+
+.iconContIn .width2 h1 a:hover{
+color: #CD0400;
+}
+
+
+.clientTesti .width1 a{
+color: #3C3C3C;
+}
+
+.clientTesti .width1 a:hover{
+color: #3C3C3C;
+}
+
+.clientTesti .width2 h1{
+color: #ffffff;
+}
+
+/* Right Container Css */
+.featuredCont .top h1{
+color:#E40E02;
+padding: 12px 0px 0px 32px;
+}
+
+.featuredCont .bottom{
+background:#FDC354 url(/images/featBg.gif) no-repeat bottom ;
+padding: 8px 13px 10px 13px;
+margin: 0px 0px 10px 0px;
+}
+
+.readmore a{
+color: #3C3C3C;
+}
+.readmore a:hover{
+color: #3C3C3C;
+}
+
+.newsCont .lightgrey{
+color: #7A7A7A;
+}
+
+.newsCont .red{
+color: #DB4944;
+}
+.newsCont .red a{
+color: #DB4944;
+}
+.newsCont .red a:hover{
+color: #DB4944;
+}
+
+
+/* footer Css */
+.footerCont .link{
+color:#fff;
+}
+
+.footerCont .link a{
+color:#fff;
+}
+
+.footerCont .link a:hover{
+color:#fff;
+}
+
+.footerCont .txt{
+color: #939393;
+}
+
+
+.footerCont .copyright{
+color:#555555;
+}
+
+.footerCont .fotlink{
+color:#555555;
+}
+
+.footerCont .fotlink a{
+color:#555555;
+}
+
+.footerCont .fotlink a:hover{
+color:#555555;
+}
+

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content_slot %}
+
+{% include "helper_page.html" %}
+
+
+{% include "helper_page.html" %}
+
+<div id="wrap" class="art_citate">
+<div id="block1">
+<h2>{% get_attr item 'title_' lang %}</h2>
+{% get_attr item 'content_' lang %}
+</div>
+<p class="normal"><a href="/senin?action=random&lang={{lang}}" class="">Другие факты</a></p>
+</div>
+
+
+{% endblock %}

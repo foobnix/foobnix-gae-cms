@@ -1,0 +1,121 @@
+.rtForm{
+width: 193px;
+float:left;
+background:url(/images/formBg.jpg) no-repeat left top;
+height:245px;
+margin-left:5px;
+padding-top:40px;
+padding-left:17px;
+padding-right:9px;
+padding-bottom:15px;
+}
+ 
+.rtForm label { width:65px; float:left; display:block;}
+
+.rtFormWebFree{
+width: 193px;
+float:left;
+background:url(/images/formBgFreeWeb.jpg) no-repeat left top;
+height:245px;
+margin-left:5px;
+padding-top:50px;
+padding-left:17px;
+padding-right:9px;
+padding-bottom:15px;
+}
+
+.rtFormField2{ width:170px;
+float:left;
+background:#FFFFFF;
+margin-bottom:8px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#787878;
+padding-left:2px;
+}
+
+.rtFormField{ width:121px; background:url(/images/input_bg.jpg) repeat-x; border:1px solid #5ea6d9;
+float:left;
+padding-left:2px;
+margin-bottom:6px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#787878;
+}
+.rtFormField1{ width:121px; float:left; background:#FFFFFF; margin-bottom:8px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#787878;}
+
+.rtFormFieldMassage{ width:121px; float:left; padding-left:2px; background:#FFFFFF; margin-bottom:14px; font-family:Arial, Helvetica, sans-serif; font-size:11px;
+color:#787878; height:80px; overflow:auto;}
+
+.rtFormFieldButton{float:left; margin-bottom:5px; margin-top:-6px; margin-left:65px;}
+
+.rtFormFieldButton1{float:left; margin-bottom:5px; margin-top:-6px; margin-left:2px;}
+
+.linkBuildFormBlog{ width:93%; float:left; color:#de0b00; border:#CCCCCC solid 1px; padding:5px; text-align:center; font-family:Arial, Helvetica, sans-serif; font-size:12px; background:#ffeec2; margin-bottom:15px; } /* 18 sep 10*/
+input.input {
+	background:none;
+	border:0;
+	width:225px;
+	margin-top:2px;
+	font-size:11px;
+	color:#1d1c1c;
+}
+input.input1 {
+	background:none;
+	border:0;
+	width:225px;
+	margin-top:4px;
+}
+.ctFormField{ width:225px; height:22px; padding-left:2px; padding-right:0px; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif; font-size:11px;color:#1d1c1c; float:left; border:#cbbfa1 solid 1px; background:url(/images/ctFormFieldBg.jpg) top left repeat-x; text-align:left; }/* 18 sep 10*/
+.ctFormField1{ width:239px; height:22px; padding-left:2px; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif; font-size:11px;
+color:#1d1c1c; float:left; border:#cbbfa1 solid 1px; background:url(/images/ctFormFieldBg.jpg) top left repeat-x; text-align:left;}
+.ctFormField1 option{ background:#FFFFFF;}
+
+.ctFormFieldList{ width:230px; float:left; height:22px; margin-bottom:5px; text-align:left;}
+.suMar{ margin-left:75px;}
+
+
+
+.ctFormMassage{ width:215px; padding-left:10px; background:#FFFFFF url(/images/ctFormMassageBg.jpg) top left repeat-x; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#1d1c1c; height:80px; float:left; text-align:left; border:#cbbfa1 solid 1px;}
+
+.linkFormField{ width:65px; 
+padding-left:0px;
+padding-right:10px;
+margin-bottom:5px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#1d1c1c;
+float:left;
+text-align:right;
+height:22px;
+}
+.linkFormField1{ width:225px;
+padding-left:10px;
+margin-bottom:8px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#787878;
+float:left;
+text-align:left;
+}
+
+.linkFormFieldMassage{ width:225px;
+padding-left:10px;
+background:#FFFFFF;
+margin-bottom:8px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+color:#787878;
+height:80px;
+float:left;
+}
+
+/*Popup Form*/
+.popupForm{width:200px; float:left; background:url(/images/requestFormBg.jpg) no-repeat left top; padding-top:15px; padding-left:10px;padding-right:5px;}
+.popupField{ width:132px; float:left; padding-left:5px; background:#FFFFFF; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#787878;}
+.popupFormMassage{width:130px;float:left; padding-left:5px; background:#FFFFFF; margin-bottom:5px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#787878; height:50px;}
+.popupFormButton{float:left;}
+.formBlog{width:95%; margin:auto;}
+
+.popupForm p {margin:0; padding:0 0 10px 0; text-align:left}
+.popupForm label {font-weight:bold; font-size:11px; float:left; width:57px; text-align:left}
