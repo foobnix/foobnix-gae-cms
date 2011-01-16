@@ -9,7 +9,8 @@ from cms.admin import ViewImage, AdminPage
 import os
 from configuration import DEBUG
 import sys
-from cms.utils.properties import populate_properties, populate_menu
+from cms.utils.properties import populate_properties, populate_menu, \
+    populate_foonbix_menu
 from cms.statistics import SubmitVersion
 from cms.twitter import UpdateTwitters
 from cms.rss import FoobnixRSS
@@ -34,7 +35,7 @@ logging.info('Loading %s, app version = %s',
              __name__, os.getenv('CURRENT_VERSION_ID'))
 
 populate_properties()
-#populate_menu()
+populate_foonbix_menu()
 
 ROUTES = [
   
