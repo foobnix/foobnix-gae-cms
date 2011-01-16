@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+{% ifequal lang "en" %}
+<rss version="2.0">
+  <channel>
+    <title>Foobnix News</title>
+    <link>http://www.foobnix.com</link>
+    <description>Foobnix releases, news</description>
+    <language>en</language>
+    <pubDate>{% now "jS F Y H:i" %}</pubDate>
+ 
+    <lastBuildDate>{% now "jS F Y H:i" %}</lastBuildDate>
+    <docs></docs>
+    <generator>Foobnix Player</generator>
+    <managingEditor>ivan.ivanenko@gmail.com</managingEditor>
+    <webMaster>ivan.ivanenko@gmail.com</webMaster>
+ {% for entry in models %}
+    <item>
+      <title>{{entry.title_en}}</title>
+      <link>http://www.foobnix.com/blog/{{entry.key.id}}/eng</link>
+      <description><![CDATA[{{entry.content_en}}]]></description>
+      <pubDate>{{entry.date}}</pubDate>
+      <guid>http://www.foobnix.com</guid>
+    </item>
+  {% endfor %}
+  </channel>
+</rss>
+{% else %}
+<rss version="2.0">
+  <channel>
+    <title>Foobnix новости</title>
+    <link>http://www.foobnix.com</link>
+    <description>Новинки, релизы и все, что связано с плеером</description>
+    <language>ru</language>
+    <pubDate>{% now "jS F Y H:i" %}</pubDate>
+ 
+    <lastBuildDate>{% now "jS F Y H:i" %}</lastBuildDate>
+    <docs></docs>
+    <generator>Foobnix Player</generator>
+    <managingEditor>ivan.ivanenko@gmail.com</managingEditor>
+    <webMaster>ivan.ivanenko@gmail.com</webMaster>
+ {% for entry in models %}
+    <item>
+      <title>{{entry.title_ru}}</title>
+      <link>http://www.foobnix.com/blog/{{entry.key.id}}</link>
+      <description><![CDATA[{{entry.content_ru}}]]></description>
+      <pubDate>{{entry.date}}</pubDate>
+      <guid>http://www.foobnix.com</guid>
+    </item>
+  {% endfor %}
+  </channel>
+</rss>
+{% endifequal %}

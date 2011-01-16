@@ -46,13 +46,23 @@ class SendEmails(webapp.RequestHandler):
                             attachments.append((image.title + ".png", image.content))
                 
                 email.status = "Send"
-                mail.send_mail(
-                      sender=email.send_from,
-                      to=to,
-                      subject=email.subject,
-                      body=email.message,
-                      html=email.message,
-                      attachments=attachments)
+                if attachments:
+                    mail.send_mail(
+                          sender=email.send_from,
+                          to=to,
+                          subject=email.subject,
+                          body=email.message,
+                          html=email.message,
+                          attachments=attachments)
+                else:
+                    mail.send_mail(
+                          sender=email.send_from,
+                          to=to,
+                          subject=email.subject,
+                          body=email.message,
+                          html=email.message
+                          )
+                    
         email.put()
         self.redirect("/admin/email")
 

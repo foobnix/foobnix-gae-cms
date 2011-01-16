@@ -79,6 +79,7 @@ class PropertieModel(db.Model):
 class StatisticModel(db.Model):
     userUUID = db.StringProperty(multiline=False)
     host = db.StringProperty(multiline=False)
+    platform = db.StringProperty(multiline=False)
     date = db.DateProperty(auto_now_add=True)
     version = db.StringProperty(multiline=False)
 

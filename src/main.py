@@ -12,6 +12,7 @@ import sys
 from cms.utils.properties import populate_properties, populate_menu
 from cms.statistics import SubmitVersion
 from cms.twitter import UpdateTwitters
+from cms.rss import FoobnixRSS
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -39,6 +40,7 @@ ROUTES = [
   
   ('/update_twitters', UpdateTwitters),
   ('/version', SubmitVersion),
+  ('/rss', FoobnixRSS),
   
   (r'/send_emails/(.*)', SendEmails),
   

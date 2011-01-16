@@ -14,6 +14,7 @@ class SubmitVersion(webapp.RequestHandler):
         uuid = self.request.get('uuid')
         host = self.request.get('host')
         version = self.request.get('version')
+        platform = self.request.get('platform')
         
         if not uuid or not host:
             return self.response.out.write(get_propertie("config.version"))
@@ -41,6 +42,7 @@ class SubmitVersion(webapp.RequestHandler):
             model.userUUID = uuid[:100]
             model.host = host[:100]
             model.version = version[:100]
+            model.platform = platform[:100]
             model.put()
                   
         self.response.out.write(get_propertie("config.version"))

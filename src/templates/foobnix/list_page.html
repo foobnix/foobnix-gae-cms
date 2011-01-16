@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
-{% include "helper_page.html" %}
+{% include "../../administrator/templates/default/helper_page.html" %}
 {% for page in pages%}
 <div class="border">
 <h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
-{% include "helper_page.html" %}
+{% include "../../administrator/templates/default/helper_page.html" %}
 {% get_attr page 'content_' lang %}
 
 {% if page.is_comment %}
