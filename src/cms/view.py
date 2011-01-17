@@ -22,8 +22,10 @@ from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
 from recaptcha.client import captcha
 import random
 import logging
-import datetime
+from google.appengine.runtime import DeadlineExceededError
+from google.appengine.api.mail import Error
 import time
+
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -33,8 +35,16 @@ def is_valid_email(email):
 
 class SendEmails(webapp.RequestHandler):
     def get(self, key_id):
+        try:
+            self.in_get(key_id)
+        except DeadlineExceededError:
+            self.response.clear()
+            self.redirect("/admin/email_statistic")
+            
+        
+    def in_get(self, key_id):
         email = EmailModel().get_by_id(int(key_id))
-        statistics = " %s <br/>" % datetime.datetime.now() 
+        init_time = time.time()
         count = 0
         for to in re.split("[ ,;:\n\r]", email.send_to):
             if to and is_valid_email(to):
@@ -47,12 +57,8 @@ class SendEmails(webapp.RequestHandler):
                             attachments.append((image.title + ".png", image.content))
                 
                 count += 1
-                model = EmailStatisticModel()
-                model.send_to = to
-                model.subject = email.subject
                 
-                
-                try:       
+                try:
                     if attachments:
                         mail.send_mail(
                               sender=email.send_from,
@@ -69,19 +75,23 @@ class SendEmails(webapp.RequestHandler):
                               body=email.message,
                               html=email.message
                               )
-                    email.status = "Sended"
-                    statistics += "%s %s - %s <br>" % (count, to, "OK")
-                    model.status = "OK"
-                except Exception, e:
-                    model.status = "Fail"
-                    email.status = "Sended with Errors"
-                    statistics += "%s %s - %s [%s]<br>" % (count, to, "<b>Fail<b/>", str(e))
+                    
+                except DeadlineExceededError, e :
+                    model = EmailStatisticModel()
+                    model.send_to = to
+                    model.subject = email.subject
+                    model.status = "30 sec limit %s" % str(e)
+                    model.put()
+                    raise DeadlineExceededError()
+                except Error, e:
+                    model = EmailStatisticModel()
+                    model.send_to = to
+                    model.subject = email.subject
+                    model.status = "Fail %s" % str(e)
+                    model.put()
                 
-                time.sleep(0.025)
-                model.put()
-                
-        statistics += "%s <br/>" % datetime.datetime.now()   
-        email.statistics = statistics          
+        email.status = "Sended"  
+        email.statistics = "Send %s Finished in %s seconds <a href='/admin/email_statistic'>Statistics</a>" % (count, str(time.time() - init_time))
         email.put()
         
         self.redirect("/admin/email?action=edit&email.key_id=%s" % key_id)
