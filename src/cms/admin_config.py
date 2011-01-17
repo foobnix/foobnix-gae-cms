@@ -115,6 +115,14 @@ admin_menu = [
          "template":"admin-statistic.html",
          "model":StatisticModel(),
          "type":CMS_EDIT
+         },
+         {
+         "template_dict":"email_statistic",
+         "link_id":CMS_URL + "/email_statistic",
+         "text":"Email Statistics",
+         "template":"admin-email-statistic.html",
+         "model":StatisticModel(),
+         "type":CMS_EDIT
          }
         ]
 

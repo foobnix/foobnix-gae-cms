@@ -32,7 +32,6 @@ def get_menus():
 def _prepare_glob_dict():
     email_list = EmailModel().all()
     email_list.order("-date")
-
     
     product_list = ProductModel().all()
     product_list.order("-date")

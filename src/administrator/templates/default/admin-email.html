@@ -3,9 +3,22 @@
 {% block content_slot %}
 
 <h2>Send Eamils</h2>
+
+         
+
+
+
  <div class="span-20">  
+ 	  {% if email.statistics%} 	
+ 		 <fieldset> 
+            <legend>Statistics </legend>
+    		{{email.statistics}}        
+        </fieldset>
+        {% endif %}
+ 
         <form action="{{admin_model.link_id}}" method="post">
 		<input type="hidden" name="action" value="addupdate" />
+		<input type="hidden" name="email.status" value="Saved" />
  
           <fieldset> 
             <legend>Email Notification</legend>
@@ -14,6 +27,12 @@
               <label>ID: {{email.key.id}}</label>
               <input type="hidden" name="email.key_id" value="{{email.key.id}}" />
             </p>
+            
+            <p> 
+              <label>Status: {{email.status}}</label>
+              <input type="hidden" name="email.key_id" value="{{email.key.id}}" />
+            </p>
+            
             
            <p>
              <label>Subject:</label><br>
@@ -48,11 +67,9 @@
             <p> 
               <input type="submit" value="Save">
               {% if email%}
-              	{% if email.status%}
-              		<a href="/send_emails/{{email.key.id}}" > Send Emails Again </a>
-              	{% else%}
-              		<a href="/send_emails/{{email.key.id}}" > Send Emails </a>
-              	{% endif%}
+              	{% ifequal email.status "Saved" %}
+              		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/send_emails/{{email.key.id}}" ><b>Send Emails</b></a>
+              	{% endifequal %}
               {% endif %} 
             </p> 
  

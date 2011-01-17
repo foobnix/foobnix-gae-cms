@@ -17,15 +17,26 @@ class MenuModel(db.Model):
     is_visible = db.BooleanProperty()
     background = db.StringProperty(multiline=False)
     
+
+class EmailStatisticModel(db.Model):
+    send_to = db.StringProperty(multiline=False)
+    subject = db.StringProperty(multiline=False)
+    status = db.StringProperty(multiline=False)
+    date = db.DateTimeProperty(auto_now_add=True)
     
 class EmailModel(db.Model):
     subject = db.StringProperty(multiline=False)
     send_from = db.StringProperty(multiline=False)
-    send_to = db.StringProperty(multiline=True)
+    
+    send_to = db.TextProperty()
+    
     date = db.DateTimeProperty(auto_now_add=True)
     message = db.TextProperty()
     status = db.StringProperty(multiline=False)
+    statistics = db.TextProperty()
     attachments = db.StringProperty(multiline=False)
+
+
 
 class PageModel(db.Model):
     title_ru = db.StringProperty(multiline=False)

@@ -11,19 +11,19 @@ from google.appengine.api import mail, users, memcache
 import re
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT, DEBUG
 from cms.model import EmailModel, ImageModel, CommentModel, \
-    COMMENT_CATEGORY_PAGE
+    COMMENT_CATEGORY_PAGE, EmailStatisticModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
 from cms.admin_config import admin_menu
 from cms.admin import get_lang
 from cms.utils.request_model import request_to_model, safe_model
-from appengine_utilities.sessions import Session
-import uuid
 from django.utils.html import urlize
 from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
 from recaptcha.client import captcha
 import random
 import logging
+import datetime
+import time
 
 def is_valid_email(email):
     if len(email) > 7:
@@ -34,8 +34,9 @@ def is_valid_email(email):
 class SendEmails(webapp.RequestHandler):
     def get(self, key_id):
         email = EmailModel().get_by_id(int(key_id))
-        
-        for to in re.split("[ ,\n\r]", email.send_to):
+        statistics = " %s <br/>" % datetime.datetime.now() 
+        count = 0
+        for to in re.split("[ ,;:\n\r]", email.send_to):
             if to and is_valid_email(to):
                 attachments = []
                 if email.attachments:
@@ -45,26 +46,45 @@ class SendEmails(webapp.RequestHandler):
                         if image:
                             attachments.append((image.title + ".png", image.content))
                 
-                email.status = "Send"
-                if attachments:
-                    mail.send_mail(
-                          sender=email.send_from,
-                          to=to,
-                          subject=email.subject,
-                          body=email.message,
-                          html=email.message,
-                          attachments=attachments)
-                else:
-                    mail.send_mail(
-                          sender=email.send_from,
-                          to=to,
-                          subject=email.subject,
-                          body=email.message,
-                          html=email.message
-                          )
-                    
+                count += 1
+                model = EmailStatisticModel()
+                model.send_to = to
+                model.subject = email.subject
+                
+                
+                try:       
+                    if attachments:
+                        mail.send_mail(
+                              sender=email.send_from,
+                              to=to,
+                              subject=email.subject,
+                              body=email.message,
+                              html=email.message,
+                              attachments=attachments)
+                    else:
+                        mail.send_mail(
+                              sender=email.send_from,
+                              to=to,
+                              subject=email.subject,
+                              body=email.message,
+                              html=email.message
+                              )
+                    email.status = "Sended"
+                    statistics += "%s %s - %s <br>" % (count, to, "OK")
+                    model.status = "OK"
+                except Exception, e:
+                    model.status = "Fail"
+                    email.status = "Sended with Errors"
+                    statistics += "%s %s - %s [%s]<br>" % (count, to, "<b>Fail<b/>", str(e))
+                
+                time.sleep(0.025)
+                model.put()
+                
+        statistics += "%s <br/>" % datetime.datetime.now()   
+        email.statistics = statistics          
         email.put()
-        self.redirect("/admin/email")
+        
+        self.redirect("/admin/email?action=edit&email.key_id=%s" % key_id)
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""
