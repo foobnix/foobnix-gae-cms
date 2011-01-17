@@ -1,0 +1,7 @@
+{% if display %}
+	{% if page %}
+		<a href="/admin/page?action=edit&page.key_id={{page.key.id}}&lang={{lang}}">edit page</a>
+	{% else%}
+		<a href="/admin/page?action=edit&page.fk_menu={{active}}&page.title={{active}}&lang={{lang}}">add_page</a>
+	{% endif%}
+{% endif %}

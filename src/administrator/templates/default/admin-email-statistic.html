@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+  <div>
+	<fieldset> 
+            <legend>User Statistics</legend>  
+      <table>
+      
+      <thead>
+        <tr>
+          <th>email</th>
+          <th>subject</th>
+          <th>status</th>
+          <th>date</th>
+        </tr>
+		</thead>			
+		<tbody>
+		{% for stat in stats %}
+	    <tr>
+	          <td>{{stat.send_to}}</td>
+	          <td>{{stat.subject}}</td>
+	          <td>{{stat.status}}</td>
+	          <td>{{stat.date}}</td>
+         </tr>
+		 {% endfor %} 
+        </tbody>
+      </table>
+ </fieldset>
+</div> 
+{% endblock%}
