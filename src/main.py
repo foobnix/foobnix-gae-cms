@@ -4,7 +4,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 import logging
 
-from cms.view import SendEmails, ViewPage
+from cms.view import ViewPage
 from cms.admin import ViewImage, AdminPage
 import os
 from configuration import DEBUG
@@ -14,6 +14,7 @@ from cms.utils.properties import populate_properties, populate_menu, \
 from cms.statistics import SubmitVersion
 from cms.twitter import UpdateTwitters
 from cms.rss import FoobnixRSS
+from cms.tasks.send_emails import MailWorker, SendEmails
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -37,14 +38,13 @@ logging.info('Loading %s, app version = %s',
 populate_properties()
 #populate_foonbix_menu()
 
+
 ROUTES = [
-  
   ('/update_twitters', UpdateTwitters),
   ('/version', SubmitVersion),
   ('/rss', FoobnixRSS),
-  
+  (r'/mail_worker', MailWorker),
   (r'/send_emails/(.*)', SendEmails),
-  
   (r'/img/(.*)/(.*)', ViewImage),
   (r'/img/(.*)/', ViewImage),
   (r'/img/(.*)', ViewImage),

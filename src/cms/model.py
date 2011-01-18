@@ -22,6 +22,7 @@ class EmailStatisticModel(db.Model):
     send_to = db.StringProperty(multiline=False)
     subject = db.StringProperty(multiline=False)
     status = db.StringProperty(multiline=False)
+    count = db.IntegerProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     
 class EmailModel(db.Model):

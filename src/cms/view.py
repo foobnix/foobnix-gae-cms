@@ -7,11 +7,8 @@ Created on 4 дек. 2010
 from google.appengine.ext.webapp import template
 from google.appengine.ext import webapp
 import os
-from google.appengine.api import mail, users, memcache
-import re
+from google.appengine.api import  users, memcache
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT, DEBUG
-from cms.model import EmailModel, ImageModel, CommentModel, \
-    COMMENT_CATEGORY_PAGE, EmailStatisticModel
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
     get_default_menu_id
 from cms.admin_config import admin_menu
@@ -22,79 +19,9 @@ from cms.utils.cache import flash_cache, put_to_cache, get_from_cache
 from recaptcha.client import captcha
 import random
 import logging
-from google.appengine.runtime import DeadlineExceededError
-from google.appengine.api.mail import Error
-import time
+from cms.model import CommentModel, COMMENT_CATEGORY_PAGE
+from appengine_utilities.settings_default import session
 
-
-def is_valid_email(email):
-    if len(email) > 7:
-        if re.match("^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$", email) != None:
-            return True
-    return False
-
-class SendEmails(webapp.RequestHandler):
-    def get(self, key_id):
-        try:
-            self.in_get(key_id)
-        except DeadlineExceededError:
-            self.response.clear()
-            self.redirect("/admin/email_statistic")
-            
-        
-    def in_get(self, key_id):
-        email = EmailModel().get_by_id(int(key_id))
-        init_time = time.time()
-        count = 0
-        for to in re.split("[ ,;:\n\r]", email.send_to):
-            if to and is_valid_email(to):
-                attachments = []
-                if email.attachments:
-                    list = email.attachments.split(",")
-                    for id in list: 
-                        image = ImageModel.get_by_id(int(id))
-                        if image:
-                            attachments.append((image.title + ".png", image.content))
-                
-                count += 1
-                
-                try:
-                    if attachments:
-                        mail.send_mail(
-                              sender=email.send_from,
-                              to=to,
-                              subject=email.subject,
-                              body=email.message,
-                              html=email.message,
-                              attachments=attachments)
-                    else:
-                        mail.send_mail(
-                              sender=email.send_from,
-                              to=to,
-                              subject=email.subject,
-                              body=email.message,
-                              html=email.message
-                              )
-                    
-                except DeadlineExceededError, e :
-                    model = EmailStatisticModel()
-                    model.send_to = to
-                    model.subject = email.subject
-                    model.status = "30 sec limit %s" % str(e)
-                    model.put()
-                    raise DeadlineExceededError()
-                except Error, e:
-                    model = EmailStatisticModel()
-                    model.send_to = to
-                    model.subject = email.subject
-                    model.status = "Fail %s" % str(e)
-                    model.put()
-                
-        email.status = "Sended"  
-        email.statistics = "Send %s Finished in %s seconds <a href='/admin/email_statistic'>Statistics</a>" % (count, str(time.time() - init_time))
-        email.put()
-        
-        self.redirect("/admin/email?action=edit&email.key_id=%s" % key_id)
 
 class ViewPage(webapp.RequestHandler):
     """param1 - menu name"""

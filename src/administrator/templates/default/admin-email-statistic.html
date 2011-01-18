@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content_slot %}
+
+<script type="text/JavaScript">
+	setTimeout("location.reload(true);",5000);
+</script>
+
   <div>
 	<fieldset> 
             <legend>User Statistics</legend>  
@@ -8,6 +13,7 @@
       
       <thead>
         <tr>
+          <th>count</th>
           <th>email</th>
           <th>subject</th>
           <th>status</th>
@@ -17,6 +23,7 @@
 		<tbody>
 		{% for stat in stats %}
 	    <tr>
+	    	  <td>{{stat.count}}</td>
 	          <td>{{stat.send_to}}</td>
 	          <td>{{stat.subject}}</td>
 	          <td>{{stat.status}}</td>

@@ -36,29 +36,28 @@
             
            <p>
              <label>Subject:</label><br>
-		         <input type="text" class="text" name="email.subject" value="{{email.subject}}">
+		         <input type="text" class="text" style="width:100%" name="email.subject" value="{{email.subject}}">
 		    </p>
 		    
 		    <p>
              <label>From:</label><br>
-		         <input type="text" class="text" name="email.send_from" value="{{email.send_from}}">
-		          <span class="notice">7funnyday7@gmail.com</span>
+		         <input type="text" class="text"  name="email.send_from" value="{{user.email}}">		          
             </p>
             
              <p>
              <label>To Emails:</label><br>
-		      <textarea name="email.send_to" >{{email.send_to}}</textarea>
+		      <textarea name="email.send_to" style="width:100%"  >{{email.send_to}}</textarea>
 		    </p>
 		    
 		    <p>
              <label>Message:</label><br>
-		      <textarea name="email.message" id="cleditor">{{email.message}}</textarea>
+		      <textarea name="email.message" id="cleditor" style="width:100%" >{{email.message}}</textarea>
 		    </p>
 		    
 		    
 		    <p>
              <label>Attachments:</label><br>
-		       <input type="text" class="text" name="email.attachments" value="{{email.attachments}}">
+		       <input type="text" class="text" name="email.attachments" value="{{email.attachments}}" >
 		       <span class="notice">1,2,3,10,15,25</span>
 		    </p>	
 		    	
@@ -66,6 +65,7 @@
             
             <p> 
               <input type="submit" value="Save">
+              
               {% if email%}
               	{% ifequal email.status "Saved" %}
               		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/send_emails/{{email.key.id}}" ><b>Send Emails</b></a>
