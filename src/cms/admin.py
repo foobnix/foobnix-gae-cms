@@ -113,6 +113,7 @@ class AdminPage(webapp.RequestHandler):
         lang = get_lang(self.request)
         
         glob_dict = prepare_glob_dict()
+        glob_dict['logout'] = users.create_logout_url(self.request.path)
         glob_dict["user"] = user
         glob_dict["lang"] = lang
         glob_dict["layouts"] = layouts

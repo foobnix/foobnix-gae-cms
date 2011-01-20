@@ -7,7 +7,7 @@ Created on 7 дек. 2010
 import os
 import logging
 
-CMS_TEMPLATE = "marina"
+CMS_TEMPLATE = "foobnix"
 
 
 APP_ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -36,7 +36,7 @@ CMS_CFG = {
     "cache_time": 0 if DEBUG else 3600,
 }
 
-admins = ["ivan.ivanenko@gmail.com", "nataly.sokolenko@gmail.com", "7funnyday7@gmail.com", "zavlab1@gmail.com"]
+admins = ["ivan.ivanenko@gmail.com", "nataly.sokolenko@gmail.com", "7funnyday7@gmail.com", "zavlab1@gmail.com", "ch.ceremoniya@gmail.com"]
 
 
 

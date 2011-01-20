@@ -36,7 +36,7 @@ logging.info('Loading %s, app version = %s',
              __name__, os.getenv('CURRENT_VERSION_ID'))
 
 populate_properties()
-#populate_foonbix_menu()
+populate_foonbix_menu()
 
 
 ROUTES = [

@@ -1,5 +1,5 @@
 application: marinatext
-version: 1
+version: 4
 runtime: python
 api_version: 1
 
@@ -16,10 +16,14 @@ handlers:
  
 - url: /images
   static_dir: templates/marina/images
+ 
+- url: /custom_url
+  script: cms/tasks/task.py
+  login: required
+  
 
 - url: /.*
   script: main.py
-  
   
 builtins:
 - datastore_admin: on  
