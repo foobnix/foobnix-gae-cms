@@ -21,6 +21,8 @@ import random
 import logging
 from cms.model import CommentModel, COMMENT_CATEGORY_PAGE
 from appengine_utilities.settings_default import session
+from appengine_utilities.sessions import Session
+import uuid
 
 
 class ViewPage(webapp.RequestHandler):
@@ -54,11 +56,14 @@ class ViewPage(webapp.RequestHandler):
             self.response.out.write(template_cached)
             return None
         
-        """
-        session = Session()
+        session = {}
+        try:
+            session = Session()
+        except:
+            logging.error("Session init error")
         if not session.has_key('user_id'):
             session['user_id'] = uuid.uuid4().hex        
-        """
+        
         if not menu_id:
             menu_id = get_default_menu_id()
         
@@ -75,7 +80,7 @@ class ViewPage(webapp.RequestHandler):
             
         glob_dict["host"] = self.request.headers['Host']
         glob_dict["lang"] = lang
-        #glob_dict["session"] = session
+        glob_dict["session"] = session
                 
         
         menu = get_menu_by(menu_id)

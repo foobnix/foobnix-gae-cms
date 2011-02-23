@@ -42,7 +42,7 @@ class ViewEditAdminPage():
         template_dict = self.admin_model["template_dict"]
         
         if template_dict == "statistic":
-            glob_dict['stats'] = CommonStatisticModel().all().order("-date").fetch(7)
+            glob_dict['stats'] = CommonStatisticModel().all().order("-date").fetch(30)
         
         if template_dict == "email_statistic":
             glob_dict['stats'] = EmailStatisticModel().all().order("-date").fetch(50)

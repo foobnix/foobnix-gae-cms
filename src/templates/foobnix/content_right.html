@@ -1,16 +1,15 @@
+<h2>{% get_propertie "prop.donate" lang %}</h2>
+{% get_propertie "prop.donate_line1" lang %}
 <h2>{% get_propertie "prop.blog" lang %}</h2>
-{% for page in page_list|slice:":4" %}
-{% ifequal page.fk_menu "blog" %}
-
+{% for page in blog_list|slice:":4" %}
 <p>
 <a href="/{{page.fk_menu}}/{{page.key.id}}?lang={{lang}}">{% get_attr page 'title_' lang %}</a>
 </p>
-{% endifequal %}
 {% endfor %}
 
 
 <h2>{% get_propertie "prop.comments" lang %}</h2>
-{% for comment in comment_list|slice:"5" %}
+{% for comment in comment_list|slice:"15" %}
 <p>
 <a href="/{{comment.page.fk_menu}}/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b></a> {% get_attr comment 'comment_' lang%} <br>
 </p>

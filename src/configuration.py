@@ -8,6 +8,7 @@ import os
 import logging
 
 CMS_TEMPLATE = "foobnix"
+#CMS_TEMPLATE = "marinatext"
 
 
 APP_ROOT_DIR = os.path.abspath(os.path.dirname(__file__))

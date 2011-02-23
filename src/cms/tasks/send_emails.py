@@ -14,6 +14,13 @@ from google.appengine.api.labs.taskqueue import taskqueue
 
 class MailWorker(webapp.RequestHandler):
     def post(self):
+        try:
+            self.inline()
+        except Exception, e :
+            logging.error(e)
+        return True
+        
+    def inline(self):
         count = self.request.get('count')
         to = self.request.get('to')
         id = self.request.get('id')
@@ -24,7 +31,7 @@ class MailWorker(webapp.RequestHandler):
         attachments = []
         if attachment:
             list = attachment.split(",")
-            for id in list: 
+            for id in list:
                 image = ImageModel.get_by_id(int(id))
                 if image:
                     attachments.append((image.title + ".png", image.content))
@@ -49,13 +56,15 @@ class MailWorker(webapp.RequestHandler):
             statistic.status = "OK"
         except Exception, e:
             logging.error(e)
-            statistic.status = "Fail %s" % str(e)
+            statistic.status = "Fail %s from: %s to: %s" % (str(e), email.send_from, to)
             
         statistic.put()
-        logging.debug("send OK %s" % self.request.get('to'))
+        logging.debug("send OK %s" % to)
+        return True
 
 class SendEmails(webapp.RequestHandler):
     def get(self, key_id):
+        
         key_id = int(key_id)
         email = EmailModel().get_by_id(key_id)
         count = 0
@@ -63,6 +72,10 @@ class SendEmails(webapp.RequestHandler):
             if to and is_valid_email(to):
                 count += 1
                 try:
+                    
+                    
+                    
+                    
                     taskqueue.add(url='/mail_worker', params=dict(count=count, id=key_id, to=to))
                 except Exception, e:
                     email.statistic = str(e)
@@ -74,6 +87,7 @@ class SendEmails(webapp.RequestHandler):
         email.status = "In process"  
         email.put()
         self.redirect("/admin/email_statistic")
+        return True
    
     
 def is_valid_email(email):

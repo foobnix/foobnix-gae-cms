@@ -20,6 +20,12 @@ def get_pages(menu_name=None):
         page_list.filter("fk_menu", menu_name)
     return page_list
 
+def get_blog_pages():
+    page_list = PageModel().all()
+    page_list.order("-date")    
+    page_list.filter("fk_menu in", ["welcome" , "blog"])
+    return page_list
+
 def get_menus():
     menu_list = MenuModel().all()
     menu_list.order("-is_visible")
@@ -54,6 +60,7 @@ def _prepare_glob_dict():
     glob_dict = {
      'langs':CMS_LANGUAGES,
      'page_list':get_pages(),
+     'blog_list':get_blog_pages(),
      'menu_list':get_menus(),
      'email_list':email_list,
      'product_list':product_list,

@@ -134,6 +134,17 @@ footer = u"""
 
 def p(name, value1, value2):
     return {"name":name, "value_ru":value1, "value_en":value2}
+
+donate_button = """<form style="display:inline" method=POST action="https://liqpay.com/?do=clickNbuy">
+        <input type=hidden name="preorder" value="dd3d0229c15543d935279f3febd403453ad2e740">
+        <input type=submit value="Donate  1.00$">
+    </form>
+    <b>Z</b>272831992873<br/>
+<b>R</b>224951911391<br/>
+<b>U</b>234673813280
+<a href="http://www.foobnix.com/support?lang=%s">%s</a>
+"""
+
 default_properties = [
 p("foobnix.header.slogan", "Foobnix простой и мощный плеер музыки для Linux", "Foobnix simple and powerful music player for Linux"),
 p("foobnix.title.slogan", "Хороший плеер для музыки и видео", "Good music and video player"),
@@ -150,8 +161,13 @@ p("prop.required", "Обязательное", "Required"),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
+p("prop.donate", "Donate", "Donate"),
+
+p("prop.donate_line1", donate_button % ("ru", "Подробней"), donate_button % ("en", "More")),
+
 p("config.blog.section", "blog", "blog"),
-p("config.version", "0.2.2-10", "0.2.2-10"),
+p("config.version", "0.2.5-5", "0.2.5-5"),
+
 
 
 
