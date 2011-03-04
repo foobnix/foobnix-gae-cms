@@ -50,8 +50,10 @@ class ViewEditAdminPage():
         clean_model = copy.copy(self.admin_model["model"])
         
         items = clean_model.all()
+        
         if hasattr(clean_model, "date"):
             items.order("-date")
+        items.fetch(50)
             
         glob_dict["items"] = items 
         

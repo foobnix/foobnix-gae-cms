@@ -141,7 +141,7 @@ donate_button = """<form style="display:inline" method=POST action="https://liqp
     </form>
     <b>Z</b>272831992873<br/>
 <b>R</b>224951911391<br/>
-<b>U</b>234673813280
+<b>U</b>234673813280<br/>
 <a href="http://www.foobnix.com/support?lang=%s">%s</a>
 """
 
@@ -161,7 +161,7 @@ p("prop.required", "Обязательное", "Required"),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
-p("prop.donate", "Donate", "Donate"),
+p("prop.donate", "Поддержите нас", "Support Us"),
 
 p("prop.donate_line1", donate_button % ("ru", "Подробней"), donate_button % ("en", "More")),
 

@@ -1,7 +1,7 @@
 <h2>{% get_propertie "prop.donate" lang %}</h2>
 {% get_propertie "prop.donate_line1" lang %}
 <h2>{% get_propertie "prop.blog" lang %}</h2>
-{% for page in blog_list|slice:":4" %}
+{% for page in blog_list|slice:":3" %}
 <p>
 <a href="/{{page.fk_menu}}/{{page.key.id}}?lang={{lang}}">{% get_attr page 'title_' lang %}</a>
 </p>
@@ -9,14 +9,14 @@
 
 
 <h2>{% get_propertie "prop.comments" lang %}</h2>
-{% for comment in comment_list|slice:"15" %}
+{% for comment in comment_list|slice:"6" %}
 <p>
 <a href="/{{comment.page.fk_menu}}/{{comment.page.key.id}}?lang={{lang}}"><b>@{{comment.name}}</b></a> {% get_attr comment 'comment_' lang%} <br>
 </p>
 {% endfor %}
 
 <h2>{% get_propertie "prop.twitter" lang %}</h2>
-{% for item in twitter_list|slice:"15" %}
+{% for item in twitter_list|slice:"6" %}
 <p>
 <b><a target="_blank" href="{{item.site}}">@{{item.name}}</a></b> {{item.comment_ru|urlize}}<br>
 </p>
