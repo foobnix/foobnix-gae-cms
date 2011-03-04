@@ -161,12 +161,13 @@ p("prop.required", "Обязательное", "Required"),
 p("prop.wrong.text", "Неправильный текст", "Wrong Text"),
 p("prop.name", "Имя", "Name"),
 p("prop.site", "Сайт", "Site"),
-p("prop.donate", "Поддержите нас", "Support Us"),
+p("prop.donate", "Поддержите", "Support Us"),
+p("prop.top_right_text", '<a href="http://code.google.com/p/foobnix/issues/list">Баги</a> <a href="https://github.com/foobnix/foobnix">Исходники</a> <a href="https://translations.launchpad.net/foobnix">Переводы</a>', '<a href="http://code.google.com/p/foobnix/issues/list">Bugs</a> <a href="https://github.com/foobnix/foobnix">Sources</a> <a href="https://translations.launchpad.net/foobnix">Translations</a>'),
 
 p("prop.donate_line1", donate_button % ("ru", "Подробней"), donate_button % ("en", "More")),
 
 p("config.blog.section", "blog", "blog"),
-p("config.version", "0.2.5-5", "0.2.5-5"),
+p("config.version", "0.2.5-7", "0.2.5-7"),
 
 
 
