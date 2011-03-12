@@ -7,8 +7,8 @@ from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
 from cms.glob_dict import prepare_glob_dict
 import copy
 from cms.model import ImageModel, CommonStatisticModel, EmailStatisticModel
-from google.appengine.api import users
-from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT
+from google.appengine.api import users, memcache
+from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT, CMS_CFG
 from cms.login import check_user_admin
 import logging
 from cms.utils.request_model import request_to_model
@@ -19,7 +19,10 @@ from google.appengine.ext.webapp import template
 class ViewImage (webapp.RequestHandler):
     def get(self, image_key_id, name=None):
         try:
-            model = ImageModel().get_by_id(int(image_key_id))
+            model = memcache.get(image_key_id)                
+            if not model:                
+                model = ImageModel().get_by_id(int(image_key_id))                
+                memcache.add(key=image_key_id, value=model, time=CMS_CFG["cache_time"])            
         except Exception, e:
             logging.error(e)
             self.redirect(IMAGE_NOT_FOUND)

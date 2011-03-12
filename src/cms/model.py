@@ -40,8 +40,18 @@ class EmailModel(db.Model):
 
 
 class PageModel(db.Model):
+    
+    description_ru = db.StringProperty(multiline=False)
+    description_en = db.StringProperty(multiline=False)
+    
+    keywords_ru = db.StringProperty(multiline=False)
+    keywords_en = db.StringProperty(multiline=False)
+    
     title_ru = db.StringProperty(multiline=False)
     title_en = db.StringProperty(multiline=False)
+    
+    head_ru = db.TextProperty()
+    head_en = db.TextProperty()
     
     content_ru = db.TextProperty()
     content_en = db.TextProperty()
@@ -51,7 +61,8 @@ class PageModel(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
     fk_menu = db.StringProperty(multiline=False)
     
-    index = db.IntegerProperty()
+    index = db.IntegerProperty()    
+    image = db.StringProperty(multiline=False)
     
 
 class ProductModel(db.Model):

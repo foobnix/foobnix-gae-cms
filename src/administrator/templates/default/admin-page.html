@@ -16,17 +16,23 @@
               <input type="hidden" name="page.key_id" value="{{page.key.id}}" />
             </p>
             <p> 
-              <label>Title</label><br> 
+              <label>Title</label>
              
             <p>  
              {% for ln in langs %}
               <b>{{ln}}:</b><input type="text" class="text" name="page.title_{{ln}}" value="{% get_attr page 'title_' ln %}">              
             {% endfor %}
             </p>
+             
+            <p>             
+           <b> Keywords:</b> <input type="text" class="text" name="page.keywords_ru" value="{{page.keywords_ru}}" style="width:600px;"><br>              
+           <b> Description:</b> <input type="text" class="text" name="page.description_ru" value="{{page.description_ru}}" style="width:600px;"><br>
+            </p>
             
              <p>
+              <b>Head:</b><br><textarea name="page.head_ru" style="height:60px;width:690px;">{{page.head_ru}}</textarea>
 		      <textarea name="page.content_ru" id="cleditor" class="wysiwyg_textarea" >{{page.content_ru}}</textarea>
-		      <b>en:</b><br><textarea name="page.content_en">{{page.content_en}}</textarea>
+		      <b>en:</b><br><textarea name="page.content_en" style="height:40px;width:690px;">{{page.content_en}}</textarea>
 		    </p>		   
             
             <p><label>Section Menu</label><br>
@@ -35,7 +41,12 @@
 				 <option value="{{ key.link_id }}" {% ifequal key.link_id page.fk_menu %}selected="selected"{% endifequal %}>{% get_attr key 'name_' lang %}</option>
 				{% endfor %} 
 			</select>
-          	</p> 
+          	</p>
+          	
+          	<p> 
+              <label>Image</label><br> 
+              <input type="text" class="text" name="page.image" value="{{page.image}}">
+            </p> 
             
             <p> 
               <label>Allow Comments</label><br> 

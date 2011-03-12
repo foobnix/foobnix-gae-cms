@@ -2,7 +2,16 @@
    <h1><a href="/">{% get_propertie "foobnix.header.slogan" lang %}</a></h1>
 
 <div id="tagline">
-	<a href="/">{% get_propertie "foobnix.header.slogan" lang %}</a>
+<table border="0" style="border-width: 0 0 0 0">
+<tr >
+<td style="border-width: 0 0 0 0"><a href="/">{% get_propertie "foobnix.header.slogan" lang %}</a></td>
+<td style="border-width: 0 0 0 0" width="10">&nbsp;</td>
+<td style="border-width: 0 0 0 0" width="300">{% get_propertie "foobnix.addthis" lang %}</td>
+</tr>
+</table>
+	
+	
+	
 </div>
   <ul id="nav">
  	{% for item in menu_list %}

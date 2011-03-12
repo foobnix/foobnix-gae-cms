@@ -35,7 +35,7 @@ webapp.template.register_template_library('cms.tag')
 logging.info('Loading %s, app version = %s',
              __name__, os.getenv('CURRENT_VERSION_ID'))
 
-populate_properties()
+#populate_properties()
 #populate_foonbix_menu()
 
 

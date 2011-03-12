@@ -47,23 +47,6 @@
 <div class="topNav">
 <ul>
 
-<!-- 
-<li style="position:relative;">
-	  <a href="services.html" onmouseover="show1()" onmouseout="hide1()" >Services</a>
-		
-      <ul id="drp" style="display:none"  onmouseover="show1()" onmouseout="hide1()">
-	      <li><a href="seo.html">Search Engine Optimization</a></li>
-	      <li><a href="social-media-marketing.html">Social Media Marketing</a></li>
-	      <li><a href="link-popularity-building.html">Link Building</a></li>
-	      <li><a href="pay-per-click.html">Pay Per Click (PPC)</a></li>
-	      <li><a href="consulting-service.html">SEO Consultants</a></li>
-	      <li><a href="content-writing.html">SEO Copywriting</a></li>
-	      <li><a href="brand-reputation-management.html">Brand Reputation Management</a></li>
-	      <li><a href="iphone-Applications.html" style="border-bottom:0">iPhone Applications Development</a></li>
-      </ul>
-</li>
- -->
-
 {% for item in menu_list %}
  	{% ifequal item.position "TOP" %}
  		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>

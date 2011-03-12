@@ -2,7 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{lang}}" lang="{{lang}}">
 <head>
     	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <title>{% get_propertie "foobnix.title.slogan" lang %}</title>
+        <title>
+        
+                 
+        {% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		{% ifequal item.link_id active %}
+ 			{% get_attr item 'name_' lang%} -		
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+	
+	{% if item %}{% get_attr item "title_" lang %} - {% endif %} {% get_propertie "foobnix.title.slogan" lang %}
+        </title>
        <style type="text/css">
             @import url(/css/screen.css) screen;
             @import url(/css/style.css);

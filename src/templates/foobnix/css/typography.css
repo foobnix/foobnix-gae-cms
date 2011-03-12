@@ -78,6 +78,7 @@ code        { font:1em Monaco, Courier, monospace; }
 /* Tables (needs improvement)
 -------------------------------------------------------------- */
 
+
 table   { margin-bottom: 1.4em; border-top:.1em solid #ddd; border-left:.1em solid #ddd; }
 th,td   { height: 1em; padding:.2em .4em; border-bottom:.1em solid #ddd; border-right:.1em solid #ddd; }
 th      { font-weight:700; background:#eee; }
