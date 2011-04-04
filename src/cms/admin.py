@@ -6,7 +6,8 @@ from cms.admin_config import admin_menu, positions, CMS_URL, CMS_EDIT, \
     CMS_VIEW, layouts, IMAGE_NOT_FOUND
 from cms.glob_dict import prepare_glob_dict
 import copy
-from cms.model import ImageModel, CommonStatisticModel, EmailStatisticModel
+from cms.model import ImageModel, CommonStatisticModel, EmailStatisticModel, \
+    StatisticModel
 from google.appengine.api import users, memcache
 from configuration import ADMIN_TEMPLATE_PATH, LANG_CODE_DEFAULT, CMS_CFG
 from cms.login import check_user_admin
@@ -49,10 +50,10 @@ class ViewEditAdminPage():
         
         if template_dict == "email_statistic":
             glob_dict['stats'] = EmailStatisticModel().all().order("-date").fetch(50)
-        
-        clean_model = copy.copy(self.admin_model["model"])
-        
-        items = clean_model.all()
+            items = StatisticModel().all()
+        else:
+            clean_model = copy.copy(self.admin_model["model"])        
+            items = clean_model.all()
         
         if hasattr(clean_model, "date"):
             items.order("-date")

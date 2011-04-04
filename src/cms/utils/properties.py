@@ -129,5 +129,8 @@ def populate_properties():
 def get_propertie(name):
     model = PropertieModel().all()
     model.filter("name", name)
-    return model.get().value_ru
+    if model.count(1) == 1:
+        return model.get().value_ru
+    else:
+        return ""
     

@@ -1,5 +1,5 @@
-application: marinatext
-version: 7
+application: foobnix-cms
+version: 17
 runtime: python
 api_version: 1
 
@@ -9,16 +9,17 @@ handlers:
   static_dir: administrator/templates/default/static
 
 - url: /css
-  static_dir: templates/marinatext/css
+  static_dir: templates/foobnix/css
  
 - url: /js
-  static_dir: templates/marinatext/js
+  static_dir: templates/foobnix/js
  
 - url: /images
-  static_dir: templates/marinatext/images
+  static_dir: templates/foobnix/images
 
 - url: /.*
   script: main.py
+  
   
 builtins:
 - datastore_admin: on  

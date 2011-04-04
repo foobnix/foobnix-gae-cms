@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+{% include "../../administrator/templates/default/helper_page.html" %}
+{% for page in pages|slice:":1" %}
+
+{% include "../../administrator/templates/default/helper_page.html" %}
+
+
+ <div class="container_head">        
+        <div class="top">
+          <div class="container_title">
+            <h1>{% get_attr page 'title_' lang %}</h1>
+          </div>          
+        </div>
+</div>
+
+
+ <div class="container_body">
+{% get_attr page 'content_' lang %}
+</div>
+
+{% endfor %}
+
+
+
+
+
+{% endblock %}

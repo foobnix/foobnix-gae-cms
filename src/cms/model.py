@@ -90,7 +90,8 @@ class CommentModel(db.Model):
     category = db.StringProperty(multiline=False)
     page = db.ReferenceProperty(PageModel)
     date = db.DateTimeProperty(auto_now_add=True)
-    user_id = db.StringProperty(multiline=False)    
+    user_id = db.StringProperty(multiline=False)
+    ip = db.StringProperty(multiline=False)    
 
 class PropertieModel(db.Model):
     name = db.StringProperty(multiline=False)

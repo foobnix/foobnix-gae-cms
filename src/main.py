@@ -39,7 +39,18 @@ logging.info('Loading %s, app version = %s',
 #populate_foonbix_menu()
 
 
+class TestBaseUrl(webapp.RequestHandler):
+    def get(self):
+        self.redirect("/test_redirect#json={value:'OK'}")
+
+class TestRedirectUrl(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write("test redirect")
+
+
 ROUTES = [
+  ('/test_base', TestBaseUrl),
+  ('/test_redirect', TestRedirectUrl),
   ('/update_twitters', UpdateTwitters),
   ('/version', SubmitVersion),
   ('/rss', FoobnixRSS),

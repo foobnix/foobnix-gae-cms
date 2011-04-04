@@ -23,6 +23,8 @@ from cms.model import CommentModel, COMMENT_CATEGORY_PAGE
 from appengine_utilities.settings_default import session
 from appengine_utilities.sessions import Session
 import uuid
+from cms.utils.properties import get_propertie
+from cms.tasks.send_emails import SendEmails, send_email
 
 
 class ViewPage(webapp.RequestHandler):
@@ -142,6 +144,11 @@ class ViewPage(webapp.RequestHandler):
                 response = self.request.get('recaptcha_response_field')
                 recaptcha_response = captcha.submit(challenge, response, "6Ld9tL0SAAAAAA8RPX--P6dgmyJ2HUeUdBUfLLAM", remote_ip)
                 
+                
+                if self.request.remote_addr in  get_propertie("prop.banned.ips").split(","):
+                    comment.recaptcha_error = True
+                    correct = False                    
+                
                 if not recaptcha_response.is_valid:
                     comment.recaptcha_error = True
                     correct = False                    
@@ -163,9 +170,16 @@ class ViewPage(webapp.RequestHandler):
                     comment.comment_ru = urlize(comment.comment_ru)
                     comment.comment_en = urlize(comment.comment_en)
                     comment.category = COMMENT_CATEGORY_PAGE
+                    comment.ip = self.request.remote_addr
                     
                     comment.put()
                     glob_dict["comment"] = None
+                    text = """
+                    %s \n
+                    %s \n
+                    "http://www.foobnix.com/%s/%s?lang=ru" \ n
+                    """ % (comment.comment_ru, comment.ip, menu_id, page_id)
+                    send_email("ivan.ivanenko@gmail.com", "ivan.ivanenko@gmail.com", "New comment", text)
                     self.redirect("/%s/%s?lang=%s" % (menu_id, page_id, lang))
                 else:
                     glob_dict["comment"] = comment

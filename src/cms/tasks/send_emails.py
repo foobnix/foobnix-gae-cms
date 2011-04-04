@@ -11,6 +11,11 @@ from google.appengine.api import mail
 from google.appengine.ext import webapp
 from google.appengine.api.labs.taskqueue import taskqueue
 
+def send_email(sender, to, subject, body):
+    mail.send_mail(sender=sender,
+              to=to,
+              subject=subject,
+              body=body)
 
 class MailWorker(webapp.RequestHandler):
     def post(self):

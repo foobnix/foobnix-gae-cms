@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+list
+
+{% block content_slot %}
+
+{% include "../../administrator/templates/default/helper_page.html" %}
+
+<div class="content">
+{% for page in pages %}
+
+<div class="features">
+              <div class="features_img"> <img alt="album" src="{{page.image}}"> </div>
+              <div class="features_info">
+                <h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
+                <p>{% get_attr page 'head_' lang %}</p>
+                {% include "../../administrator/templates/default/helper_page.html" %}
+              </div>
+            </div>
+{% endfor %}
+</div>
+{% endblock %}
+
+
+
+
+

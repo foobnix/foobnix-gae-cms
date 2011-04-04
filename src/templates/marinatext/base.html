@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<title>      
+        {% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		{% ifequal item.link_id active %}
+ 			{% get_attr item 'name_' lang%} -		
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+	
+	{% if item %}{% get_attr item "title_" lang %} - {% endif %} {% get_propertie "title.slogan" lang %}
+        </title>
+        
+        
+
+{%if item %}
+<meta name="description" content="{% get_attr item 'description_' lang%}" /> 
+<meta name="keywords" content="{% get_attr item 'keywords_' lang%}" />
+{% else %}
+	{% for page in pages|slice:":1" %}
+<meta name="description" content="{% get_attr page 'description_' lang%}" /> 
+<meta name="keywords" content="{% get_attr page 'description_' lang%}" /> 
+	{% endfor %}
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="/css/wv.css" />
+<link rel="stylesheet" type="text/css" href="/css/popup.css" />
+
+</head>
+
+<body>
+{% include "../../administrator/templates/default/top_admin_panel.html" %}
+
+<div id="backgroundFilter"></div>
+
+<div id="wrapper">
+
+  <div class="header">
+
+    <div class="logo"><a href="/"><img src="/images/master_logo.png" alt=""   border="0"/></a></div>
+
+    <div class="toplinksdiv">
+
+      <ul class="toplinks">
+      	{% for item in menu_list %}
+			 	{% ifequal item.position "BLOCK" %}			 	
+			 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>		 	
+			 	{% endifequal %}
+			{% endfor %}
+			
+			{% if display %}
+				<li><a href="/admin/menu?menu.position=BLOCK&action=edit">[add]</a></li>
+			{% endif %}
+      </ul>
+
+    </div>
+
+<div class="login">
+	<ul>
+		{% get_propertie "title.phones" lang %}		   
+	</ul>
+</div>
+
+  </div>
+
+  <div class="glnav_l"></div>
+
+  <div class="glnav_c">
+
+    <ul class="gbnav">
+    
+    {% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>
+ 	{% endifequal %}
+	{% endfor %}
+
+	{% if display %}
+	<li><a href="/admin/menu?menu.position=TOP&action=edit">[new]</a></li>
+	{% endif %}
+
+    </ul>
+
+  </div>
+
+<div class="glnav_rnew"></div>
+
+  <div class="glnav_r"></div>
+  <div class="div_pr">
+    <div class="info_635_l">
+      {% block content_slot %}
+	  {% endblock %}
+	  
+    </div>
+    
+    <div class="info_310_r">
+        <div class="toplinksdiv">
+    </div>
+    
+     {% if display %}
+		<a href="/admin/page?action=edit&page.fk_menu=blog&lang={{lang}}">add_page</a>
+	{% endif %}
+     
+	 {% for page in blog_list %}
+	 
+     <div>
+      <div class="d_container_head">
+        <div class="d_tl-corner"></div>
+        <div class="d_tr-corner"></div>
+        <div class="d_top">  
+		<h4><img src="{{page.image}}" align="absmiddle" width="34" height="23"/> <a href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}</h4></a> </div>
+      </div>
+      <div class="d_container_body">
+        <div class="d_container_body_wrapper">
+          <div class="d_content_p">
+          	{% get_attr page 'head_' lang %}
+          	{% include "../../administrator/templates/default/helper_page.html" %}           
+          </div>
+        </div>
+        
+      </div>
+      <div class="d_container_footer">
+      
+        <div class="d_bl-corner"></div>
+        <div class="d_br-corner"></div>
+        <div class="d_bottom"></div>
+      </div>
+	</div>  
+{% endfor %}
+	  </div>
+	  
+	  
+    </div>
+  </div>
+<div class="footer">
+  <ul class="foottxt fon">
+{% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a> |</li>
+ 	{% endifequal %}
+	{% endfor %}
+  </ul>
+  
+   <ul class="foottxt">
+  {% for item in menu_list %}
+ 	{% ifequal item.position "BLOCK" %}
+ 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a> |</li>
+ 	{% endifequal %}
+	{% endfor %}
+  </ul>
+
+  <ul class="foottxt fon">
+   {% for page in blog_list %}
+   <li><a href="/blog/{{page.key.id}}">{% get_attr page 'title_' lang %}</a> |</li>
+   {% endfor %}
+  </ul>
+
+  <ul class="foottxt">
+  <li>{% get_propertie "footer.line1" lang %}</li>
+  <li>{% get_propertie "footer.line2" lang %}</li>  
+  </ul>
+  </div>  
+</div>
+
+</body>
+</html>
