@@ -38,7 +38,7 @@ CMS_CFG = {
     "cache_time": 0 if DEBUG else 3600,
 }
 
-admins = ["ivan.ivanenko@gmail.com", "nataly.sokolenko@gmail.com", "7funnyday7@gmail.com", "zavlab1@gmail.com", "ch.ceremoniya@gmail.com"]
+admins = ["ivan.ivanenko@gmail.com", "zavlab1@gmail.com", "ch.ceremoniya@gmail.com"]
 
 
 

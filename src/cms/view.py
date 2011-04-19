@@ -144,6 +144,10 @@ class ViewPage(webapp.RequestHandler):
                 response = self.request.get('recaptcha_response_field')
                 recaptcha_response = captcha.submit(challenge, response, "6Ld9tL0SAAAAAA8RPX--P6dgmyJ2HUeUdBUfLLAM", remote_ip)
                 
+                for spam in ("www", "http"):
+                    if spam in comment.comment_ru or spam in  comment.comment_en: 
+                        comment.recaptcha_error = True
+                        correct = False
                 
                 if self.request.remote_addr in  get_propertie("prop.banned.ips").split(","):
                     comment.recaptcha_error = True
