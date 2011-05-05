@@ -49,14 +49,14 @@ def populate_foonbix_menu():
         
     add_menu("welcome", "Главная", "Welcome", "TOP", None, LAYOUT_LIST_PAGE, 1)
     add_menu("about", "Описание", "Description", "TOP", None, LAYOUT_ONE_PAGE, 2)
-    add_menu("screenshots", "Галерея", "Gallery", "TOP", None, LAYOUT_ONE_PAGE, 3)
+    add_menu("screenshots", "Скриншоты", "Screenshots", "TOP", None, LAYOUT_ONE_PAGE, 3)
     add_menu("download", "Скачать", "Download", "TOP", None, LAYOUT_ONE_PAGE, 4)
     add_menu("feedback", "Отзывы", "Feedback", "TOP", None, LAYOUT_LIST_PAGE, 5)
     add_menu("blog", "Блог", "Blog", "TOP", None, LAYOUT_LIST_PAGE, 6)
     add_menu("faq", "FAQ", "FAQ", "TOP", None, LAYOUT_LIST_PAGE, 7)
     add_menu("support", "Поддержать", "Support Us", "TOP", None, LAYOUT_LIST_PAGE, 8)
     add_menu("aboutus", "О нас", "About Us", "TOP", None, LAYOUT_ONE_PAGE, 9)
-        
+    add_menu("wiki", "Вики", "Wiki", "TOP", None, LAYOUT_ONE_PAGE, 10)
 
 def populate_menu():
     all = MenuModel().all()
