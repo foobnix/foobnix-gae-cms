@@ -8,7 +8,7 @@ body{ font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000000; b
 .logo{ width:290px;float:left;}
 .toplinksdiv{ width:400px;float:left;}
 .toplinks{ list-style:none; margin-left:140px;}
-.toplinks li{ float:left; width:154px; background:url(/images/icon_blt.gif) no-repeat 0px 3px; padding-left:14px; color:#af120d; padding-bottom:5px; font-size:11px;}
+.toplinks li{ float:left; width:154px; background:url(/images/icon_blt.gif) no-repeat 0px 3px; padding-left:14px; color:#af120d; padding-bottom:5px; font-size:14px;}
 .toplinks li a{ color:#af120d; text-decoration:none;}
 .toplinks li a:hover{ color:#af120d; text-decoration:underline;}
 .login{ width:230px;height:auto; float:left;}
@@ -29,9 +29,9 @@ a.prev:hover{ text-decoration:underline;}
 .inp_txt_b{ width:113px; height:19px; padding-left:2px;}
 .ddmenu{ width:85px; margin-left:5px; height:22px; color:#000000;}
 
-
-
-
+.mlink {color:#525252; text-decoration: none;font-weight: bold;}
+.mlink:hover { text-decoration: underline; }
+.mlink:visited { text-decoration: none; }
 
 table.mainborder { border-collapse:collapse;  border:4px solid #e5e5e5; font-family:Trebuchet MS; font-size:13px; font-weight:bold;}
 table.bottomborder td {text-align:center;border-bottom: 1px solid #e5e5e5; padding:5px 0px; text-indent:5px;}
@@ -106,7 +106,7 @@ a.ln_more:hover{ text-decoration:none;}
 .tabtxt_b{margin-left:275px; position:relative; bottom:7px; font-size:20px; color:#a90104; font-style:italic;}
 
 
-.container_title{float:left;padding-top:5px; font-size: 13px;}
+.container_title{float:left;padding-top:5px; font-size: 13px;color:#525252}
 .container_title_txt{width:190px; float:left; text-align:right; color:#000000; padding-top:20px; font-size:11px;}
 
 
@@ -159,10 +159,10 @@ a.ln_more:hover{ text-decoration:none;}
 .features_info{ width:495px; float:left; height:auto; padding-top:20px; padding-bottom:10px;}
 
 
-h1{color:#a90104; font-size:24px; font-weight:normal; margin:0px; padding:0px;}
+h1{color:#525252; font-size:24px; font-weight:normal; margin:0px; padding:0px;}
 h2{color:#a90104; font-size:16px; font-weight:bold;} 
 h2 span{ color:#663333; display:block; font-size:12px; font-weight:normal; }
-p{ color:#663333; text-align:left; font-size:13px; margin-bottom:5px;}
+p{ color:#663333; text-align:left; font-size:14px; margin-bottom:5px;}
 p.col{ color:#993333; padding-top:5px;}
 h4{ color:#996666; font-size:18px; font-weight:normal; margin:0px; padding:10px 0px 0px 0px;}
 h5{ color:#cc0000; font-size:13px; font-weight:bold; margin-top:5px;}

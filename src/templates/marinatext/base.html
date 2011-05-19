@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-
+<meta name="google-site-verification" content="dcBj01-AmMBQuXcl8sRe1mDWKMaEArHSEV5w9RfYPnE" />
 <title>      
         {% for item in menu_list %}
  	{% ifequal item.position "TOP" %}
@@ -112,7 +112,9 @@
         <div class="d_tl-corner"></div>
         <div class="d_tr-corner"></div>
         <div class="d_top">  
-		<h4><img src="{{page.image}}" align="absmiddle" width="34" height="23"/> <a href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}</h4></a> </div>
+		<h4><img src="{{page.image}}" align="absmiddle" width="34" height="23"/> 
+			<a class="mlink" href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}
+		</h4></a> </div>
       </div>
       <div class="d_container_body">
         <div class="d_container_body_wrapper">

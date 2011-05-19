@@ -1,5 +1,5 @@
 application: marinatext
-version: 7
+version: 8
 runtime: python
 api_version: 1
 
@@ -9,13 +9,13 @@ handlers:
   static_dir: administrator/templates/default/static
 
 - url: /css
-  static_dir: templates/marina/css
+  static_dir: templates/marinatext/css
  
 - url: /js
-  static_dir: templates/marina/js
+  static_dir: templates/marinatext/js
  
 - url: /images
-  static_dir: templates/marina/images
+  static_dir: templates/marinatext/images
 
 - url: /.*
   script: main.py
