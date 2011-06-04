@@ -7,8 +7,8 @@ Created on 7 дек. 2010
 import os
 import logging
 
-#CMS_TEMPLATE = "foobnix"
-CMS_TEMPLATE = "marinatext"
+CMS_TEMPLATE = "foobnix-cms"
+#CMS_TEMPLATE = "marinatext"
 #CMS_TEMPLATE = "foobnix-android"
 
 

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {% block content_slot %}
 
 {% include "../../administrator/templates/default/helper_page.html" %}
@@ -10,8 +9,10 @@
 {% include "../../administrator/templates/default/helper_page.html" %}
 
 <h2>{% get_attr page 'title_' lang %}</h2>
-
 {% get_attr page 'content_' lang %}
+
+
+
 </div>
 {% endfor %}
 

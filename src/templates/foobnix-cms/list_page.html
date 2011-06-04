@@ -5,9 +5,12 @@
 {% for page in pages%}
 <div class="border">
 <h2><a href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
+
+
+
 {% include "../../administrator/templates/default/helper_page.html" %}
 {% get_attr page 'content_' lang %}
-
+{{render}}
 {% if page.is_comment %}
 <br>
 <span class="big_text">{% get_propertie "prop.comments" lang %} ({{page.commentmodel_set.count}})</span> &nbsp;&nbsp;&nbsp;<a href="/{{active}}/{{page.key.id}}?lang={{lang}}">{% get_propertie "prop.add.new.comment" lang %}</a><br>

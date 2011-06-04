@@ -1,0 +1,27 @@
+application: foobnix-android
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+
+- url: /static
+  static_dir: administrator/templates/default/static
+
+- url: /css
+  static_dir: templates/foobnix-android/css
+ 
+- url: /js
+  static_dir: templates/foobnix-android/js
+ 
+- url: /images
+  static_dir: templates/foobnix-android/images
+
+- url: /.*
+  script: main.py
+  
+builtins:
+- datastore_admin: on  
+
+inbound_services:
+- mail

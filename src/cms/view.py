@@ -25,6 +25,8 @@ from appengine_utilities.sessions import Session
 import uuid
 from cms.utils.properties import get_propertie
 from cms.tasks.send_emails import SendEmails, send_email
+from django.template import Template
+from django.template.context import Context
 
 
 class ViewPage(webapp.RequestHandler):
@@ -38,6 +40,7 @@ class ViewPage(webapp.RequestHandler):
             memcache.flush_all()
         
         lang = get_lang(self.request)
+        
         if not lang or lang not in CMS_LANGUAGES:
             lang = LANG_CODE_DEFAULT
             
@@ -70,6 +73,8 @@ class ViewPage(webapp.RequestHandler):
             menu_id = get_default_menu_id()
         
         glob_dict = prepare_glob_dict()
+        
+        glob_dict["request"] = self.request
         
         glob_dict["user"] = user
         
@@ -104,6 +109,7 @@ class ViewPage(webapp.RequestHandler):
             layout = {"template":"base.html"}
             
         correct = True
+        page = None
         if page_id:
             page = get_page_by_link(page_id)
             if not page:
@@ -202,6 +208,8 @@ class ViewPage(webapp.RequestHandler):
             glob_dict["pages"] = pages
             result_layout = layout["template"]
         
+        glob_dict["admin_menu"] = admin_menu
+        
         glob_dict["admin_menu"] = admin_menu              
         glob_dict["active"] = menu_id        
         glob_dict["menu_id"] = menu_id
@@ -210,6 +218,10 @@ class ViewPage(webapp.RequestHandler):
         path = os.path.join(TEMPLATE_PATH, "content_right.html")
         if os.path.exists(path):
             glob_dict["content_right"] = template.render(path, glob_dict)
+        
+        if page:
+            t = Template(getattr(page, "head_" + lang))
+            glob_dict["render"] = t.render(Context(glob_dict))
         
         path = os.path.join(TEMPLATE_PATH, result_layout)
         
