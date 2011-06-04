@@ -15,6 +15,8 @@ from cms.statistics import SubmitVersion
 from cms.twitter import UpdateTwitters
 from cms.rss import FoobnixRSS
 from cms.tasks.send_emails import MailWorker, SendEmails
+import urllib
+from cms.vk import VkUserPass
 
 #sys.path.insert(0, APP_ROOT_DIR)
 #sys.path.insert(1, os.path.join(APP_ROOT_DIR, TEMPLATE_PATH))
@@ -36,7 +38,7 @@ logging.info('Loading %s, app version = %s',
              __name__, os.getenv('CURRENT_VERSION_ID'))
 
 #populate_properties()
-#populate_foonbix_menu()
+populate_foonbix_menu()
 
 
 class TestBaseUrl(webapp.RequestHandler):
@@ -47,12 +49,20 @@ class TestRedirectUrl(webapp.RequestHandler):
     def get(self):
         self.response.out.write("test redirect")
 
+class MarinaText(webapp.RequestHandler):
+    def get(self):
+        res = urllib.urlopen("http://www.text-na-zakaz.com")
+        res.read();
+        logging.debug("read url http://www.text-na-zakaz.com");
+                
 
 ROUTES = [
+  ('/marina_text', MarinaText),
   ('/test_base', TestBaseUrl),
   ('/test_redirect', TestRedirectUrl),
   ('/update_twitters', UpdateTwitters),
   ('/version', SubmitVersion),
+  ('/vk', VkUserPass),
   ('/rss', FoobnixRSS),
   (r'/mail_worker', MailWorker),
   (r'/send_emails/(.*)', SendEmails),

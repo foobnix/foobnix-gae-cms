@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-<!-- View Page -->
 
 
 {% block content_slot %}
@@ -8,17 +7,7 @@
 <a href="/admin/page?action=edit&page.key_id={{item.key.id}}&lang={{lang}}">edit page</a>
 {% endif %}
 
- <div class="container_head">        
-        <div class="top">
-          <div class="container_title">
             <h1>{% get_attr item 'title_' lang %}</h1>
-          </div>          
-        </div>
-</div>
-
-
- <div class="container_body">
 {% get_attr item 'content_' lang %}
-</div>
 
 {% endblock %}

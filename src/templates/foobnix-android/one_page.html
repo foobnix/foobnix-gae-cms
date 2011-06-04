@@ -4,17 +4,13 @@
 {% include "../../administrator/templates/default/helper_page.html" %}
 {% for page in pages|slice:":1" %}
 
-<div class="solutionSeo"><h1>{% get_attr page 'title_' lang %}</h1></div>
 {% include "../../administrator/templates/default/helper_page.html" %}
-<div class="firstPara">
 
-<a href="/">Home</a> <span>&raquo;</span> <b>{{active}}</b><br />
-
-<br />
-
+<h1>{% get_attr page 'title_' lang %}</h1>
+ 
+ 
 {% get_attr page 'content_' lang %}
 
 {% endfor %}
-
 
 {% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru"><!-- Source is // -->
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+	 {% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		{% ifequal item.link_id active %}
+ 			{% get_attr item 'name_' lang%} -		
+ 		{% endifequal %}
+ 	{% endifequal %}  
+	{% endfor %}
+	
+	{% if item %}{% get_attr item "title_" lang %} - {% endif %}
+	
+	</title>
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="all" charset="utf-8"/>
+	<link media="only screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio:0)" href="/css/iphone.css" type="text/css" rel="stylesheet" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
+	
+	{%if item %}
+<meta name="description" content="{% get_attr item 'description_' lang%}" /> 
+<meta name="keywords" content="{% get_attr item 'keywords_' lang%}" />
+{% else %}
+	{% for page in pages|slice:":1" %}
+<meta name="description" content="{% get_attr page 'description_' lang%}" /> 
+<meta name="keywords" content="{% get_attr page 'description_' lang%}" /> 
+	{% endfor %}
+{% endif %}
+
+</head>
+<body>
+{% include "../../administrator/templates/default/top_admin_panel.html" %}
+
+	{% for ln in langs %}              	
+			{% ifequal ln lang%}				
+				{% lang_name ln %}
+			{% else %}
+				<a href="?lang={{ln}}">{% lang_name ln %}</a>	
+			{% endifequal %}			
+		{% endfor %}
+
+<div class="tm" >
+	<img src="/images/logo.png" style="vertical-align:middle" />
+	{% get_propertie "title.slogan" lang %}
+</div>
+<div class="tm">
+
+	 {% for item in menu_list %}
+ 	{% ifequal item.position "TOP" %}
+ 		<a href="/{{item.link_id }}?lang={{lang}}" class="mlink">{% get_attr item 'name_' lang%}</a>
+ 	{% endifequal %}
+	{% endfor %}
+
+	{% if display %}
+		<a href="/admin/menu?menu.position=TOP&action=edit">[new]</a>
+	{% endif %}
+	
+</div>
+
+<div class="content">
+	{% block content_slot %}
+	{% endblock %}
+</div>
+
+<div class="ft">
+{% get_propertie "foobnix.footer" lang %}
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17469609-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+</html>

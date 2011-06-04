@@ -10,7 +10,7 @@ import os
 from google.appengine.api import  users, memcache
 from configuration import TEMPLATE_PATH, CMS_LANGUAGES, LANG_CODE_DEFAULT, DEBUG
 from cms.glob_dict import get_menu_by, prepare_glob_dict, get_pages, get_layout, \
-    get_default_menu_id
+    get_default_menu_id, get_page_by_link
 from cms.admin_config import admin_menu
 from cms.admin import get_lang
 from cms.utils.request_model import request_to_model, safe_model
@@ -86,9 +86,15 @@ class ViewPage(webapp.RequestHandler):
                 
         
         menu = get_menu_by(menu_id)
+        
+        
         glob_dict["menu"] = menu
         if not menu:            
+            
+            page = get_page_by_link(menu_id)
             id = get_default_menu_id()
+            if page and id:                
+                return self.redirect("%s/%s" % (id, page.link_id))
             if id:
                 return self.redirect("/" + id)
             
@@ -99,14 +105,14 @@ class ViewPage(webapp.RequestHandler):
             
         correct = True
         if page_id:
-            try:
-                page = layout["model"].get_by_id(int(page_id))
-            except:
-                return self.redirect("/" + menu_id)
-                
+            page = get_page_by_link(page_id)
+            if not page:
+                try:
+                    page = layout["model"].get_by_id(int(page_id))
+                except:
+                    pass
             if not page:
                 return self.redirect("/" + menu_id)
-                
             
             result_layout = layout["child_template"]
             logging.debug("Result layout", "result_layout")

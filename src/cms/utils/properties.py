@@ -133,4 +133,12 @@ def get_propertie(name):
         return model.get().value_ru
     else:
         return ""
+
+def get_properties(name):
+    model = PropertieModel().all()
+    model.filter("name", name)
+    if model.count(1) == 1:
+        return model.get()
+    else:
+        return ""
     

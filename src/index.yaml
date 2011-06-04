@@ -241,6 +241,16 @@ indexes:
 
 - kind: PageModel
   properties:
+  - name: link_id
+  - name: is_visible
+    direction: desc
+  - name: fk_menu
+  - name: index
+  - name: date
+    direction: desc
+
+- kind: PageModel
+  properties:
   - name: visible
   - name: date
     direction: desc

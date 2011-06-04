@@ -17,11 +17,16 @@
             </p>
             <p> 
               <label>Title</label>
-             
             <p>  
-             {% for ln in langs %}
-              <b>{{ln}}:</b><input type="text" class="text" name="page.title_{{ln}}" value="{% get_attr page 'title_' ln %}">              
+            {% for ln in langs %}
+              <b>{{ln}}:</b><input type="text" class="text"  style="width:600px;" name="page.title_{{ln}}" value="{% get_attr page 'title_' ln %}"><br/>              
             {% endfor %}
+            </p>
+            
+            <p> 
+              <label>Article Link (optional)</label><br> 
+              <input type="text" class="text" name="page.link_id" value="{{page.link_id}}">
+              <span class="notice">welcome-to-this-article</span> 
             </p>
              
             <p>             

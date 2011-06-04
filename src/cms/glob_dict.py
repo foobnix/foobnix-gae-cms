@@ -89,7 +89,21 @@ def get_default_menu_id():
     menu = get_menu_by(None)
     if menu:
         return menu.link_id
- 
+
+def get_page_by_link(link_id):
+    menu_list = get_pages()    
+    if link_id:
+        menu_list.filter("link_id", link_id)
+        
+    if menu_list.count() >= 1:
+        return menu_list[0]
+        
+    return None
+    
+    
+        
+    
+
 def get_menu_by(link_id):
     menu_list = get_menus()    
     if link_id:

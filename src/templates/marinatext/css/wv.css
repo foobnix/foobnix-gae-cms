@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-body{ font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000000; background:url(/images/bg_body_ptrn.jpg) repeat; margin:15px 0px;}
+body{ font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000000; background:url(/images/bg_body_ptrn.jpg) repeat; margin:15px 0px;}
 *{margin:0px; padding:0px;}
 /**layout structure***/
 #wrapper{ width:950px; margin:0px auto; height:100%;background-color:#f7f1db; padding:5px; overflow:hidden;}

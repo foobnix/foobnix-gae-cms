@@ -48,7 +48,7 @@
       <ul class="toplinks">
       	{% for item in menu_list %}
 			 	{% ifequal item.position "BLOCK" %}			 	
-			 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>		 	
+			 		<li><a href="/{{item.link_id }}">{% get_attr item 'name_' lang%}</a></li>		 	
 			 	{% endifequal %}
 			{% endfor %}
 			
@@ -75,7 +75,7 @@
     
     {% for item in menu_list %}
  	{% ifequal item.position "TOP" %}
- 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a></li>
+ 		<li><a href="/{{item.link_id }}">{% get_attr item 'name_' lang%}</a></li>
  	{% endifequal %}
 	{% endfor %}
 
@@ -102,7 +102,7 @@
     </div>
     
      {% if display %}
-		<a href="/admin/page?action=edit&page.fk_menu=blog&lang={{lang}}">add_page</a>
+		<a href="/admin/page?action=edit&page.fk_menu=blog">add_page</a>
 	{% endif %}
      
 	 {% for page in blog_list %}
@@ -113,7 +113,14 @@
         <div class="d_tr-corner"></div>
         <div class="d_top">  
 		<h4><img src="{{page.image}}" align="absmiddle" width="34" height="23"/> 
-			<a class="mlink" href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}
+			
+				{% if page.link_id %}
+    	            <a class="mlink" href="{{page.link_id}}"> {% get_attr page 'title_' lang %}
+                {% else %}
+        	        <a class="mlink" href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}
+                {% endif %}
+			
+						
 		</h4></a> </div>
       </div>
       <div class="d_container_body">
@@ -142,7 +149,7 @@
   <ul class="foottxt fon">
 {% for item in menu_list %}
  	{% ifequal item.position "TOP" %}
- 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a> |</li>
+ 		<li><a href="/{{item.link_id }}">{% get_attr item 'name_' lang%}</a> |</li>
  	{% endifequal %}
 	{% endfor %}
   </ul>
@@ -150,7 +157,7 @@
    <ul class="foottxt">
   {% for item in menu_list %}
  	{% ifequal item.position "BLOCK" %}
- 		<li><a href="/{{item.link_id }}?lang={{lang}}">{% get_attr item 'name_' lang%}</a> |</li>
+ 		<li><a href="/{{item.link_id }}">{% get_attr item 'name_' lang%}</a> |</li>
  	{% endifequal %}
 	{% endfor %}
   </ul>
@@ -167,6 +174,20 @@
   </ul>
   </div>  
 </div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23460315-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 
 </body>
 </html>

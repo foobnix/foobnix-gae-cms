@@ -40,7 +40,7 @@ class EmailModel(db.Model):
 
 
 class PageModel(db.Model):
-    
+    link_id = db.StringProperty(multiline=False)
     description_ru = db.StringProperty(multiline=False)
     description_en = db.StringProperty(multiline=False)
     

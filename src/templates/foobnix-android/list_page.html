@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content_slot %}
+
+{% include "../../administrator/templates/default/helper_page.html" %}
+
+
+{% for page in pages %}
+
+<li> 
+<h3><a href="http://m.habrahabr.ru/post/119688/" class="t">{% get_attr page 'title_' lang %}</a></h3> 
+<span>{% get_attr page 'head_' lang %}</span> 
+</li> 
+                
+{% endfor %}
+
+{% endblock %}
+
+
+
+
+

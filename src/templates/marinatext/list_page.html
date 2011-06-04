@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-list
+<!-- List Page -->
+
 
 {% block content_slot %}
 
@@ -11,8 +12,12 @@ list
 <div class="features">
               <div class="features_img"> <img alt="album" src="{{page.image}}"> </div>
               <div class="features_info">
-              
+              	{% if page.link_id %}
+                <h2><a class="mlink" href="/{{active}}/{{page.link_id}}">{% get_attr page 'title_' lang %}</a></h2>
+                {% else %}
                 <h2><a class="mlink" href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
+                {% endif %}
+                
                 <p>{% get_attr page 'head_' lang %}</p>
                 {% include "../../administrator/templates/default/helper_page.html" %}
               </div>
