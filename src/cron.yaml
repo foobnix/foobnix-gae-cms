@@ -1,9 +1,4 @@
 cron:
 - description: update twitter list
   url: /update_twitters
-  schedule: every 6 hours
-
-- description: load marina text
-  url: /marina_text
-  schedule: every 2 mins
-  
+  schedule: every 12 hours

@@ -11,6 +11,9 @@ from datetime import datetime
 
 class SubmitVersion(webapp.RequestHandler):
     def get(self):
+        self.response.out.write(get_propertie("config.version"))
+    
+    def get_old(self):
         uuid = self.request.get('uuid')
         host = self.request.get('host')
         version = self.request.get('version')

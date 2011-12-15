@@ -4,31 +4,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta name="google-site-verification" content="dcBj01-AmMBQuXcl8sRe1mDWKMaEArHSEV5w9RfYPnE" />
 <title>      
-        {% for item in menu_list %}
- 	{% ifequal item.position "TOP" %}
- 		{% ifequal item.link_id active %}
- 			{% get_attr item 'name_' lang%} -		
- 		{% endifequal %}
- 	{% endifequal %}  
-	{% endfor %}
-	
-	{% if item %}{% get_attr item "title_" lang %} - {% endif %} {% get_propertie "title.slogan" lang %}
-        </title>
-        
-        
+	{% if item %}
+		{% get_attr item "title_" lang %}
+	{% else %}
+		{% if active_menu %}	 	
+	 			{% get_attr active_menu 'title_' lang%}	 					
+		{% endif %} 			
+	{% endif %}
+</title>
 
-{%if item %}
-<meta name="description" content="{% get_attr item 'description_' lang%}" /> 
-<meta name="keywords" content="{% get_attr item 'keywords_' lang%}" />
-{% else %}
-	{% for page in pages|slice:":1" %}
-<meta name="description" content="{% get_attr page 'description_' lang%}" /> 
-<meta name="keywords" content="{% get_attr page 'description_' lang%}" /> 
-	{% endfor %}
-{% endif %}
-
+	{% if item %}
+		<meta name="description" content="{% get_attr item 'description_' lang %}" /> 
+		<meta name="keywords" content="{% get_attr item 'keywords_' lang %}" />
+	{% else %}
+		{% if active_menu %}	 	
+	 			<meta name="description" content="{% get_attr active_menu 'description_' lang%}" /> 
+				<meta name="keywords" content="{% get_attr active_menu 'keywords_' lang%}" />	 					
+		{% endif %} 			
+	{% endif %}
+        
 <link rel="stylesheet" type="text/css" href="/css/wv.css" />
 <link rel="stylesheet" type="text/css" href="/css/popup.css" />
+
+<link rel="shortcut icon" href="/images/icon.png" /> 
+<link rel="icon" href="/images/icon.png" />   
 
 </head>
 
@@ -60,9 +59,10 @@
     </div>
 
 <div class="login">
+<img src="/images/ContactUs60.png" style="float:right;">
 	<ul>
-		{% get_propertie "title.phones" lang %}		   
-	</ul>
+		{% get_propertie "title.phones" lang %}
+	</ul>	
 </div>
 
   </div>
@@ -119,14 +119,17 @@
                 {% else %}
         	        <a class="mlink" href="/blog/{{page.key.id}}"> {% get_attr page 'title_' lang %}
                 {% endif %}
-			
-						
 		</h4></a> </div>
       </div>
       <div class="d_container_body">
         <div class="d_container_body_wrapper">
           <div class="d_content_p">
           	{% get_attr page 'head_' lang %}
+          	 {% if page.link_id %}
+                <a class="dlink" href="/{{active}}/{{page.link_id}}">Читать далее ...</a>
+                {% else %}
+                <a class="dlink" href="/{{active}}/{{page.key.id}}">Читать далее ...</a>
+                {% endif %}
           	{% include "../../administrator/templates/default/helper_page.html" %}           
           </div>
         </div>

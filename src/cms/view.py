@@ -213,6 +213,7 @@ class ViewPage(webapp.RequestHandler):
         glob_dict["admin_menu"] = admin_menu              
         glob_dict["active"] = menu_id        
         glob_dict["menu_id"] = menu_id
+        glob_dict["active_menu"] = menu
         glob_dict["page_id"] = page_id
         glob_dict["active_menu"] = get_menu_by(menu_id)
         path = os.path.join(TEMPLATE_PATH, "content_right.html")

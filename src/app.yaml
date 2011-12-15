@@ -1,5 +1,5 @@
 application: foobnix-cms
-version: 14
+version: 22
 runtime: python
 api_version: 1
 

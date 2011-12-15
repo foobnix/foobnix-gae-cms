@@ -31,6 +31,6 @@ def get_translated(text, src='ru', to='en'):
             try:
                     retText += resp['responseData']['translatedText']
             except:
-                    raise
+                    pass
     return retText
     

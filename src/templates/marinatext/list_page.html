@@ -18,8 +18,16 @@
                 <h2><a class="mlink" href="/{{active}}/{{page.key.id}}">{% get_attr page 'title_' lang %}</a></h2>
                 {% endif %}
                 
-                <p>{% get_attr page 'head_' lang %}</p>
+                {% get_attr page 'head_' lang %}
+                                
+                {% if page.link_id %}
+                <a class="dlink" href="/{{active}}/{{page.link_id}}">Читать далее ...</a>
+                {% else %}
+                <a class="dlink" href="/{{active}}/{{page.key.id}}">Читать далее ...</a>
+                {% endif %}
+                
                 {% include "../../administrator/templates/default/helper_page.html" %}
+                
               </div>
             </div>
 {% endfor %}

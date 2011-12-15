@@ -77,7 +77,7 @@ ROUTES = [
   (r'/(.*)/(.*)/', ViewPage),
   (r'/(.*)/(.*)', ViewPage),
   (r'/(.*)/', ViewPage),
-  (r'/(.*)', ViewPage)
+  (r'/(.*)', ViewPage),
   ]   
 
 application = webapp.WSGIApplication(ROUTES, debug=DEBUG)

@@ -7,8 +7,10 @@ Created on 21 дек. 2010
 from cms.model import PropertieModel, MenuModel, ProductModel, PageModel
 from cms.admin_config import default_properties, LAYOUT_CATALOG_PAGE, \
     LAYOUT_LIST_PAGE, LAYOUT_ONE_PAGE
-from configuration import DEBUG
+from configuration import DEBUG, CMS_CFG
 from cms.utils.translate import get_translated
+from cms.utils.cache import get_or_put_cache
+from google.appengine.api import memcache
 
 def add_page(title, content, menu):
     page = PageModel()
@@ -127,18 +129,31 @@ def populate_properties():
             new.put()
 
 def get_propertie(name):
+    val = memcache.get(name)
+    if val:
+        return val
+    
     model = PropertieModel().all()
     model.filter("name", name)
     if model.count(1) == 1:
-        return model.get().value_ru
+        res = model.get().value_ru
+        memcache.add(key=name, value=res, time=CMS_CFG["cache_time"])
+        return res
     else:
+        memcache.add(key=name, value="", time=CMS_CFG["cache_time"])
         return ""
 
 def get_properties(name):
+    val = memcache.get(name)
+    if val:
+        return val
+    
     model = PropertieModel().all()
     model.filter("name", name)
     if model.count(1) == 1:
+        memcache.add(key=name, value=model.get(), time=CMS_CFG["cache_time"])
         return model.get()
     else:
+        memcache.add(key=name, value="", time=CMS_CFG["cache_time"])
         return ""
     
